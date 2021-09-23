@@ -1,0 +1,80 @@
+<aura:component controller="NM_CYFD_ContractRoleController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+   
+    <aura:handler name="init" value="{!this}" action="{!c.initHandler}" />
+    <aura:attribute name="staff" type="Boolean" default = "false" />
+    <aura:attribute name="client" type="Boolean" default = "false" />
+    <aura:attribute name="jccClient" type="Boolean" default = "false" />
+    <aura:attribute name="jjacClient" type="Boolean" default = "false" />
+    <aura:attribute name="mentoringClient" type="Boolean" default = "false" />
+    <aura:attribute name="member" type="Object" />
+    <aura:html tag="style">
+        .cuf-content {
+          padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+          padding: 0rem !important;
+        }
+        .slds-modal__content{
+        
+        }
+        .slds-modal__container {
+          width: 60%;
+          max-width: 60%;
+          height: 650px;
+        }
+        .slds-modal__content {
+          padding:0;
+          box-shadow:none!important;
+        }
+        .n_bor_rem {
+          text-align: left;
+          border: 0!important;
+          padding: 33px 10px 16px;
+        }
+        .n_bor_rem h2 {
+          font-size: 26px;
+          font-weight: bold;
+        } 
+        .modal-body {
+          min-height:520px;
+          height:520px;
+          max-height:520px;
+        }
+        .slds-modal__footer {
+          border-top: 1px solid #E2E2E2!important;
+          text-align: right;
+          padding: 18px 0 8px;
+          margin: 0 10px;
+          box-shadow: none!important;
+        }
+        .slds-modal__footer .slds-m-left_small {
+            text-align:right;
+            margin-right:0;
+        }
+
+     </aura:html>
+     <div class="slds-col modal-header slds-modal__header n_bor_rem">
+      	<h2 class="title slds-text-heading--medium">Edit Contract Role</h2>
+  	</div>
+    <!--
+   <c:nmcyfdContractRoleCmp  contractRoleId="{!v.recordId}" staff="{!v.staff}" client="{!v.client}" onclose="{!c.close}" jcc="{!v.jccClient}" mentoring="{!v.mentoringClient}" jjac="{!v.jjacClient}"/>
+-->   
+   
+ <div class="slds-modal__content">
+        <aura:if isTrue="{!v.staff}">
+            <c:nmcyfdEditStaffCmp onclose="{!c.close}" contractRoleId="{!v.recordId}" member="{!v.member}" jcc="{!v.jccClient}" mentoring="{!v.mentoringClient}" jjac="{!v.jjacClient}"/>
+     </aura:if>
+     <aura:if isTrue="{!v.client}"> 
+         
+         <c:nmcyfdEditYouthCmp onclose="{!c.close}" contractRoleId="{!v.recordId}" member="{!v.member}" jcc="{!v.jccClient}" mentoring="{!v.mentoringClient}" jjac="{!v.jjacClient}"/>        
+        </aura:if>
+       <!-- <aura:if isTrue="{!v.staff}">
+            <c:nmcyfdEditStaffCmp onclose="{!c.close}" contractRoleId="{!v.recordId}" member="{!v.member}" jcc="{!v.jccClient}" mentoring="{!v.mentoringClient}" jjac="{!v.jjacClient}"/>
+            <aura:set attribute="else">
+               <c:nmcyfdEditYouthCmp onclose="{!c.close}" contractRoleId="{!v.recordId}" member="{!v.member}" jcc="{!v.jccClient}" mentoring="{!v.mentoringClient}" jjac="{!v.jjacClient}"/>
+            </aura:set>
+        </aura:if> -->
+       
+
+    </div>   
+</aura:component>

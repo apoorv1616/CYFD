@@ -1,0 +1,108 @@
+// Theme settings
+.btn-primary {
+  background-color: $brand-primary;
+  color: contrast-color($brand-primary);
+  &:hover,&:focus {
+    background-color: lighten($brand-primary,20%);
+    color: contrast-color(lighten($brand-primary,20%));
+  }
+  &:active,&.active {
+    background-color: lighten($brand-primary,25%);
+    color: contrast-color(lighten($brand-primary,25%));
+  }
+}
+
+.btn-outline {
+  background-color: white;
+  color: $brand-primary;
+  border: 1px solid $brand-primary;
+  &:hover,
+  &:focus {
+    background-color: darken($brand-primary, 20%);
+    color: contrast-color(lighten($brand-primary, 20%));
+  }
+
+  &:active,
+  &.active {
+    background-color: darken($brand-primary, 25%);
+    color: contrast-color(lighten($brand-primary, 25%));
+  }
+}
+
+.btn-default {
+  background-color: white;
+  color: contrast-color(white);
+  &:hover,&:focus {
+    background-color: darken(white,40%);
+    color: contrast-color(darken(white,40%));
+  }
+  &:active,&.active {
+    background-color: darken(white,25%);
+    color: contrast-color(darken(white,25%));
+  }
+}
+
+.btn-action {
+  background-color: $danger;
+  color: contrast-color($danger);
+
+  &:hover,
+  &:focus {
+    background-color: darken($danger, 20%);
+    color: contrast-color(darken($danger, 20%));
+  }
+
+  &:active,
+  &.active {
+    background-color: darken($danger, 25%);
+    color: contrast-color(darken($danger, 25%));
+  }
+}
+
+
+.bg-alt {
+  background: #F3F9FF;
+}
+
+
+
+.nm-container{
+  font-size: 15px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+@media (min-width: 1400px) {
+  .nm-container{
+    max-width: 1360px;
+  }
+}
+
+@media (max-width: 1399px) and (min-width: 1200px) {
+  .nm-container{
+    max-width: 1140px;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 992px) {
+  .nm-container{
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .nm-container{
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 576px) {
+  .nm-container{
+    max-width: 540px;
+  }
+}
+

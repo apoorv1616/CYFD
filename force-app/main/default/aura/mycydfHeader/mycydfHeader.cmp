@@ -1,0 +1,197 @@
+<aura:component implements="forceCommunity:themeLayout,forceCommunity:searchInterface,forceCommunity:availableForAllPageTypes" controller="NM_CYFD_HeaderController" extends="forceCommunity:navigationMenuBase"
+  access="global">
+  <aura:attribute name="navHomeActive" type="boolean" default="false" />
+  <aura:attribute name="navBenefitsActive" type="boolean" default="false" />
+  <aura:attribute name="navProfileActive" type="boolean" default="false" />
+    <aura:attribute name="toggleLogin" type="Boolean" default="false" />
+    <aura:attribute name="toggleRegistration" type="Boolean" default="false" />
+    <aura:attribute name="hideRegistration" type="Boolean" default="true" />
+    <aura:attribute name="showLogin" type="Boolean" default="true" />
+    <aura:attribute name="showUserDetails" type="Boolean" default="true" />
+    <aura:attribute name="userName" type="String" default="" />
+    <aura:attribute name="imageResource" type="String" default="" />
+    <aura:attribute name="loginURL" type="String" default="" />
+    <aura:attribute name="registrationURL" type="String" default="" />
+    <aura:attribute name="isGuestUser" type="Boolean" default="true"/>
+    <aura:attribute name="searchString" type="String" default=""/>
+     <aura:attribute name="search" type="Aura.Component[]" required="false"/>
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+     <aura:handler event="forceCommunity:routeChange" action="{!c.handleRouteChange}"/>
+
+  <lightning:navigation aura:id="navService"/>
+ 
+
+   
+  <!-- <div class="container-lg">
+    <img class="logo" src="{!$Resource.CYFD_Design + '/images/logo_.png'}" alt="CYDF Logo" />
+    <label class="nav-toggle" for="nav-checkbox">
+      <span class="nav-toggle-icon"></span>
+      <span class="nav-toggle-label">Menu</span>
+    </label>
+    <nav class="nav-primary" aria-labelledby="primaryNavLabel" onclick="{!c.onClick}">
+      <div class="sr-only" id="primaryNavLabel">Primary navigation</div>
+
+      <aura:iteration items="{!v.menuItems}" var="item">
+        <a
+          class="{!item.active ? 'fancy-link-brand' : 'fancy-link'}"
+          href="javascript:void(0);"
+          data-menu-item-id="{!item.id}">
+          {!item.label}
+        </a>
+      </aura:iteration>
+
+      <div class="user-nav">
+        <div class="detail">
+          <div class="msg">Welcome</div>
+          <div class="name">Emilia S.</div>
+        </div>
+        <div class="avatar"></div>
+      </div>
+
+    </nav>xw
+  </div> -->
+  <header>
+    <div class="nm-header--guest nm-header">
+      <div class="nm-nav">
+        <div class="left-section">
+          <a href="#">
+            <img class="logo" src="{!$Resource.CYFD_Design + '/images/nmcyfd_logo.jpeg'}" alt="NM CYFD Logo" />
+          </a>
+             <!-- <div class="searchRegion">
+            	{!v.search}
+          </div> -->
+          
+          <!-- <div class="search">
+            <div class="search-wrapper">
+                <form class="search-form">
+                    <div class="search-input-wrapper">
+                        <input class="search-input" type="text" placeholder="My Search"/>
+                    </div>
+                    <input type="hidden" name="language" value="en" />
+                </form>
+            </div>
+          </div> -->
+        </div>
+        <aura:if isTrue="{!!v.isGuestUser}">
+          <div class="search">
+            <div class="search-wrapper">
+    
+                    <div class="search-input-wrapper">
+                        <span onkeypress="{!c.gotoURL}" class="">
+                            <lightning:input class="search-input" type="search" label="" 
+                                        value="{!v.searchString}" placeholder="Search Contract Roles" name="search"/>
+                        </span>
+                        <!-- <lightning:button aura:id="submit" name="submit" type="submit" label="Search" onclick="{! c.gotoURL }" /> -->
+                    </div>
+                <form class="search-form"></form>
+            </div>
+        </div>
+        </aura:if>
+        
+        <div class="right-section">
+          <ul class="menu only_desktop">
+            
+            <!--  <aura:if isTrue="{!v.showLogin}">
+                    <aura:if isTrue="{!v.toggleLogin}">
+                        <li>
+                        	<a class="active" href="{!v.loginURL}">Login</a>
+                        </li>
+                        <aura:set attribute="else">
+                            <li>
+                            	<a href="{!v.loginURL}">Login</a>
+                            </li>
+                        </aura:set>
+                    </aura:if>
+                </aura:if> -->
+               <aura:if isTrue="{! !v.showLogin}">   
+                 <aura:if isTrue="{!!v.isGuestUser}">
+                  <li>
+                    <a onclick="{!c.navigateToHome}">Home</a>
+                  </li>
+                  <li>
+                    <a onclick="{!c.navigateToContracts}">Contracts</a>
+                  </li>
+                  <li>
+                    <a onclick="{!c.navigateToUserGuide}">User Guide</a>
+                  </li>
+                  <li>
+                   <label class="dropdown">
+                       <div class="dd-button">
+                           
+                           <span>Welcome, {!v.userName}</span>
+                           
+                       </div>
+                       <input type="checkbox" class="dd-input" id="test" />
+                       <ul class="dd-menu">
+                           <li><li><a onclick="{!c.logout}">Logout</a></li></li>
+                       </ul>
+                       
+                   </label>  
+                     <img class="logo user-image" src="{!v.imageResource}" /> 
+                    </li>
+                 </aura:if>                            
+              </aura:if>
+               <!-- <aura:if isTrue="{! !v.showLogin}">
+                    <li>
+                    	<a onclick="{!c.redirectToLogin}">Logout</a>
+              		</li>
+                </aura:if> -->
+            
+           <!-- <li class="formheader_right">
+              <button class="slds-button slds-button_brand">Registration</button>
+            </li> -->
+           <!-- <label class="dropdown">
+              <div class="dd-button">
+                <img src="#" alt="Picture" class="profile-img" />
+                <span>User Name</span>
+              </div>
+               <input type="checkbox" class="dd-input" id="test" />
+              <ul class="dd-menu">
+                <li><a href="#">My Profile</a></li>
+                <li><a href="#">My Inbox</a></li>
+                <li class="divider"></li>
+                <li>
+                  <a>Logout</a>
+                </li>
+              </ul>
+            </label> -->
+          </ul>
+          <div class="navigation only_mobile">
+            <input type="checkbox" class="navigation__checkbox" id="navi-toggle"></input>
+            <label for="navi-toggle" class="navigation__button">
+              <span class="navigation__icon"><span class="slds-assistive-text">Menu</span></span>
+            </label>
+            <div class="navigation__background">&nbsp;</div>
+            <nav class="navigation__nav" aria-labelledby="primaryNavLabel">
+              <div id="primaryNavLabel" class="slds-assistive-text">Primary navigation</div>
+              <ul class="navigation__list">
+                <li class="navigation__item">
+                  <a href="#" class="navigation__link">Home</a>
+                </li>
+                <li class="navigation__item">
+                  <a href="#" class="navigation__link">Program</a>
+                </li>
+                <li class="navigation__item">
+                  <a href="#" class="navigation__link">Login</a>
+                </li>
+                <li class="form--header_right">
+                  <button class="slds-button slds-button_brand">Registration</button>
+                </li>
+                <li class="navigation__item">
+                  <a href="#" class="navigation__link">My
+                    Profile</a>
+                </li>
+
+                <li class="navigation__item">
+                  <a class="navigation__link">Logout</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+</aura:component>

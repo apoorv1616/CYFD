@@ -1,0 +1,142 @@
+.step-nav,
+.sub-steps {
+  display: flex;
+  flex-direction: column;
+
+  .step-item {
+    color: $text-color;
+    padding-bottom: $gap-sm;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+
+    &.active {
+      font-weight: 600;
+      color: $text-color;
+
+      &.disabled {
+        cursor: default;
+      }
+    }
+
+    &.complete {
+      font-weight: 500;
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+
+.step-nav {
+  counter-reset: stepItem;
+
+  >a.step-item {
+    &.active {
+      color: $text-color;
+    }
+  }
+
+  >.step-item {
+    counter-increment: stepItem;
+    padding-left: $gap + ($gap-xs / 2);
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: $gray-md;
+
+    &::before {
+      border-radius: 50%;
+      content: counter(stepItem);
+      background: $gray-md;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: $gap-sm + $gap-xs;
+      height: $gap-sm + $gap-xs;
+      position: absolute;
+      font-size: $font-size-base;
+      left: 0;
+    }
+
+    &.active::before {
+      background: $text-color;
+    }
+
+    &.complete {
+      color: $brand-primary;
+
+      &::before {
+        background: $brand-primary;
+      }
+    }
+  }
+}
+
+.sub-steps {
+  counter-reset: subItem1;
+
+  >.step-item {
+    position: relative;
+    counter-increment: subItem1;
+    display: flex;
+    font-size: $font-size-base;
+    color: $gray-md;
+
+    .title:before {
+      content: counter(stepItem) "."counter(subItem1) " ";
+    }
+
+
+  }
+
+  >a {
+
+    &.complete {
+      color: $text-color;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: $gap-xs / 2;
+        opacity: 0;
+        width: $gap-sm;
+        height: $gap-sm;
+        border-radius: 50%;
+
+      }
+    }
+
+    &:last-of-type {
+      &.complete {
+        &::before {
+          animation: blip 0.5s ease;
+          background: $success;
+        }
+      }
+    }
+  }
+
+  .icon {
+    margin-right: $gap-sm;
+    margin-left: $gap-xs / 2;
+    position: relative;
+    width: $gap-sm;
+    height: $gap-sm;
+    margin-top: $gap-xs / 3;
+
+  }
+
+  .title {
+    flex: 1;
+  }
+
+  >.step-item {
+    display: flex;
+  }
+}

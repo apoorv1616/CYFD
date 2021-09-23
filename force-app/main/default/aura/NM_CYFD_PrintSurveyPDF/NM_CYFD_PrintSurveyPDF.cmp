@@ -1,0 +1,8 @@
+<aura:component implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" controller="NM_CYFD_SubmitSurveyController">
+    <aura:html tag="style">
+        .slds-modal__container{
+            display:none !important;
+        }
+    </aura:html>
+    <aura:handler name="init" value="{!this}" action="{!c.initHandler}" />
+</aura:component>

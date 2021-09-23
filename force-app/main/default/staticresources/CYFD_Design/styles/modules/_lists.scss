@@ -1,0 +1,14 @@
+.list-separated {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  > li {
+    + li {
+      margin-top: $gap-xs * 1.5;
+      padding-top: $gap-xs * 1.5;
+      border-top: 1px solid lighten($border-default,5%);
+    }
+  }
+}

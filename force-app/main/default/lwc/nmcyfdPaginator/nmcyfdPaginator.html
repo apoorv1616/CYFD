@@ -1,0 +1,14 @@
+<template>
+    <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-end">
+        <span class="slds-m-around_xx-small ">Page {currentPage}/{totalPage}</span>
+        <span >
+            <lightning-button class="slds-var-m-around_xx-small" label="Previous" onclick={handlePrevButton}
+                disabled={noPrevious} icon-name="utility:chevronleft"
+                ></lightning-button>
+            <lightning-button class="slds-var-m-around_xx-small" label="Next" 
+                onclick={handleNextButton} disabled={noNext}
+                icon-position="right" icon-name="utility:chevronright"
+                ></lightning-button>
+        </span>
+    </div>
+</template>

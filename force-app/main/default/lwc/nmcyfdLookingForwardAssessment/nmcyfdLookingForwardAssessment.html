@@ -1,0 +1,64 @@
+<template>
+    <div>
+        <h3 class ="slds-p-left_medium n_head_space2 heading"><b>CASEY Life Skills - (Step 7 of 7)</b></h3>
+        <h3 class ="slds-p-left_medium n_head_space heading"><b>Looking Forward </b></h3>
+
+        <br/>
+
+        <div class="slds-form form-section">
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IBelieveICanInfluenceLifeTurnOut" class = "slds-p-left_medium n_fix_inl "
+                options={options} onchange={changeHandler} label="I believe I can influence how my life will turn out."
+                value={dataObj.IBelieveICanInfluenceLifeTurnOut} 
+                type="radio" required></lightning-radio-group>
+            </div>
+            
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanDescribeMyVisionAsAnAdult" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can describe my vision for myself as a successful adult."
+                value={dataObj.ICanDescribeMyVisionAsAnAdult}
+                type="radio" required></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IHaveARelationshipWithTrustedAdult" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I have a good relationship with a trusted adult I like and respect."
+                value={dataObj.IHaveARelationshipWithTrustedAdult}
+                type="radio" required></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IWouldUseExperinceToHelpYouth" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I would like to use my experience to help other youth."
+                value={dataObj.IWouldUseExperinceToHelpYouth}
+                type="radio" required></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IBelieveRelationshipsHelpMeSucceed" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I believe my relationships with others will help me succeed."
+                value={dataObj.IBelieveRelationshipsHelpMeSucceed}
+                type="radio" required></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IFeelIAmReadyForNextPhaseOfLife" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I feel I am ready for the next phase of my life."
+                value={dataObj.IFeelIAmReadyForNextPhaseOfLife}
+                type="radio" required></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="MostDaysIAmProudOfLivingLife" class = "  slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="Most days, I am proud of the way I am living my life."
+                value={dataObj.MostDaysIAmProudOfLivingLife}
+                type="radio" required></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="MostDaysIFeelIHaveControlOfLife" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="Most days, I feel I have control of how my life will turn out."
+                value={dataObj.MostDaysIFeelIHaveControlOfLife}
+                type="radio" required></lightning-radio-group>
+            </div>
+            
+            <!-- ends -->
+        </div>
+        
+    </div>
+    
+</template>

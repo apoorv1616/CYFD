@@ -1,0 +1,33 @@
+.flexipageComponent{
+    background: white;
+}
+.headingDiv{
+    width: 100%;
+    background: darkgrey;
+    text-align: center;
+    height: 30px;
+    border-radius: 10px;
+}
+.THIS .horizontal-radio {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+/* .THIS .horizontal-radio .slds-radio + .slds-radio {
+    margin-left: 1rem;
+} */
+lightning-radio-group fieldset div{
+    display: flex;
+}
+
+.n_fix_head_surv {
+    background: none;
+    text-align: left;
+    border-radius: 0;
+    height: auto;
+    padding: 10px 0 0px;
+}
+.slds-radio {
+    display: inline-block!important;
+}

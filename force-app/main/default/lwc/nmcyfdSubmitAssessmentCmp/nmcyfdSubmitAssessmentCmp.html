@@ -1,0 +1,93 @@
+<template>
+
+    <div class="slds-grid slds-wrap slds-p-vertical_medium">
+        <div class="slds-col slds-size_6-of-12 slds-large-size_6-of-12">
+            <h1 class="page--heading">   Assessment Submission</h1>
+        </div>
+        <template if:false={isStep1}>       
+            <div class="slds-col slds-size_6-of-12 slds-large-size_6-of-12 slds-text-align_right">
+                <div class="slds-float_right">
+                    <div class="item-node">
+                        <template if:true={navigationItems}>
+                            <template for:each={navigationItems} for:item="item">
+                                <c-sidebar-node class="item-node-i" key={item.key} node={item}>
+                                </c-sidebar-node>
+                            </template>
+                        </template>
+                    </div>
+                    
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="instructions">
+        <p class="slds-text-align_center">{instructions}</p>
+    </div>
+
+    <div class="card--section">
+        <!-- <h2> Step {currentStep} of {totalSteps}</h2> -->
+        <template if:true={isStep1}>         
+            <c-nmcyfd-assessment-youth-selection contract-id={contractId} onyouthselect={handleYouthSelection}></c-nmcyfd-assessment-youth-selection>
+        </template> 
+        <!-- <template if:true={isPermanencyStep}>
+            <c-nmcyfd-permanency-assessment assessment-id={assessmentId}></c-nmcyfd-permanency-assessment>
+        </template> -->
+        <template if:true={isDailyLivingStep}>
+            <c-nmcyfd-daily-living-assessment assessment-id={assessmentId}></c-nmcyfd-daily-living-assessment>
+        </template> 
+        <template if:true={isSelfCareStep}>
+            <c-nmcyfd-self-care-assessment assessment-id={assessmentId}></c-nmcyfd-self-care-assessment>
+        </template>
+        <template if:true={isRelationshipStep}>
+            <c-nmcyfd-relationshipsand-communications-assessment assessment-id={assessmentId}></c-nmcyfd-relationshipsand-communications-assessment>
+        </template>
+        <template if:true={isHousingStep}>
+            <c-nmcyfd-housingand-money-management-assessment assessment-id={assessmentId}></c-nmcyfd-housingand-money-management-assessment>
+        </template>
+        <template if:true={isWorkStudyStep}>
+            <c-nmcyfd-workand-study-life-assessment assessment-id={assessmentId}></c-nmcyfd-workand-study-life-assessment>
+        </template>
+        <template if:true={isCareerEducationStep}>
+            <c-nmcyfd-careerand-education-planning-assessment assessment-id={assessmentId}></c-nmcyfd-careerand-education-planning-assessment>
+        </template>
+        <template if:true={isLookingForwardStep}>
+            <c-nmcyfd-looking-forward-assessment assessment-id={assessmentId}></c-nmcyfd-looking-forward-assessment>
+        </template>
+
+        <div class="card--footer">
+            <div class="slds-m-left_small slds-m-right_small slds-m-bottom_medium">
+                <button class="slds-button slds-float--left  slds-button_neutral"
+                    onclick={handleBackToContract}>Back to Contract</button>
+                <template if:true={previousButtonShow}>
+                    <button class="slds-button slds-float--left slds-button_neutral"
+                        onclick={handlePreviousStep}>Previous</button>
+                </template>
+                <template if:true={isPermanencyStep}>
+                    <button class="slds-button slds-float--left slds-button_neutral"
+                        onclick={backToClientsList}>Back to Clients List</button>
+                </template>
+                
+                    <template if:true={showNext}>
+                        <button class="slds-button slds-float--right  slds-button_brand"
+                        onclick={handleSaveAndExit}>Save and Exit</button>
+                    </template>
+                
+                <template if:false={isLookingForwardStep}>
+                    <template if:true={showNext}>
+                        <button class="slds-button slds-float--right  slds-button_brand"
+                        onclick={handleNextStep}>Next</button>
+                    </template>
+                </template>
+                <template if:true={isLookingForwardStep}>
+                    <button class="slds-button slds-float--right  slds-button_brand"
+                        onclick={handleSubmit}>Submit</button>
+                </template>
+            </div>
+        </div>
+    
+    </div>
+        
+    
+
+    
+</template>

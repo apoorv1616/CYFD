@@ -1,0 +1,64 @@
+<template>
+    <div class="container">
+        {contractName} &nbsp;&nbsp; - &nbsp;&nbsp; Contract Deliverables
+        <br /><br />
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th scope="col">
+                        <div class="slds-truncate" title="Document Name">Document Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title=" Upload Document"> Upload Document</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Status">Status</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Add/Update Document">Add/Update Document</div>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <template if:true={contractActivities}>
+                    <template for:each={contractActivities} for:item="CA" for:index="ind">
+                        <tr class="slds-hint-parent" key={CA.Id}>
+                            <td data-label="Document Name">
+                                <div class="slds-truncate" title={CA.activityName}>
+                                    {CA.activityName}</div>
+                            </td>
+                            <td data-label="Upload Document">
+                                <template if:true={CA.docName}>
+                                    <div class="slds-truncate" title={CA.docName}>
+                                        {CA.docName}</div>
+                                </template>
+                            </td>
+                            <td data-label="Add/Update Document">
+                                <div class="slds-truncate" title={CA.Status}> {CA.Status}</div>
+                            </td>
+                            <td data-label="Confidence">
+                                <div class="slds-truncate" title="fileUploader">
+                                    <lightning-file-upload variant="label-hidden" name="fileUploader" accept={acceptedFormats}
+                                        record-id={CA.activityId} data-id={ind} onuploadfinished={handleUploadFinished}
+                                        multiple >
+                                    </lightning-file-upload>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </template>
+            </tbody>
+        </table>
+        <br />
+        <table>
+            <tr>
+                <td style="text-align: left;">
+                    <button class="slds-button slds-button_neutral" onclick={handleBackToContract}>
+                        Back To Contract
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</template>

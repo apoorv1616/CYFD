@@ -1,0 +1,458 @@
+@mixin csv {
+  > *:not(:last-child)::after {
+    content:", ";
+  }
+}
+
+// Better than box-shadow for shadowing non-square shapes.
+@mixin drop-shadow($dropshadow) {
+  -webkit-filter: drop-shadow($dropshadow);
+     -moz-filter: drop-shadow($dropshadow);
+      -ms-filter: drop-shadow($dropshadow);
+          filter: drop-shadow($dropshadow);
+}
+
+@mixin fancy-uline($background,$color) {
+  background-size: 1px 1em;
+  box-shadow: inset 0 0rem $background, inset 0 -0.15rem rgba($text-color,0.1);
+  display: inline-flex;
+  margin: ($gap-xs / 2.5) 0;
+  text-shadow: -2px -2px $background,-2px 2px $background,2px -2px $background,2px 2px $background;
+  transition: box-shadow 0.05s;
+  will-change: box-shadow;
+  &:hover,&:focus,&:active {
+    box-shadow: inset 0 -0.1rem $background, inset 0 -0.25rem $color;
+    color: $color;
+  }
+}
+
+@mixin font-bold {
+  font-weight: $font-weight-bold;
+}
+@mixin font-regular {
+  font-weight: $font-weight-regular;
+}
+@mixin font-light {
+  font-weight: $font-weight-light;
+}
+@mixin font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+@mixin font-smoothing {
+  font-smooth: always;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+@mixin input-placeholder {
+  &.placeholder {
+    @content
+  }
+  &:-moz-placeholder {
+    @content
+  }
+  &::-moz-placeholder {
+    @content
+  }
+  &:-ms-input-placeholder {
+    @content
+  }
+  &::-webkit-input-placeholder {
+    @content
+  }
+}
+
+@mixin max-content($width:$screen-lg) {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $width;
+  width: 100%;
+}
+
+// Maintains aspect ratio
+// @include responsive-ratio(16,9);
+@mixin responsive-ratio($x,$y, $pseudo: false) {
+  $padding: unquote( ( $y / $x ) * 100 + '%' );
+  @if $pseudo {
+    &:before {
+      padding-top: $padding;
+      width: 100%;
+      @include pseudo($pos: relative);
+    }
+  }
+  @else {
+    padding-top: $padding;
+  }
+}
+
+// Material-like shadowing
+@mixin shadow($level: 1) {
+  @if $level == 1 {
+    box-shadow: 0 1px 3px rgba(#333,0.12), 0 1px 2px rgba(#333,0.24)
+  }
+  @else if $level == 2 {
+    box-shadow: 0 3px 6px rgba(#333,0.16), 0 3px 6px rgba(#333,0.23)
+  }
+  @else if $level == 3 {
+    box-shadow: 0 10px 20px rgba(#333,0.19), 0 6px 6px rgba(#333,0.23)
+  }
+  @else if $level == 4 {
+    box-shadow: 0 14px 28px rgba(#333,0.25), 0 10px 10px rgba(#333,0.22)
+  }
+  @else if $level == 5 {
+    box-shadow: 0 19px 38px rgba(#333,0.30), 0 15px 12px rgba(#333,0.22)
+  }
+}
+
+@mixin sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  text-transform: none;
+  width: 1px;
+}
+
+@mixin triangle($color, $direction, $size: 6px, $position: absolute, $round: false){
+  height: 0;
+  width: 0;
+  @if $round {
+    border-radius: 3px;
+  }
+  @if $direction == down {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+    margin-top: 0 - round( $size / 2.5 );
+  }
+  @else if $direction == up {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    margin-bottom: 0 - round( $size / 2.5 );
+  }
+  @else if $direction == right {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+    margin-right: -$size;
+  }
+  @else if $direction == left {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+    margin-left: -$size;
+  }
+}
+
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin vertical-align($position) {
+  position:$position;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
+
+@mixin word-wrap {
+  hyphens: auto;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+}
+
+
+@mixin fancy-link($color) {
+
+  position:relative;
+  color: $color;
+
+  @media (min-width: $screen-sm) {
+    &::after {
+      left: 50%;
+      transform: translateX(-50%);
+      content: "";
+      width: 0;
+      position: absolute;
+      bottom: - $gap-xs / 2;
+      background: transparent;
+      height: $one;
+      transition: all 0.15s ease-in-out;
+    }
+
+    &.active,
+    &:hover,
+    &:focus {
+      color: $color;
+      text-decoration: none !important;
+      &::after {
+        width: 100%;
+        background: $color;
+        left: 0;
+        transform: none;
+      }
+    }
+  }
+}
+
+@mixin input-base {
+  //appearance: none;
+  background: white;
+  font-size: 0.9rem;
+  border: 1px solid $border-default;
+  border-radius: 0;
+  line-height: 1;
+  min-height: $gap+($gap-xs / 2);
+  height: $gap+($gap-xs / 2);
+  padding: ($gap-xs * 0.5) $gap-xs;
+  width: 100%;
+}
+
+@mixin focus-outline {
+  outline: 2px dotted #c5c5c5;
+  outline-offset: 2px;
+}
+
+
+
+
+
+/* Media query Manager */
+
+
+/*
+0 - 600px       :   Phone
+601 - 900px     :   Tablet Potrait
+901 - 1200px    :   Tablet Landscape
+1201 - 1800px   :   Desktop
+1801 +          :   BigDesktop
+*/
+
+
+/*Break-point argument choices:
+- mob
+- tab-p
+- tab-l
+- b-desktop
+*/
+
+@mixin respond($break-point) {
+  @if $break-point==phone {
+      @media (max-width: 37.5em) {
+          //600px
+          @content
+      }
+      ;
+  }
+  @if $break-point==tab-p {
+      @media (max-width: 56.25em) {
+          //900px
+          @content
+      }
+      ;
+  }
+  @if $break-point==tab-l {
+      @media (max-width: 75em) {
+          //1200px
+          @content
+      }
+      ;
+  }
+  @if $break-point==b-desktop {
+      @media (min-width: 112.5em) {
+          //1800px+
+          @content
+      }
+      ;
+  }
+}
+
+
+@mixin basebtn{
+  &,
+  &:link,
+  &:visited{
+      align-items: center;
+      border-radius: 2px;
+      display: inline-flex; 
+      flex: 0 0 auto;
+      font-size: 18px;
+      font-weight: 500;
+      justify-content: center;
+      min-width: 88px;
+      outline: 0;
+      // text-transform: uppercase;
+      text-decoration: none;
+      transition: .3s cubic-bezier(.25,.8,.5,1),color 1ms;
+      position: relative;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      will-change: box-shadow;
+  }
+  &:hover{
+      background: $nm_primary-hover;
+      border: 1px solid $nm_primary-color;
+      color: $nm_white;
+  }
+}
+
+@mixin primarybtn{
+  .slds-button.slds-button_brand {
+      @include basebtn;
+      padding: 1rem 4rem;
+      box-shadow: $nm_btn-shadow--hover;
+      background: $nm_primary-color;
+      border: 1px solid $nm_primary-color;
+      color: $nm_white;
+      &:active,
+      &:focus{
+          box-shadow: $nm_btn-shadow--focus;
+      }
+  }
+}
+
+
+@mixin neutralbtn{
+  .slds-button--neutral,.slds-button_neutral{
+      @include basebtn;
+      background: transparent;
+      color: $nm_primary-color;
+      border: 0px;
+      box-shadow: none;
+      font-size: 1rem !important;
+      &:hover{
+          background: rgba($nm_primary-color, 0.1);
+          color: $nm_primary-color;
+          border: 0px;
+          box-shadow: none;
+      }
+      @media (max-width: $screen-sm-min){
+          background: rgba($nm_primary-color, 0.1);
+          color: $nm_primary-color;
+          border: 0px;
+          box-shadow: none;
+      }
+  }
+}
+@mixin outlinebtnform{
+  .slds-button_outline-brand{
+      @include basebtn;
+      padding: .5rem 3rem;
+      background: transparent;
+      color: $nm_primary-color;
+      border: 0px;
+      box-shadow: none;
+      &:hover{
+          background: rgba($nm_primary-color, 0.1);
+          color: $nm_primary-color;
+          border: 0px;
+          box-shadow: none;
+      }
+      @media (max-width: $screen-sm-min){
+          background: rgba($nm_primary-color, 0.1);
+          color: $nm_primary-color;
+          border: 0px;
+          box-shadow: none;
+      }
+  }
+}
+
+@mixin neutralbtnform{
+  .slds-button_neutral{
+      @include basebtn;
+      padding: .5rem 3rem;
+      background: transparent;
+      color: $nm_dark_gray-1;
+      border: 0px;
+      box-shadow: none;
+      &:hover{
+          background: rgba($nm_dark_gray-1, 0.1);
+          color: $nm_dark_gray-1;
+          border: 0px;
+          box-shadow: none;
+      }
+      @media (max-width: $screen-sm-min){
+          background: rgba($nm_dark_gray-1, 0.1);
+          color: $nm_dark_gray-1;
+          border: 0px;
+          box-shadow: none;
+      }
+  }
+}
+@mixin primarybtnform{
+  .slds-button.slds-button_brand {
+      @include basebtn;
+      padding: .5rem 3rem;
+      box-shadow: $nm_btn-shadow--hover;
+      background: $nm_primary-color;
+      border: 1px solid $nm_primary-color;
+      color: $nm_white;
+      &:active,
+      &:focus{
+          box-shadow: $nm_btn-shadow--focus;
+      }
+  }
+}
+@mixin deletebtnform{
+  .slds-button_destructive {
+      @include basebtn;
+      padding: .5rem 3rem;
+      background: transparent;
+      color: $nm_error;
+      border: 0px;
+      box-shadow: none;
+      &:hover{
+          background: rgba($nm_error, 0.1);
+          color: $nm_error;
+          border: 0px;
+          box-shadow: none;
+      }
+      @media (max-width: $screen-sm-min){
+          background: rgba($nm_error, 0.1);
+          color: $nm_error;
+          border: 0px;
+          box-shadow: none;
+      }
+  }
+}
+
+@mixin successbtnform{
+  .slds-button_success{
+      @include basebtn;
+      padding: .5rem 3rem;
+      background: transparent;
+      color: $nm_success;
+      border: 0px;
+      box-shadow: none;
+      &:hover{
+          background: rgba($nm_success, 0.1);
+          color: $nm_success;
+          border: 0px;
+          box-shadow: none;
+      }
+      @media (max-width: $screen-sm-min){
+          background: rgba($nm_success, 0.1);
+          color: $nm_success;
+          border: 0px;
+          box-shadow: none;
+      }
+  }
+}
+
+
+@mixin white-gradient {
+background: linear-gradient(to right,  rgba($nm_white,1) 0%, rgba($nm_white,0) 100%);
+}

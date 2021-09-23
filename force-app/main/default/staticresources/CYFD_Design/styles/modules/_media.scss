@@ -1,0 +1,19 @@
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+.video-container {
+  height: 0;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 56.25%;
+  iframe {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+

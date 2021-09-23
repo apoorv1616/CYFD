@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+
+//-- Debug your box model (options: true, false)
+$enable-debugger:           false;
+
+//-- Let CSS4 make your life easier, or don't (options: true, false)
+$enable-css-variables:      true;
+
+//-- Enable spacer utility classes
+$enable-spacers:            true;
+
+//-- Enable flexbox grid system
+$enable-grid-classes:       true;
+
+//-- Enable flexbox utility classes
+$enable-flex-classes:       true;
+
+//--- Spacing
+$one:                       0.0625rem;
+
+$spacer:                    1rem;
+$spacer-x:                  $spacer;
+$spacer-y:                  $spacer;
+
+$gap-xs:                    $spacer / 2;
+$gap-sm:                    $spacer;
+$gap-base:                  $spacer * 1.5;
+$gap:                       $spacer * 2;
+$gap-md:                    $spacer * 3;
+$gap-lg:                    $spacer * 4;
+
+//-- Grid settings
+$grid-columns:              12;
+$grid-gutter-width:         $gap;
+
+//-- Viewports
+$screen-xs:                 480px;
+$screen-sm:                 768px;
+$screen-sm-min:             $screen-sm - 1px;
+$screen-sm-ls:              1024px;
+$screen-md:                 991px;
+$screen-lg:                 1200px;
+$screen-xl:                 1440px;
+$mobile-nav-break:          $screen-sm-ls;
+
+//-- Layout
+$header-height:             8rem;
+$header-height-collapsed:   6.5rem;
+$sidebar-width:             16rem;
+$footer-height:             $gap-md;
+
+//-- Forms
+$input-height:              $gap + 0.5rem;
+
+//-- Typography
+$font-regular:              'Source Sans Pro', sans-serif;
+$font-heading:              'Source Sans Pro', sans-serif;
+$font-size-base:            14px;
+
+$line-height-small:         1.5;
+$line-height-base:          1.428571429;
+$line-height-large:         1.3333333;
+
+$font-weight-light:         300;
+$font-weight-regular:       400;
+$font-weight-semibold:      600;
+$font-weight-bold:          700;
+
+$font-size-h1:              3.5rem;
+$font-size-h2:              2rem;
+$font-size-h3:              1.5rem;
+$font-size-h4:              1.25rem;
+$font-size-h5:              $font-size-base;
+$font-size-h6:              0.875rem;
+
+//- Brand Colors
+$gray-lt:                   #f6f6f6;
+$gray:                      #dddddd;
+$gray-md:                   #999999;
+$gray-dk:                   #343434;
+
+$brand-primary:             #0098db;
+$brand-secondary:           #6D3788;
+$brand-tertiary:            #000000;
+$brand-quinary:             #E8EFF7;
+
+$success:                   #93c461;
+$info:                      #5bc0de;
+$warning:                   #f29f4e;
+$danger:                    #cf202f;
+
+//-- Element colors
+$text-dark:                 #333333;
+$text-color:                $gray-dk;
+$text-light:                darken($gray,10%);
+
+$link-color:                $brand-primary;
+$link-active:               darken($brand-primary,10%);
+
+$border-default:            #d5d5d5;
+$border-lt:                 $gray-lt;
+$hr-bg:                     $gray;
+
+$border-radius:             6px;
+$border-radius-sm:          3px;
+
+//-- Layout colors
+$page-bg:                   white;
+
+$header-bg:                 white;
+$header-color:              $text-color;
+
+$footer-bg:                 darken($brand-secondary,25%);
+$footer-color:              lighten($gray-lt,30%);
+
+$nav-icon-size:             24px;
+$nav-icon-color:            $text-color;

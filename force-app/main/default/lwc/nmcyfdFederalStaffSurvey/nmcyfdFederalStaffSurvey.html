@@ -1,0 +1,394 @@
+<template>
+    <div>
+        <template if:true ={jjac}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">Offend - Short Term</p>
+            </div>
+            <div class="questionsDiv n_fix_inl">
+                <div class="question">
+                    <lightning-radio-group name="DidTheYouthHaveArrestInTheProgram" 
+                        label="Did the youth have an arrest or delinquent offense  while in the progam?"
+                        options={options} required 
+                        value={dataObj.DidTheYouthHaveArrestInTheProgram} onchange={changeHandler}
+                        type="radio"></lightning-radio-group> 
+                    
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="WasTheYouthCommittedToAFacility"
+                        label="Was the youth committed to a juvenile facility while participating in the program?"
+                        options={options} required 
+                        value={dataObj.WasTheYouthCommittedToAFacility} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                    
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="WasTheYouthSentencedToAPrison"
+                        label="Was the youth sentenced to adult prison while participating in the program?"
+                        options={options} required
+                        value={dataObj.WasTheYouthSentencedToAPrison} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="DidTheYouthReceiveAnotherSentence"
+                    label="Did the youth receive another sentence while serving in the program?"
+                        options={options} required
+                        value={dataObj.DidTheYouthReceiveAnotherSentence} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="DidTheyReoffendOrHaveAnOffense"
+                    label="As a youth who came into the program with an arrest or a delinquent offense, did they reoffend or have a delinquent offense while in the program?"
+                        options={options} required
+                        value={dataObj.DidTheyReoffendOrHaveAnOffense} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="CameInWithArrestSentToFacility"
+                    label="As a youth who came into the program with an arrest or a delinquent offense, was the youth committed to a juvenile facility while participating in the program? "
+                        options={options} required
+                        value={dataObj.CameInWithArrestSentToFacility} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="WasTheYouthSentencedToAdultPrison"
+                    label="As a youth who came into the program with an arrest or a delinquent offense, was the youth sentenced to adult prison while participating in the program?"
+                        options={options} required
+                        value={dataObj.WasTheYouthSentencedToAdultPrison} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="DidTheYouthReceiveANewSentence"
+                    label="As a youth who came into the program with an arrest or a delinquent offense, did the youth receive another sentence while serving in the program?"
+                        options={options} required
+                        value={dataObj.DidTheYouthReceiveANewSentence} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="DidTheYouthCompleteTheRequirements"
+                    label="Did the youth complete the program requirements?"
+                        options={options} required
+                        value={dataObj.DidTheYouthCompleteTheRequirements} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="DidTheYouthExitSatisfactorily"
+                    label="Did the youth exit the program satisfactorily?"
+                        options={options} required
+                        value={dataObj.DidTheYouthExitSatisfactorily} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </div>
+        </template>
+        <template if:true ={jjac}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">Offend - Long Term</p>
+            </div>
+            <div class="questionsDiv n_fix_inl">
+                <div class="question">
+                    <lightning-radio-group name="HaveArrestOrOffenseWith6_12Months"
+                    label="Did the youth have an arrest or delinquent offense  within 6 - 12 months of being in the progam?"
+                        options={options} required
+                        value={dataObj.HaveArrestOrOffenseWith6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="SentToAFacilityWithin6_12Months"
+                    label="Was the youth committed to a juvenile facility within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.SentToAFacilityWithin6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="SentToAdultJailWithin6_12Months"
+                    label="Was the youth sentenced to adult prison within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.SentToAdultJailWithin6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="GetAnotherSentenceIn6_12Months"
+                    label="Did the youth receive another sentence within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.GetAnotherSentenceIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="ReoffendOrJuvenileActIn6_12Months"
+                    label="As a youth who came into the program with an arrest or a delinquent offense, did they reoffend or have a delinquent offense within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.ReoffendOrJuvenileActIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="RecommittedToAFacilityIn6_12Months"
+                    label="As a youth who came into the program with an arrest or a delinquent offense, was the youth recommitted to a juvenile facility within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.RecommittedToAFacilityIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="SentencedToAdultJailIn6_12Months"
+                    label="As a youth who came into the program with an arrest or a delinquent offense, was the youth sentenced to adult prison within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.SentencedToAdultJailIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="HaveAnotherSentenceWithin6_12Months"
+                    label="As a youth who came into the program with an arrest or a delinquent offense, did the youth receive another sentence within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.HaveAnotherSentenceWithin6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </div>
+        </template>
+        
+        <template if:true ={jjac}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">Gang Activity</p>
+            </div>
+            <div class="questionsDiv n_fix_inl">
+                <div class="question">
+                    <lightning-radio-group name="ExhibitADecreaseInGangActivity"
+                    label="Did the youth exhibit a decrease in gang activity while in the program?"
+                        options={options} required
+                        value={dataObj.ExhibitADecreaseInGangActivity} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="DecreaseInGangActivityIn6_12Months"
+                    label="Did the youth exhibit a decrease in gang activity within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.DecreaseInGangActivityIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </div>
+        </template>
+        <template if:true ={jjac}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">Substance Abuse</p>
+            </div>
+            <div class="questionsDiv n_fix_inl">
+                <div class="question">
+                    <lightning-radio-group name="ExhibitADecreaseInSubstanceAbuse"
+                    label="Did the youth exhibit a decrease in substance abuse  while in the program?"
+                        options={options} required
+                        value={dataObj.ExhibitADecreaseInSubstanceAbuse} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="LessSubstanceAbuseIn6_12Months"
+                    label="Did the youth exhibit a decrease in substance abuse  within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.LessSubstanceAbuseIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </div>
+        </template>
+        <template if:false ={jcc}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">Self-Esteem</p>
+            </div>
+        </template>
+        
+        <div class="questionsDiv n_fix_inl">
+            <template if:false ={jcc}>
+                <div class="question">
+                    <lightning-radio-group name="ExhibitAnIncreaseInSelfEsteem"
+                    label="Did the youth exhibit an increase in self-esteem while in the program?"
+                        options={options} required
+                        value={dataObj.ExhibitAnIncreaseInSelfEsteem} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </template>
+            <template if:true ={jjac}>
+                <div class="question">
+                    <lightning-radio-group name="IncreaseInSelfEsteemIn6_12Months"
+                    label="Did the youth exhibit an increase in self-esteem within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.IncreaseInSelfEsteemIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </template>
+        </div>
+        <template if:true ={jjac}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">Body Image</p>
+            </div>
+            <div class="questionsDiv n_fix_inl">
+                <div class="question">
+                    <lightning-radio-group name="ExhibitAnImprovementOfBodyImage"
+                    label="Did the youth exhibit an improvement of body image while in the progam?"
+                        options={options} required
+                        value={dataObj.ExhibitAnImprovementOfBodyImage} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="ImprovementOfBodyImageIn6_12Months"
+                    label="Did the youth exhibit an improvement of body image within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.ImprovementOfBodyImageIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </div>
+        </template>
+        <template if:false ={jcc}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">Family Relationship</p>
+            </div>
+        </template>
+        
+        <div class="questionsDiv n_fix_inl">
+            <template if:false ={jcc}>
+                <div class="question">
+                    <lightning-radio-group name="DesiredChangeInFamilyRelationships"
+                    label="Did the youth exhibit a desired change in family relationships while in the program?"
+                        options={options} required
+                        value={dataObj.DesiredChangeInFamilyRelationships} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </template>
+            <template if:true ={jjac}>
+                <div class="question">
+                    <lightning-radio-group name="ChangeInFamilyTiesIn6_12Months"
+                    label="Did the youth exhibit a desired change in family relationships within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.ChangeInFamilyTiesIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </template>
+            
+        </div>
+        <template if:false ={jcc}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">Perception of Social Support</p>
+            </div>
+        </template>
+        
+        <div class="questionsDiv n_fix_inl">
+            <template if:false ={jcc}>
+                <div class="question">
+                    <lightning-radio-group name="GainInPerceptionOfSocialSupport"
+                    label="Did the youth exhibit an improvement in the perception of social support while in the program?"
+                        options={options} required
+                        value={dataObj.GainInPerceptionOfSocialSupport} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </template>
+            <template if:true ={jjac}>
+                <div class="question">
+                    <lightning-radio-group name="AcumenOfSocialSupport6_12Months"
+                    label="Did the youth exhibit an improvement in the perception of social support within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.AcumenOfSocialSupport6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </template>
+            
+        </div>
+        <template if:false ={jcc}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">School Performance</p>
+            </div>
+        </template>
+        
+        <div class="questionsDiv n_fix_inl">
+            <template if:false ={jcc}>
+                <div class="question">
+                    <lightning-radio-group name="ShowImprovementInSchoolPerformance"
+                    label="Did the youth exhibit an improvement in school performance (grades) while in the program?"
+                        options={options} required
+                        value={dataObj.ShowImprovementInSchoolPerformance} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </template>
+            <template if:true ={jjac}>
+                <div class="question">
+                    <lightning-radio-group name="GainInSchoolGradesWithin6_12Months"
+                    label="Did the youth exhibit an improvement in school performance (grades) within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.GainInSchoolGradesWithin6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </template>
+            
+        </div>
+        <template if:false ={jcc}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">School Attendance</p>
+            </div>
+        </template>
+        
+        <div class="questionsDiv n_fix_inl">
+            <template if:false ={jcc}>
+                <div class="question">
+                    <lightning-radio-group name="ImprovementInSchoolAttendance"
+                    label="Did the youth exhibit an improvement in school attendance while in the program?"
+                        options={options} required
+                        value={dataObj.ImprovementInSchoolAttendance} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </template>
+            <template if:true ={jjac}>
+                <div class="question">
+                    <lightning-radio-group name="GainInSchoolAttendanceIn6_12Months"
+                    label="Did the youth exhibit an improvement in school attendance within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.GainInSchoolAttendanceIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </template>
+            
+        </div>
+        <template if:true ={jjac}>
+            <div class="headingDiv n_fix_head_surv">
+                <p class="headingText">School Behavior</p>
+            </div>
+        
+            <div class="questionsDiv n_fix_inl">
+                <div class="question">
+                    <lightning-radio-group name="ShowImprovementInBehaviorAtSchool"
+                    label="Did the youth exhibit an improvement in behavior at school while in the program?"
+                        options={options} required
+                        value={dataObj.ShowImprovementInBehaviorAtSchool} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+                <div class="question">
+                    <lightning-radio-group name="GainInBehaviorAtSchoolIn6_12Months"
+                    label="Did the youth exhibit an improvement in behavior at school within 6 - 12 months of being in the program?"
+                        options={options} required
+                        value={dataObj.GainInBehaviorAtSchoolIn6_12Months} onchange={changeHandler}
+                        type="radio"></lightning-radio-group>
+                </div>
+            </div>
+        </template>
+        
+        <div class="headingDiv n_fix_head_surv">
+            <p class="headingText">Parent/Family Involvement</p>
+        </div>
+        <div class="questionsDiv n_fix_inl">
+            <div class="question">
+                <lightning-radio-group name="ParentFamilyWasActiveInTheProgram"
+                label="Parent/Family was active in the program."
+                    options={options} required
+                    value={dataObj.ParentFamilyWasActiveInTheProgram} onchange={changeHandler}
+                    type="radio" 
+                    ></lightning-radio-group>
+            </div>
+            <div class="question">
+                <lightning-radio-group name="ParentCompletedProgramDetailsSuccess"
+                label="Parent/Family successfully completed their program requirements/expectations."
+                    options={options} required
+                    value={dataObj.ParentCompletedProgramDetailsSuccess} onchange={changeHandler}
+                    type="radio"></lightning-radio-group>
+            </div>
+            <div class="question">
+                <lightning-radio-group name="FamilySatisfiedWithTheirInvolvement"
+                label="Parent/Family was satisfied with their involvement in the program."
+                    options={options} required
+                    value={dataObj.FamilySatisfiedWithTheirInvolvement} onchange={changeHandler}
+                    type="radio"></lightning-radio-group>
+            </div>
+        </div>
+    </div>    
+</template>

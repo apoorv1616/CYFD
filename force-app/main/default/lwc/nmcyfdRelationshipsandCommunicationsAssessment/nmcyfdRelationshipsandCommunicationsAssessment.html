@@ -1,0 +1,123 @@
+<template>
+    <div>
+        <h3 class ="slds-p-left_medium heading n_head_space2"><b>CASEY Life Skills - (Step 3 of 7)</b></h3>
+        <h3 class ="slds-p-left_medium heading n_head_space"><b>Relations and Communications </b></h3>
+
+        <br/>
+
+        <div class="slds-form form-section">
+
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanSpeakUpForMyself" class = "  slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can speak up for myself."
+                value={dataObj.ICanSpeakUpForMyself} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToActInSocialSettings" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to act in social or professional situations."
+                value={dataObj.IKnowHowToActInSocialSettings} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToShowRespectToPeople" class = "slds-p-left_medium n_fix_inl "
+                options={options} onchange={changeHandler} label="I know how to show respect to people with different beliefs, opinions, and cultures."
+                value={dataObj.IKnowHowToShowRespectToPeople}  required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanDescribeMyBiologicalIdentity" class = "  slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can describe my racial and ethnic identity."
+                value={dataObj.ICanDescribeMyBiologicalIdentity} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanExplainSexualOrientation" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can explain the difference between sexual orientation and gender identity."
+                value={dataObj.ICanExplainSexualOrientation} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IHaveFriendsILikeToBeWith" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I have friends I like to be with who help me feel valued and worthwhile."
+                value={dataObj.IHaveFriendsILikeToBeWith} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IAmAPartOfAFamilyAndWeCareRC" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I am a part of a family and we care about each other."
+                value={dataObj.IAmAPartOfAFamilyAndWeCareRC} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanGetInTouchWithFamily" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can get in touch with at least one family member when I want to."
+                value={dataObj.ICanGetInTouchWithFamily} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IHaveFamilyToSpendTimeWithOnXMasRC" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I have friends or family to spend time with on holidays and special occasions."
+                value={dataObj.IHaveFamilyToSpendTimeWithOnXMasRC} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowAtLeastOneAdultWhenIExit" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know at least one adult I can depend on when I exit care."
+                value={dataObj.IKnowAtLeastOneAdultWhenIExit} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowAnAdultWhoCouldCareForKidsRC" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know an adult who could be a grandparent, aunt or uncle to my children now or my future children."
+                value={dataObj.IKnowAnAdultWhoCouldCareForKidsRC} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="MyRelationshipsAreFreeFromHitting" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="My relationships are free from hitting, slapping, shoving, being made fun of, or name calling."
+                value={dataObj.MyRelationshipsAreFreeFromHitting} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowSignsOfAnAbusiveRelationships" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know the signs of an abusive relationship."
+                value={dataObj.IKnowSignsOfAnAbusiveRelationships} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowWhatMyLegalPermanencyGoalIsRC" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know what my legal permanency goal is."
+                value={dataObj.IKnowWhatMyLegalPermanencyGoalIsRC} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IHaveInformationAboutMyFamilyRC" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I have information about my family members."
+                value={dataObj.IHaveInformationAboutMyFamilyRC} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IThinkAboutTheImpactOfMyChoices" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I think about how my choices impact others."
+                value={dataObj.IThinkAboutTheImpactOfMyChoices} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IDealWithAngerAndNotHurtOthers" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} required
+                value={dataObj.IDealWithAngerAndNotHurtOthers} label="I can deal with anger without hurting others or damaging things."
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IShowOthersThatICareAboutThem" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I show others that I care about them."
+                value={dataObj.IShowOthersThatICareAboutThem} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <!-- ends -->
+        </div>
+        
+    </div>
+    
+</template>

@@ -1,0 +1,123 @@
+<template>
+    <div>
+        <h3 class ="slds-p-left_medium n_head_space2 heading"><b>CASEY Life Skills - (Step 1 of 7)</b></h3>
+        <h3 class ="slds-p-left_medium n_head_space heading"><b>Daily Living </b></h3>
+
+        <br/>
+
+        <div class="slds-form form-section">
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowWhereToGoForTheInternet" class = "slds-p-left_medium n_fix_inl "
+                options={options} onchange={changeHandler} label="I know where to go to get on the internet."
+                value={dataObj.IKnowWhereToGoForTheInternet} required
+                type="radio"></lightning-radio-group>
+            </div>
+            
+
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanFindWhatINeedOnTheInternet" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can find what I need on the internet."
+                value={dataObj.ICanFindWhatINeedOnTheInternet} required
+                type="radio"></lightning-radio-group>
+            </div>
+            
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToUseMyEmailAccount" class = "  slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to use my email account."
+                value={dataObj.IKnowHowToUseMyEmailAccount} required
+                type="radio"></lightning-radio-group>
+            </div>
+
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToSendComputerDocuments" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can create, save, print and send computer documents."
+                value={dataObj.IKnowHowToSendComputerDocuments} required
+                type="radio"></lightning-radio-group>
+            </div>
+
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowTheRisksMeetingPeopleOnline" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know the risks of meeting someone in person that I met online."
+                value={dataObj.IKnowTheRisksMeetingPeopleOnline} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IWouldNotPostPicturesOrMessages" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I would not post pictures or messages if I thought it would hurt someone's feelings."
+                value={dataObj.IWouldNotPostPicturesOrMessages} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IfSomeoneSendMeMessagesIWillTell" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="If someone sent me messages online that made me feel bad or scared, I would know what to do or who to tell."
+                value={dataObj.IfSomeoneSendMeMessagesIWillTell} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowOneAdultWhoWouldTakeMyCallDL" class = " slds-p-left_medium n_fix_inl"
+                                    options={options} onchange={changeHandler} label="I know at least one adult, other than my worker, who would take my call in the middle of the night if I had an emergency."
+                                    value={dataObj.IKnowOneAdultWhoWouldTakeMyCallDL} required
+                                    type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="AnAdultITrustChecksInWithMeDL" class = " slds-p-left_medium n_fix_inl"
+                                        options={options} onchange={changeHandler} label="An adult I trust, other than my worker, checks in with me regularly. "
+                                        value={dataObj.AnAdultITrustChecksInWithMeDL} required
+                                        type="radio"></lightning-radio-group>
+            </div>   
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="WhenIShopForFoodITakeAList" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="When I shop for food, I take a list and I compare prices."
+                                value={dataObj.WhenIShopForFoodITakeAList} required
+                                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanMakeMealsWithOrWithoutRecipes" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can make meals with or without using a recipe."
+                value={dataObj.ICanMakeMealsWithOrWithoutRecipes} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IThinkAboutWhatIEatAndItsImpact" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I think about what I eat and how it impacts  my health."
+                value={dataObj.IThinkAboutWhatIEatAndItsImpact} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IUnderstandHowToReadFoodLabels" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I understand how to read food product labels to see how much fat, sugar, salt, and calories the food has."
+                value={dataObj.IUnderstandHowToReadFoodLabels} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToDoMyOwnLaundry" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to do my own laundry."
+                value={dataObj.IKnowHowToDoMyOwnLaundry} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKeepMyLivingSpaceClean" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I keep my living space clean."
+                value={dataObj.IKeepMyLivingSpaceClean} required
+                type="radio"></lightning-radio-group> 
+            </div>
+           
+            
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowTheProductsToUseWhenCleaning" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know the products to use when cleaning the bathroom and kitchen."
+                value={dataObj.IKnowTheProductsToUseWhenCleaning} required
+                type="radio"></lightning-radio-group>
+            </div>
+
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToUseAFireExtinguisher" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to use a fire extinguisher."
+                value={dataObj.IKnowHowToUseAFireExtinguisher} required
+                type="radio"></lightning-radio-group>
+            </div>
+        </div>
+        
+    </div>
+    
+</template>

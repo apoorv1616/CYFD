@@ -1,0 +1,13 @@
+table{
+    box-shadow: #dec78bb0 1px 1px 0px 1px;
+ }
+ 
+ td, th {
+     text-align: center;
+     padding:2%;
+   }
+ 
+ 
+ tr:hover {
+    background-color: #f3f3f7;
+ }

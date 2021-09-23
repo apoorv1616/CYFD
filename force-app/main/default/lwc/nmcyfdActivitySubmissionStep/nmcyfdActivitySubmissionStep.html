@@ -1,0 +1,123 @@
+<template>
+
+    <div>
+        <b class="slds-float_left">Supporting Documents</b>
+        <div class="slds-float_right">
+            <lightning-file-upload
+                            name="fileUploader"
+                            accept={acceptedFormats}
+                            record-id={contractActivityId}
+                            onuploadfinished={handleUploadFinished}
+                            multiple>
+                    </lightning-file-upload>
+        </div>
+    </div>
+    <table
+        class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked slds-p-top_large">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Name
+                </th>
+                <th scope="col">
+                    Type
+                </th>
+                <th scope="col">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <template if:true={docs}>
+                <template for:each={docs} for:item="doc" for:index="index">
+                    <tr key={doc.id}>  
+                        <td data-label="Name">
+                            {doc.name}
+                        </td>
+                        <td data-label="Type">
+                            {doc.type}
+                        </td>
+                        <td data-label="Actions">
+                            <a onclick={handleDeleteFile} data-index={index} data-id={doc.id}>Delete</a>
+                        </td>
+                    </tr>
+                </template>
+            </template>
+        </tbody>
+    </table>
+
+
+
+    <!-- <table class="borderclass slds-p-around_medium">
+        <tr class="mainhead" >
+            <td class="inner" colspan="3" style="color:white">
+                <b class="slds-float_left">Supporting Documents</b>
+                <button class="button slds-float_right" onclick={addDocument}>Add File</button>&nbsp;&nbsp;
+                <div class="slds-float_right">
+                    <lightning-file-upload
+                            name="fileUploader"
+                            accept={acceptedFormats}
+                            record-id={contractActivityId}
+                            onuploadfinished={handleUploadFinished}
+                            multiple>
+                    </lightning-file-upload>
+                  </div>
+            </td>
+        
+        </tr>
+        <tr class="table-header">
+            <td class="inner" style="color:white">Name</td>
+            <td class="inner" style="color:white">Type</td>
+            <td class="inner" style="color:white">Actions</td>
+        </tr>
+        <template if:true={docs}>
+            <template for:each={docs} for:item="doc" for:index="index">
+                <tr key={doc.id}>                  
+                    <td class="inner">{doc.name}</td>
+                    <td class="inner">{doc.type}</td>
+                    <td class="inner"><a onclick={handleEditRole} data-id={doc.Id}>Edit</a> | 
+                        <td class="inner"><a onclick={handleDeleteFile} data-index={index} data-id={doc.id}>Delete</a></td>
+                </tr>
+            </template> 
+        </template>
+    </table> -->
+
+
+    <!-- <template if:true={addFile}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                  aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+              <div class="slds-modal__container">
+                  <header class="slds-modal__header">
+                      <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+                          onclick={handleCloseModal}>
+                          <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="Close" size="medium">
+                          </lightning-icon>
+                          <span class="slds-assistive-text">Close</span>
+                      </button>
+                      <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{heading}</h2>
+                  </header>
+                  <div class="slds-modal__content modal__content-height slds-p-around_medium modal-body"
+                      id="modal-content-id-1">
+                          
+                      <lightning-file-upload
+                            name="fileUploader"
+                            accept={acceptedFormats}
+                            record-id="a0702000000A56o"
+                            onuploadfinished={handleUploadFinished}
+                            multiple>
+                    </lightning-file-upload>
+                  </div>
+                  <footer class="slds-modal__footer">
+                      <button class="slds-button" title="Cancel" onclick={handleCloseModal}>Cancel</button>
+                      <button class="slds-button" title="Save" onclick={handleCloseModal}>Save</button>
+                  </footer>
+              </div>
+          </section>
+          <div class="slds-backdrop slds-backdrop_open"></div>
+          <template if:true={showSpinner}>
+              <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+          </template>
+      </template> -->
+
+</template>

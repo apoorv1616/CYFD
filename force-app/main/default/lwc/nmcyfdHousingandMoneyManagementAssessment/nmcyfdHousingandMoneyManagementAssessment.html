@@ -1,0 +1,194 @@
+<template>
+    <div>
+        <h3 class ="slds-p-left_medium n_head_space2 heading"><b>CASEY Life Skills - (Step 4 of 7)</b></h3>
+        <h3 class ="slds-p-left_medium n_head_space heading"><b>Housing and Money Management</b></h3>
+
+        <br/>
+
+        <div class="slds-form form-section">
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IUnderstandHowInterestRatesWork" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="I understand how interest rates work on loans or credit purchases."
+                                value={dataObj.IUnderstandHowInterestRatesWork} required
+                                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IUnderstandMakingPurchasesWithCards" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I understand the disadvantges of making purchases with my credit card."
+                value={dataObj.IUnderstandMakingPurchasesWithCards} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowTheImportanceOfGoodCredit" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know the importance of a good credit score."
+                value={dataObj.IKnowTheImportanceOfGoodCredit} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToBalanceMyBankAccount" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="I know how to balance my bank account."
+                                value={dataObj.IKnowHowToBalanceMyBankAccount} required
+                                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IPutMoneyInMySavingsAccount" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="I put money in my savings account when I can."
+                                value={dataObj.IPutMoneyInMySavingsAccount} required
+                                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowAnAdultWhoWouldHelpMeHM" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know an adult who would help me if I had a financial emergency."
+                value={dataObj.IKnowAnAdultWhoWouldHelpMeHM} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IUseOnlineBankingToTrackMyMoney" class = "slds-p-left_medium n_fix_inl "
+                options={options} onchange={changeHandler} label="I use online banking to keep track of my money."
+                value={dataObj.IUseOnlineBankingToTrackMyMoney}   required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowTheGoodAndBadOfLoanStores" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know the advantages and disadvantages of using a check cashing or payday loan store."
+                value={dataObj.IKnowTheGoodAndBadOfLoanStores}  required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToFindSafeCheapHousing" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to find safe and affordable housing."
+                value={dataObj.IKnowHowToFindSafeCheapHousing} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <!-- <lightning-radio-group name="ICanFigureOutCostsOfOwningACar" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can figure out all the costs of car ownership, such as registration, repair, insurance, and gas."
+                value={dataObj.ICanFigureOutCostsOfOwningACar} required
+                type="radio"></lightning-radio-group> -->
+                <lightning-radio-group name="ICanFigureOutTheCostsToMove" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can figure out the costs to move to a new place, such as deposits, rents, utilities, and furniture."
+                value={dataObj.ICanFigureOutTheCostsToMove} required
+                type="radio"></lightning-radio-group> 
+
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToFillOutAnAptRentalApp" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to fill out an apartment rental application."
+                value={dataObj.IKnowHowToFillOutAnAptRentalApp} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToGetERHelpToPayBills" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} required
+                                value={dataObj.IKnowHowToGetERHelpToPayBills} label="I know how to get emergency help to pay for water, electricity, and gas bills."
+                                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowWhatCanHappenWithMyLease" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know what can happen if I break my rental lease."
+                value={dataObj.IKnowWhatCanHappenWithMyLease} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanExplainTheNeedForInsurance" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="I can explain why people need renter's or homeowner's insurance."
+                                value={dataObj.ICanExplainTheNeedForInsurance} required
+                                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowAnAdultICanLiveWith" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="I know an adult I could live with for a few days or weeks if I need to."
+                                value={dataObj.IKnowAnAdultICanLiveWith} required
+                                type="radio"></lightning-radio-group>
+            </div>
+
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ThereIsAtLeastOneAdultIContact" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="There is at least one adult that I have regular contact with, other than my case manager or other professional, who lives in stable and safe housing."
+                                value={dataObj.ThereIsAtLeastOneAdultIContact} required
+                                type="radio"></lightning-radio-group>
+            </div>
+
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowAnAdultICanGoToForHelp" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know an adult I can go to for financial assistance."
+                value={dataObj.IKnowAnAdultICanGoToForHelp} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IPlanForTheExpensesIPayEachMonth" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label='I plan for the expenses that I must pay each month.'
+                value={dataObj.IPlanForTheExpensesIPayEachMonth} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKeepRecordsOfMoneyIAmPaid" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="I keep records of the money I am paid and the bills I pay."
+                                value={dataObj.IKeepRecordsOfMoneyIAmPaid} required
+                                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowWhatHappensIfIGetCaught" class = "  slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know what happens in my state if I am caught driving without car insurance or a driver's license."
+                value={dataObj.IKnowWhatHappensIfIGetCaught} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanExplainHowToGetALicense" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="I can explain how to get and renew a driver's license or state ID card."
+                                value={dataObj.ICanExplainHowToGetALicense} required
+                                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <!-- <lightning-radio-group name="ICanFigureOutTheCostsToMove" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can figure out the costs to move to a new place, such as deposits, rents, utilities, and furniture."
+                value={dataObj.ICanFigureOutTheCostsToMove} required
+                type="radio"></lightning-radio-group>  -->
+                <lightning-radio-group name="ICanFigureOutCostsOfOwningACar" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can figure out all the costs of car ownership, such as registration, repair, insurance, and gas."
+                value={dataObj.ICanFigureOutCostsOfOwningACar} required
+                type="radio"></lightning-radio-group> 
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToUsePublicTransportation" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to use public transportation to get where I need to go."
+                value={dataObj.IKnowHowToUsePublicTransportation} required 
+                type="radio"></lightning-radio-group>
+            </div>
+
+            <!-- ends -->
+            
+            <!-- <p class = "slds-p-left_medium n_fix_inl ">I know an adult who would help me if I had a financial emergency.</p>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowMyFamilyMedicalHistory" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler}
+                value={dataObj.IKnowMyFamilyMedicalHistory}
+                type="radio"></lightning-radio-group>
+            </div> -->
+            
+                                                     
+            
+            
+
+            
+
+            
+            
+
+           
+
+            
+
+           
+
+            
+
+            
+
+
+
+        </div>
+        
+    </div>
+    
+</template>

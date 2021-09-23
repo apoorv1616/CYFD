@@ -1,0 +1,128 @@
+// Compiling CSS4 variables can be toggled on or off in _settings.scss
+
+// Color map
+$colors: (
+  text: $text-color,
+  background: $page-bg,
+  link: $link-color,
+  link-active: darken($link-active, 10%),
+);
+
+// Font map
+$fonts: (
+  family: (
+    body: ($font-regular),
+    head: ($font-heading),
+  ),
+  weight: (
+    body: $font-weight-regular,
+    head: $font-weight-bold,
+  ),
+  size: (
+    body: $font-size-base,
+    h1: $font-size-h1,
+    h2: $font-size-h2,
+    h3: $font-size-h3,
+    h4: $font-size-h4,
+    h5: $font-size-h5,
+    h6: $font-size-h6,
+  ),
+  leading: (
+    body: $line-height-base,
+    head: $line-height-large,
+  )
+);
+
+// associate variable map name to an actual variable map
+$var-maps: (
+  color: $colors,
+  font : $fonts,
+);
+
+// which property uses which var map
+$props: (
+  background-color: color,
+  color : color,
+  font-family : (font, family),
+  font-size : (font, size),
+  font-weight : (font, weight),
+  line-height : (font, leading),
+);
+
+// the variable mixin takes a property and variable name
+@mixin v($prop, $var, $show-fall: true) {
+  // get the property's map name(s)
+  $map-name: map-get($props, $prop);
+  $nest-name: null;
+  $nest-map-name: null;
+  $map: null;
+  $var-fall: null;
+  $var-output: null;
+  // if a list, we need to go deeper
+  @if type-of($map-name)==list {
+    $nest-name: nth($map-name, 1);
+    $nest-map-name: nth($map-name, 2);
+  }
+  // if it is a nested map
+  @if $nest-name {
+    // get the map from nested map-name
+    $map: map-get($var-maps, $nest-name);
+    // get the nested map
+    $nest-map: map-get($map, $nest-map-name);
+    // get the var value fro mthe nested map
+    $var-fall: map-get($nest-map, $var);
+    $var-output: var(--#{$nest-name}-#{$nest-map-name}-#{$var});
+  }
+  @else {
+    // get the map from map name
+    $map: map-get($var-maps, $map-name);
+    // fallback, grab the variable's value from the map
+    $var-fall: map-get($map, $var);
+    $var-output: var(--#{$map-name}-#{$var});
+  }
+  // if show standard is not overridden to be null
+  @if $show-fall {
+    #{$prop}: $var-fall;
+  }
+  // css4 variable output
+  @if $enable-css-variables==true {
+    #{$prop}: $var-output;
+  }
+}
+
+
+
+
+/*Color Codes*/
+$nm_default-text: $text-color;
+$nm_white: #ffffff;
+$nm_black: #000000;
+$nm_primary-color: #f26822;
+$nm_secoundary-color: #ffeb00;
+$nm_light_gray-1: #aaacb1;
+$nm_light_gray-2: #DFE0E2;
+$nm_dark_gray-1: #6C6E75;
+$nm_border: rgba($nm_default-text, 0.04);
+$nm_primary-hover: #f17131;
+
+/*Shadow Codes*/
+$nm_btn-shadow--hover: 0 3px 1px -2px rgba($nm_black,.2), 0 2px 2px 0 rgba($nm_black,.14), 0 1px 5px 0 rgba($nm_black,.12);
+$nm_btn-shadow--focus: 0 5px 5px -3px rgba($nm_black,.2), 0 8px 10px 1px rgba($nm_black,.14), 0 3px 14px 2px rgba($nm_black,.12);
+$nm_default-shadow: 2px 5px 12px 0px rgba($nm_primary-color, 0.1);
+
+
+/*Screen Size*/
+$screen-xs: 480px;
+$screen-sm: 768px;
+$screen-sm-min: $screen-sm - 1px;
+$screen-sm-max: $screen-sm + 1px;
+$screen-sm-ls: 1024px;
+$screen-sm-ls-min: $screen-sm-ls - 1px;
+$screen-sm-ls-max: $screen-sm-ls + 1px;
+$screen-md: 991px;
+$screen-lg: 1200px;
+$screen-lg-min: $screen-lg - 1px;
+$screen-xl: 1400px;
+
+/*Animation*/
+$animationSpeed: 40s;

@@ -1,0 +1,252 @@
+<apex:page standardController="Invoice__c" extensions="NM_CYFD_GenerateInvoicePDF" lightningStylesheets="false" showHeader="false" sidebar="false" standardStylesheets="false" renderAs="pdf" applyHtmlTag="false" applyBodyTag="false" >
+  <!-- <center> <apex:image url="{!$Resource.Logo}" width="120" height="70"/> </center>-->
+    <html>
+        <head>
+    
+            <style type="text/CSS">
+                @page {
+                
+                size: A4;
+                @bottom-right {
+                content: counter(page) "/" counter(pages);
+                }
+                }
+                
+   
+            </style>  
+  
+        </head>
+        <body>
+            
+   <h1>Original</h1>
+   <center> <h1>Invoice</h1></center>
+ 
+     
+    <table style = "table-layout: fixed ; border: 1px; width : 100%">
+        <tr>
+            <td colspan="2">{!invoice.Contract__r.Name__c}</td>
+            
+        </tr> 
+		<tr>
+            <td colspan="2">{!invoice.Contract__r.Address__c}</td>
+            <td style="text-align : right">Invoice Date :</td>
+            <td style="text-align : right">{!invoiceDate }</td>
+           
+        </tr>
+        <tr>
+            <td colspan="2">{!invoice.Contract__r.City__c} {!invoice.Contract__r.State__c}, {!invoice.Contract__r.Zip__c}</td>
+            <td style="text-align : right">Invoice No :</td>
+            <td style="text-align : right"> {!invoice.Name }</td>
+            
+        </tr>
+        <tr>
+            <td colspan="2">Fiscal Year : {!fiscalYear}</td>
+            <td style="text-align : right">Services Rendered :</td>
+            <td style="text-align : right">{!serviceRenderedDate}</td>
+        </tr>
+       
+    </table>
+    
+    <br/><br/>
+    <span>PO # <u>{!invoice.Contract__r.PO_Number__c}</u></span><br/>
+    <span>CONTRACT # <u>{!invoice.Contract__r.Contract_Number__c}</u></span><br/>
+    <span>CONTRACT DATE: <u>{!contractDateRange}</u></span>
+    <br/><br/>
+  
+    <table style = "width : 100%">
+        <tr>
+        <th style ="width : 50%">Services Rendered </th>           
+        <th style="text-align : right">Units</th>
+        <th style="text-align : right">Units Rate</th>
+        <th style="text-align : right">Amount</th>
+        </tr>
+        <!--  Changes related to Invoice Contract Activity Issue Start | Yash Agarwal -->
+        <apex:repeat value="{!contractActivityList}" var="act">
+             <tr>
+                 <td>{!act.name}</td>
+                 <td style="text-align : right">{!act.units}</td>
+                 <td style="text-align : right">
+                     <apex:outputText value="{0, number, currency}">
+                        <apex:param value="{!act.rate}" />
+                        </apex:outputText>
+                 </td>                 
+                 <td style="text-align : right">
+                 <apex:outputText value="{0, number, currency}">
+                        <apex:param value="{!act.amount}" />
+                 </apex:outputText>
+                 </td>
+             </tr>         
+         </apex:repeat>
+        <!--End-->
+     <!--      <apex:repeat value="{!contractActivitiesMap}" var="m">              
+           <apex:repeat value="{!contractActivitiesMap[m]}" var="value">
+               <tr>
+                   <td>{!value.Activity_Label__c} <br/> </td>
+                   <td style="text-align : right">{!value.Unit__c}</td>
+                   <td style="text-align : right">
+                     	<apex:outputText value="{0, number, currency}">
+                        	<apex:param value="{!value.Rate__c}" />
+                        </apex:outputText>
+                   </td>                 
+                   <td style="text-align : right">
+                   		<apex:outputText value="{0, number, currency}">
+                         	<apex:param value="{!value.Amount__c}" />
+                        </apex:outputText>
+                   </td>
+               </tr>
+               
+           </apex:repeat>            
+        </apex:repeat>-->
+       <tr>
+            <td colspan="4">
+                <div style="height:20px"/>
+            </td>
+        </tr>
+         
+        <apex:variable var="v" value="" rendered="{!(jjac)}">
+         <tr>
+             <td><b>Contract Activity Total :	</b></td>
+             <td colspan="2"></td>
+             <td style="text-align : right">
+                 <apex:outputText value="{0, number, currency}">
+                        <apex:param value="{!invoice.Amount__c}" />
+                        </apex:outputText>
+                 </td>
+        
+        </tr>
+         <tr>
+      
+             <td><b>5% Program Support fee as a total :</b> </td>
+             <td colspan="2"></td>
+             <td style="text-align : right;">                
+                 <apex:outputText value="{0, number, currency}">
+                     <apex:param value="{!invoice.Program_Support_Fee__c}" />
+                 </apex:outputText>
+             </td>
+        
+        </tr>
+            <tr>
+      
+             <td><b>Adjustment Amount :</b> </td>
+             <td colspan="2"></td>
+             <td style="text-align : right; border-bottom : 1px solid black;">    
+                 ${!invoice.Adjustment_Amount__c}
+                 <!--<apex:outputText value="{0, number, currency}">
+                     <apex:param value="{!invoice.Adjustment_Amount__c}" />
+                 </apex:outputText> -->
+             </td>
+        
+        </tr>
+        
+        </apex:variable>
+         <apex:variable var="v" value="" rendered="{!(jcc)}">
+             <tr>
+             <td><b>Contract Activity Total :	</b></td>
+             <td colspan="2"></td>
+             <td style="text-align : right">
+                 <apex:outputText value="{0, number, currency}">
+                        <apex:param value="{!invoice.Amount__c}" />
+                        </apex:outputText>
+                 </td>
+        
+        </tr>
+        
+         <tr>
+      
+             <td><b>12% Program Support fee as a total :</b> </td>
+             <td colspan="2"></td>
+             <td style="text-align : right;">                
+                 <apex:outputText value="{0, number, currency}">
+                     <apex:param value="{!invoice.Program_Support_Fee__c}" />
+                 </apex:outputText>
+             </td>
+        
+        </tr>
+             
+        <tr>
+      
+             <td><b>Adjustment Amount :</b> </td>
+             <td colspan="2"></td>
+             <td style="text-align : right; border-bottom : 1px solid black;">    
+                 ${!invoice.Adjustment_Amount__c}
+                 <!--<apex:outputText value="{0, number, currency}">
+                     <apex:param value="{!invoice.Adjustment_Amount__c}" />
+                 </apex:outputText> -->
+             </td>
+        
+        </tr>
+        </apex:variable>
+       
+        <tr>
+             <td><b>Invoice Total : </b></td>
+             <td colspan="2"></td>
+            <td style="text-align : right; ">
+                 <apex:outputText value="{0, number, currency}">
+                        <apex:param value="{!invoice.Invoice_Total__c}" />
+                        </apex:outputText>
+                 </td>
+
+        </tr>
+        <apex:variable var="v" value="" rendered="{!jjac}">
+         <tr>
+            <td colspan="4">
+                <div style="height:20px"/>
+            </td>
+        </tr>
+         
+             <tr>
+                 <td><b>Match : </b></td>
+                 <td colspan="2"></td>
+                 <td style="text-align : right">
+                 <apex:outputText value="{0, number, currency}">
+                        <apex:param value="{!invoice.Match_Amount__c}" />
+                        </apex:outputText>
+                 </td>
+       
+             </tr>
+        </apex:variable>
+    </table>
+      <br/> <br/>
+   
+    <p>I certify that the above information is true and correct and that payment for service rendered has not been received. </p>
+    <table style = "table-layout: fixed ; width : 100%; padding-top:15px;">
+        <tr>
+            <th colspan="3">______________________________________<br/>Vendor Signature</th>           
+            <th style="text-align : center">_____________________________<br/>Date</th>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td></td>
+        </tr>         
+    </table>
+   <br/><br/>
+    <p>We certify that the information in this invoice is true and correct, that the services performed are in accordance with the scope of work in the above referenced contract, and services rendered have not been previously approved.</p>
+    <table style = "table-layout: fixed ; width : 100%; padding-top:15px;">
+        <tr>
+            <th colspan="3">______________________________________<br/>Program Manager Signature</th>           
+            <th style="text-align : center">_____________________________<br/>Date</th>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+            <td></td>
+        </tr>         
+    </table>
+   
+        </body>
+    </html>
+    
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">
+</script>
+  <!-- <script>
+        jQuery(document).ready(function() 
+        {
+          
+           window.open("/{!InvoiceId}", "_blank");
+         
+
+        }); 
+    </script>    -->  
+ 
+
+
+</apex:page>

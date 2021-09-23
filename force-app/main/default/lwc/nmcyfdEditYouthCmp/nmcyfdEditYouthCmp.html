@@ -1,0 +1,300 @@
+<template>
+    <div>
+        <div class="slds-modal__content slds-p-around_large" id="modal-content-id-1">
+            <!-- Contract Role Form-->
+            
+             <p style="color : red;">{errorMsg}</p> 
+            <div class="slds-grid slds-wrap input-client">
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-input type="text" value={client.firstName} label="First Name"
+                        autocomplete="none" required class="firstName" name="firstName" style="width:100%" onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-input type="text" value={client.lastName} label="Last Name"
+                        autocomplete="none" required class="lastName" name="lastName" style="width:100%" onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-input type="text" max-length="1" value={client.middleInitial}
+                        label="Middle Initial" autocomplete="none" name="middleInitial" style="width:100%"
+                        onchange={handleInputChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-combobox name="suffix" label="Suffix" placeholder="Select one"
+                        value={client.suffix} class="required-field" options={suffixValues} onchange={handleInputChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-input type="date" value={client.dob} label="Date Of Birth" autocomplete="none"
+                        name="dob" required style="width:100%" class="dob" onchange={handleInputChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-input type="date" class="initialRegistrationDate"  value={client.initialRegistrationDate}
+                        label="Initial Registration Date" required autocomplete="none" name="initialRegistrationDate"
+                        style="width:100%" onchange={handleInputChange}></lightning-input>
+                </div>
+                <template if:false={mentoring}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="populationServed" class="populationServed" label="Population Served"
+                            placeholder="Select one" value={client.populationServed} required
+                            options={populationServedValues} onchange={handleInputChange}></lightning-combobox>
+                    </div>
+                </template>
+                <template if:true={mentoring}>
+                    
+                     <div class="slds-col slds-p-around_small  slds-size_1-of-1 slds-large-size_12-of-12" role="listitem">
+                        <label class="slds-form-element__label" for="combobox-id-5"><span style="color: red;">*</span>At Risk Factors</label>
+                        <c-multiselect_picklist all-options={atRiskFactorsValues}
+                        selected-options={selectedAtRiskFactors} required-error-message="Complete this field" is-invalid={isInvalidRisk} allow-search=true is-required=true
+                        onselected={handleRiskFactorsSelection} style="width: 100%;"> </c-multiselect_picklist>
+                    </div>  
+                </template>
+                <template if:true={jcc}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="date" class="localSelectionPanelDate" value={client.localSelectionPanelDate}
+                            label="Local Selection Panel Date" autocomplete="none" required
+                            name="localSelectionPanelDate" style="width:100%" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="livingArrangements" class="livingArrangements" label="Living Arrangements"
+                            placeholder="Select one" value={client.livingArrangements} required
+                            options={livingArrangementsValues} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                </template>
+                <template if:false={jjac}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="education" label="Education" placeholder="Select one"
+                            value={client.education} options={educationValues} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="school" label="School" placeholder="Select one"
+                            value={client.school} options={schoolValues} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                </template>
+                <template if:true={jcc}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="employmentStatus" label="Employment Status"
+                            placeholder="Select one" value={client.employmentStatus}
+                            options={employmentStatusValues} onchange={handleInputChange}></lightning-combobox>
+                    </div>
+                  
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="sourceOfIncome" label="Source Of Income"
+                            placeholder="Select one" value={client.sourceOfIncome}
+                            options={sourceOfIncomeValues} onchange={handleInputChange}></lightning-combobox>
+                    </div>
+                </template>
+                <template if:false={jjac}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="cyfdInvolved" label="CYFD Involved" placeholder="Select one"
+                            value={client.cyfdInvolved} options={cyfdInvolvedValues}
+                            onchange={handleInputChange}></lightning-combobox>
+                    </div>
+                
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="referralSource" label="Referral Source" placeholder="Select one"
+                            value={client.referralSource} class="referralSource" required options={referralSourceValues}
+                            onchange={handleInputChange}></lightning-combobox>
+                    </div>
+                </template>
+                <template if:true={jcc}>
+                  
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="arrestInPast30Days" label="Arrest In Past 30 Days"
+                            placeholder="Select one" value={client.arrestInPast30Days}
+                            options={arrestInPast30DaysValues} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="healthInsurance" label="Health Insurance"
+                            placeholder="Select one" value={client.healthInsurance}
+                            options={healthInsuranceValues} onchange={handleInputChange}></lightning-combobox>
+                    </div>
+                </template>
+                <template if:false={jjac}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input variant="label-stacked"  type="checkbox" label="No SSN" name="noSSN" checked={client.noSSN}
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="text" value={client.ssnNumber} label="SSN Number"
+                            autocomplete="none" name="ssnNumber" style="width:100%" onchange={handleInputChange}
+                            maxlength="9" pattern="^[0-9]*$" minlength="9" message-when-pattern-mismatch="Please use a valid 9 digits SSN." >
+                        </lightning-input>
+                    </div>
+                </template>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-combobox name="gender" label="Gender" placeholder="Select one"
+                        value={client.gender} class="gender" required options={genderValues} onchange={handleInputChange}>
+                    </lightning-combobox>
+                </div>
+                <template if:true={mentoring}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="lgbtq" label="LGBTQ" placeholder="Select one"
+                            value={client.lgbtq} options={lgbtqValues} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                </template>
+                <template if:true={jcc}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="text" value={client.driverLicenseNumber}
+                            label="Driver License Number" autocomplete="none" name="driverLicenseNumber"
+                            style="width:100%" onchange={handleInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input variant="label-stacked"  type="checkbox" label="Client has Medicaid ID" name="hasMedicalId"
+                            checked={client.hasMedicalId} onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="text" value={client.medicalId} label="Medicaid ID"
+                            autocomplete="none" name="medicalId" style="width:100%"
+                            onchange={handleInputChange}></lightning-input>
+                    </div>
+                </template>
+
+                <!--  -->
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-combobox name="primaryLanguage" label="Primary Language" placeholder="Select one"
+                        value={client.primaryLanguage} options={primaryLanguageValues}
+                        onchange={handleInputChange}></lightning-combobox>
+                </div>
+
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-combobox name="ethnicity" label="Ethnicity" placeholder="Select one" autocomplete="pass"
+                        value={client.ethnicity} class="ethnicity" required options={ethnicityValues} onchange={handleInputChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-combobox name="tribalAffiliation" label="Tribal Affiliation"
+                        placeholder="Select one" value={client.tribalAffiliation}
+                        options={tribalAffiliationValues} onchange={handleInputChange}></lightning-combobox>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-combobox name="otherTribalAffiliation" label="Other Tribal Affiliation"
+                        placeholder="Select one" value={client.otherTribalAffiliation}
+                        options={otherTribalAffiliationValues} onchange={handleInputChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-combobox name="race" label="Race" placeholder="Select one" value={client.race}
+                        options={raceValues} class="race" required onchange={handleInputChange}></lightning-combobox>
+                </div>
+               
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-input variant="label-stacked"  type="checkbox" class="homeless" label="Homeless" name="homeless"
+                        checked={client.homeless} onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-input type="text" value={client.addressLine1} label="Address Line 1"
+                        autocomplete="none" class="addressLine1" required={isNotHomeless} name="addressLine1" style="width:100%" onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-input type="text" value={client.addressLine2} label="Address Line 2"
+                        autocomplete="none" class="addressLine2" name="addressLine2" style="width:100%" onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-input type="text" value={client.city} label="City" autocomplete="none"
+                        name="city"  class="city" required={isNotHomeless}  style="width:100%" onchange={handleInputChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-input type="text" value={client.state} label="State" autocomplete="none"
+                        name="state" class="state" required={isNotHomeless}  style="width:100%" onchange={handleInputChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                    <lightning-input type="text" value={client.zipCode} label="Zip Code"
+                    maxlength="5" pattern="^[0-9]*$" minlength="5" message-when-pattern-mismatch="Please use a valid 5 digits zip code." 
+                         autocomplete="none" class="zipCode" required={isNotHomeless}   name="zipCode" style="width:100%" onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <template if:false={jjac}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="checkbox" label="No Phone" name="noPhone" checked={client.noPhone}
+                            onchange={handleInputChange} variant="label-stacked" >
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="phone" value={client.primaryPhone} label="Primary Phone"
+                            autocomplete="none" max-length="10"  name="primaryPhone" style="width:100%" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="phone" value={client.otherPhone} label="Other Phone"
+                            autocomplete="none" max-length="10"  name="otherPhone" style="width:100%" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                </template>
+                <template if:true={jcc}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="text" value={client.sexualPreferrence}
+                            label="Sexual Preferrence" autocomplete="none" name="sexualPreferrence"
+                            style="width:100%" onchange={handleInputChange}></lightning-input>
+                    </div>
+                  
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-combobox name="dischargeReason" label="Discharge"
+                                placeholder="Select one" value={client.dischargeReason}
+                                options={dischargeReasonOptions} onchange={handleDischargeReasonChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-combobox name="reason" label="Reason" placeholder="Select one"
+                                value={client.reason} options={reasonOptions} onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+                   
+                  
+                </template>
+                <template if:true={jjac}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox class="geographicLocation" name="geographicLocation" label="Geographic Location" placeholder="Select one"
+                            value={client.geographicLocation} options={geographicLocationValues} required onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox name="otherPopulation" label="Other Population" placeholder="Select one"
+                            value={client.otherPopulation} options={otherPopulationValues} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox class="gangActivity" label="Gang Activity" placeholder="Select one"
+                            value={client.gangActivity} name="gangActivity" required  options={gangActivityValues} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-combobox class="currentlyInDetention" name="currentlyInDetention" label="Currently In Detention?" placeholder="Select one"
+                            value={client.currentlyInDetention} required options={currentlyInDetentionValues} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                </template>
+
+                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-input variant="label-stacked" type="checkbox" label="Active Status" name="status" checked={client.status}
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+            </div>
+
+        </div>
+        <div class="slds-col modal-footer slds-modal__footer">
+            <div class="slds-text-align_center slds-m-left_small slds-m-right_small slds-m-bottom_medium">
+                <button class="slds-button  slds-button_neutral"
+                    onclick={saveRole}>Save</button>
+                
+                <button class="slds-button  slds-button_brand"
+                        onclick={handleClose}>Close</button>
+            </div>    
+        </div>
+    </div>
+</template>

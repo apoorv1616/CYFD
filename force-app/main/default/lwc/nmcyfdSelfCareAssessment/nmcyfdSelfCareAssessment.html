@@ -1,0 +1,118 @@
+<template>
+    <div>
+        <h3 class ="slds-p-left_medium heading  n_head_space2"><b>CASEY Life Skills - (Step 2 of 7)</b></h3>
+        <h3 class ="slds-p-left_medium heading  n_head_space"><b>Self Care </b></h3>
+
+        <br/>
+
+        <div class="slds-form form-section">
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanTakeCareOfMyOwnMinorInjuries" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can take care of my own minor injuries and illnesses."
+                value={dataObj.ICanTakeCareOfMyOwnMinorInjuries} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanGetMedicalAndDentalCare" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can get medical and dental care when I need it."
+                value={dataObj.ICanGetMedicalAndDentalCare} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToMakeMyOwnAppointments" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="I know how to make my own medical and dental appointments."
+                                value={dataObj.IKnowHowToMakeMyOwnAppointments} required
+                                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowWhenIShouldGoToTheER" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know when I should go to the emergency room instead of the doctor's office  ."
+                value={dataObj.IKnowWhenIShouldGoToTheER} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowMyFamilyMedicalHistory" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know my family medical history."
+                value={dataObj.IKnowMyFamilyMedicalHistory} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToGetHealthInsurance" class = " slds-p-left_medium n_fix_inl"
+                                options={options} onchange={changeHandler} label="I know how to get health insurance when I am older than 18. "
+                                value={dataObj.IKnowHowToGetHealthInsurance} required
+                                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IHaveOneTrustedAdultWhoWillVisitSC" class = "slds-p-left_medium n_fix_inl "
+                options={options} onchange={changeHandler} label="I have at least one trusted adult who would visit me if I were in the hospital."
+                value={dataObj.IHaveOneTrustedAdultWhoWillVisitSC}  required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ThereIsOneAdultITrustToSpeak" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="There is at least one adult I trust who would be legally allowed to make medical decisions for me and advocate for me if I was unable to speak for myself."
+                value={dataObj.ThereIsOneAdultITrustToSpeak} required
+                type="radio"></lightning-radio-group> 
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToGetBenefitsLikeSS" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to get the benefits I am eligible for, such as Social Security, Medicaid, Temporary Assistance for Needy Families (TANF), and Education and Training Vouchers (ETV)."
+                value={dataObj.IKnowHowToGetBenefitsLikeSS} required
+                type="radio"></lightning-radio-group> 
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IBatheDaily" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I bathe (wash up) daily. "
+                value={dataObj.IBatheDaily} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IBrushMyTeethDaily" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I brush my teeth daily."
+                value={dataObj.IBrushMyTeethDaily} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToGetAwayFromHarm" class = "slds-p-left_medium n_fix_inl "
+                options={options} onchange={changeHandler} label="I know how to get myself away from harmful situations."
+                value={dataObj.IKnowHowToGetAwayFromHarm}  required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IHaveAPlaceToGoWhenIFeelUnsafe" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I have a place to go when I feel unsafe. "
+                value={dataObj.IHaveAPlaceToGoWhenIFeelUnsafe} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanTurnDownASexualAdvance" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can turn down a sexual advance. "
+                value={dataObj.ICanTurnDownASexualAdvance} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowWaysToProtectMyselfFromSTDs" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know ways to protect myself from sexually transmitted diseases (STDs)."
+                value={dataObj.IKnowWaysToProtectMyselfFromSTDs} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToPreventGettingPregnant" class = "  slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to prevent getting pregnant or getting someone else pregnant. "
+                value={dataObj.IKnowHowToPreventGettingPregnant} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowWhereToGoGetSexInformation" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know where to go to get information on sex or pregnancy."
+                value={dataObj.IKnowWhereToGoGetSexInformation} required
+                type="radio"></lightning-radio-group>
+            </div>
+
+            <!-- ENDS-->
+        
+        </div>
+        
+    </div>
+    
+</template>

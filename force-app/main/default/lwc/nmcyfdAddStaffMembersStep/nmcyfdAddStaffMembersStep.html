@@ -1,0 +1,193 @@
+<template>
+    <div>
+        <b class="slds-float_left">{month} Activities</b>
+        <div class="slds-float_right">
+            <button class="slds-button slds-float--left slds-button_neutral" onclick={addExistingMember}>Add Existing Staff Member</button>&nbsp;&nbsp;
+            <button class="slds-button slds-float--left slds-button_neutral" onclick={addNewMember}>Add Staff Member</button>
+        </div>
+    </div>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked slds-p-top_large">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Staff Name
+                </th>
+                <th scope="col">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <template if:true={staffMembers}>
+                <template for:each={staffMembers} for:item="staff" for:index="index">
+                    <tr key={staff.roleId}>
+                        <td data-label="Staff Name">
+                            {staff.name}
+                        </td>
+                        <td data-label="Actions">
+                            <a onclick={handleEditRole} data-index={index} data-id={staff.roleId}>Edit</a> |
+                            <a onclick={handleRemoveRole} data-index={index} data-id={staff.roleId}>Delete</a>
+                        </td>
+                    </tr>
+                </template>
+            </template>
+        </tbody>
+    </table>
+
+    <!-- Add Existing Staff Member -->
+    <template if:true={addExisting}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleCloseModal}>
+                        <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="Close"
+                            size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{heading}</h2>
+                </header>
+                <div class="slds-modal__content modal__content-height slds-p-around_medium modal-body"
+                    id="modal-content-id-1">
+
+                <!-- <lightning-combobox name="existingStaff" label="Staff" placeholder="Select a Staff"
+                            value={selectedRoleId} options={existingMembers} onchange={handleMemberSelection} ></lightning-combobox>        
+                 -->
+                 <!--   <select class="slds-select slds-combobox lightning-basecombobox_basecombobox" name="existingStaff"
+                        onchange={handleMemberSelection}>
+                        <option value="">Select one</option>
+                        <template for:each={existingMembers} for:item="staff" for:index="index">
+                            <option key={staff.roleId} value={staff.roleId}>{staff.name}</option>
+                        </template>
+                    </select> -->
+                    <div class="slds-m-bottom_small">
+                        <lightning-input type="search" value={searchValue} label="Search Staffs"
+                           onchange={searchKeyword}></lightning-input>
+                     </div>
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked slds-p-top_large">
+                    <thead>
+                        <tr>
+                            <th scope="col"> </th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Birthdate</th>
+                        </tr>
+                    </thead>
+            
+                    <tbody>
+                        <template if:true={existingMembers}>
+                            <template for:each={existingMembers} for:item="staff" for:index="index">
+                                <tr key={staff.roleId}>
+                                    <td>
+                                        <lightning-input variant="label-stacked" type="checkbox" label="" name={staff.roleId} 
+                                        checked={staff.selected} onchange={handleSelection}> </lightning-input>
+                                    </td>
+                                    <td data-label="Staff Name">{staff.firstName}</td>
+                                    <td data-label="Staff Name">{staff.lastName}</td>
+                                    <td data-label="Dob">{staff.dob}</td>
+                                </tr>
+                            </template>
+                        </template>
+                        <template if:false={existingMembers}>
+                            No existing staff members
+                        </template>
+                    </tbody>
+                </table>
+
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" title="Cancel" onclick={handleCloseModal}>Cancel</button>
+                    <button class="slds-button slds-button_brand" disabled={saveButton1} title="Save"
+                        onclick={addExistingStaffs}>Add</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+        </template>
+    </template>
+    <!-- Add New Staff Member -->
+    <template if:true={addNew}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleCloseModal}>
+                        <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="Close"
+                            size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">{heading}</h2>
+                </header>
+                <div class="slds-modal__content modal__content-height slds-p-around_large"
+                    id="modal-content-id-2">
+                    <p style="color : red;">{errorMsg}</p>
+                    <!-- Contract Role Form-->
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-input type="text" value={newMember.firstName} label="First Name"
+                                autocomplete="none" required class="firstName" name="firstName" style="width:100%" onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-input type="text" value={newMember.lastName} label="Last Name"
+                                autocomplete="none" required class="lastName" name="lastName" style="width:100%" onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-input type="date" value={newMember.dob} label="Date Of Birth" autocomplete="none"
+                                name="dob" required style="width:100%" class="dob" onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-combobox name="gender" label="Gender" placeholder="Select one"
+                                value={newMember.gender} options={genderValues} onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-input type="text" value={newMember.jobTitle} label="Job Title"
+                                autocomplete="none" required class="jobTitle" name="jobTitle" style="width:100%" onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-input type="text" value={newMember.workExp} label="Work Experience"
+                                autocomplete="none" name="workExp" style="width:100%" onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-combobox name="education" label="Education" placeholder="Select one"
+                                value={newMember.education} options={educationValues} onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+
+
+                        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-combobox name="backgroundCheck" label="Background Check" placeholder="Select one"
+                                value={newMember.backgroundCheck} class="backgroundCheck" required options={backgroundValues}
+                                onchange={handleInputChange}></lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-input variant="label-stacked" type="checkbox" label="Active Status" name="status" checked={newMember.status}
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" title="Cancel" onclick={handleCloseModal}>Cancel</button>
+                    <button class="slds-button slds-button_brand" title="Save" onclick={handleNewRoleSave}>Save</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+        </template>
+    </template>
+</template>

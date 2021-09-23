@@ -1,0 +1,100 @@
+<template>
+    <div>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_4-of-12"> 
+                <p>Client Name</p>
+                <lightning-input label="Client Name" type="search" id="input" value={searchTerm}
+                    onclick={handleClick} onblur={inblur} name="clientName" onchange={handleFilterChange}
+                    variant="label-hidden" autocomplete="off" placeholder="Search...">
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_4-of-12"> 
+                <lightning-combobox name="assessmentType" label="Assessment Type" placeholder="Select one"
+                    value={selectedAssessmentType} class="required-field" options={assessmentTypes} onchange={handleFilterChange}>
+                </lightning-combobox>
+            </div>
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_4-of-12"> 
+                <lightning-combobox name="action" label="Action" placeholder="Select one"
+                    value={selectedAction} class="required-field" options={actions} onchange={handleFilterChange}>
+                </lightning-combobox>
+            </div>
+        </div>
+        <br/>
+        <div class="slds-m-left_small slds-m-right_small slds-m-bottom_medium">
+            <button class="slds-button slds-float--right  slds-button_neutral"
+                onclick={addClient}>Add Client</button>
+        </div>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked slds-p-top_large">
+        <thead>
+            <tr>
+                <th scope="col"> Client Name</th>
+                <th scope="col"> Latest Assessment Status</th>
+                <th scope="col"> Latest Assessment Type</th>
+                <th scope="col"> Latest Assessment Steps Completed</th>
+                <th scope="col"> Actions</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <template if:true={assessmentsToDisplay}>
+                <template for:each={assessmentsToDisplay} for:item="item" for:index="index">
+                    <tr key={item.youthId}>
+                        <td data-label=""><a data-youth-id={item.youthId} onclick={onYouthClick}> {item.name}</a></td>
+                        <td data-label="">{item.status}</td>
+                        <td data-label="">{item.assessmentType}</td>
+                        <td data-label="">{item.stepsCompleted}</td>
+                        <td data-label="Actions">
+                        <a data-youth-id={item.youthId} data-latest-assessment={item.assessmentType} data-step={item.lastCompletedStep} data-assessment-id={item.assessmentId} data-label={item.action} onclick={handleYouthSelection}>{item.action} </a>
+                        <!--    <a onclick={handleEditRole} data-index={index} data-id={client.roleId}>Edit</a> |
+                            <a onclick={handleRemoveRole} data-index={index} data-id={client.roleId}>Delete</a> -->
+                        </td>
+                    </tr>
+                </template>
+            </template>
+        </tbody>
+    </table>
+    <br/>
+    <div class="slds-text-align_center slds-col slds-p-top_medium"><!--PAGE NAVIGATION-->
+        <div class="slds-col slds-p-bottom_xx-small">
+            <span >
+                <lightning-button-icon icon-name="utility:left" variant="bare" size="medium" alternative-text="Previous Page" onclick={previousPage}></lightning-button-icon>
+            </span>
+            <label class="slds-text-color_weak slds-p-horizontal_x-small" for="pageNum">Page:</label> 
+            <span>{pageNum}&nbsp;of&nbsp;<b id="totalPages2">{totalPages}</b></span>
+            <span>
+                <lightning-button-icon icon-name="utility:right" variant="bare" size="medium" alternative-text="Next Page" onclick={nextPage} class="slds-p-horizontal_x-small"></lightning-button-icon>
+            </span>
+        </div>           
+    </div>
+    </div>
+
+    <template if:true={showAddClient}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleClose}>
+                        <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="Close"
+                            size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Add Client</h2>
+                </header>
+                <div class="slds-modal__content modal__content-height slds-p-around_large"
+                    id="modal-content-id-2">
+                  
+                 <c-nmcyfd-edit-youth-cmp onclose={handleClose} contract-id={contractId} mentoring={mentoring} jcc={jcc} jjac={jjac}></c-nmcyfd-edit-youth-cmp>
+                </div>
+              
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+        </template>
+    </template>
+
+</template>

@@ -1,0 +1,25 @@
+.leftbutton {
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color:white;
+    background-color:  #F16821;
+    border: none;
+    border-radius: 20px;
+    padding: 8px;
+    
+  }
+  .rightbutton{
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color:white;
+    background-color:  #F16821;
+    border: none;
+    border-radius: 20px;
+    padding: 8px;
+  }
+  .borderclass{
+    border: 1px solid black;
+
+}

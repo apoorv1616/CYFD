@@ -1,0 +1,18 @@
+.THIS .horizontal-radio .slds-radio__label .slds-form-element__label,
+.THIS .horizontal-radio .slds-checkbox__label .slds-form-element__label,
+.THIS .check-group .slds-checkbox__label .slds-form-element__label,
+.THIS .radio-group .slds-radio__label .slds-form-element__label {
+    font-weight: normal;
+}
+.THIS .horizontal-radio .slds-radio + .slds-radio {
+    margin-left: 1rem;
+}
+
+.THIS .horizontal-radio .slds-form-element__control {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.item-node{
+    display : flex;
+}

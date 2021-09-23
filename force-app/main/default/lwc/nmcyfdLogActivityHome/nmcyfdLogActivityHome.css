@@ -1,0 +1,47 @@
+.item-node{
+    display : flex;
+}
+
+.container{
+    width : 80%;
+    margin-left: 10%;
+    margin-bottom : 5%;
+}
+
+.action-button-left{
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color:black;
+    background-color: white;
+    border-color: black;
+    border-radius: 20px;
+    padding: 8px;
+    min-width: 100px;
+  }
+
+.action-button-right{
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color:white;
+    background-color:  #F16821;
+    border: none;
+    border-radius: 20px;
+    padding: 8px;
+    min-width: 100px;
+  }
+
+.buttonclass{
+    background-color: mediumturquoise  ;
+}
+.button {
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color:black;
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    
+  }

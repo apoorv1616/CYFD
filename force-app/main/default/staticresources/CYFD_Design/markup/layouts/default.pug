@@ -1,0 +1,42 @@
+include ../partials/global-includes.pug
+
+- var siteName = 'MyGIC Link'
+- var PrimaryNavItems = [{'url':'index','title':'Home'},{'url':'benefits','title':'My Benefits'},{'url':'profile','title':'My Profile'}];
+
+block variables
+  - var pageName = 'Home'
+  - var pageDescription = 'A simple boilerplate for Pug projects'
+  - var currentPage = 'home';
+
+doctype transitional
+html(lang="en", xmlns="http://www.w3.org/2000/svg", xmlns:xlink="http://www.w3.org/1999/xlink")
+  head
+    block base_url
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content= pageDescription)
+
+    block title
+      title= pageName + ' | ' + siteName
+
+    include ../partials/stylesheets.pug
+    block stylesheets
+
+  body
+    a.skip-link(href="#main-content",z-index="1") Skip to main content
+    block modals
+    input.nav-checkbox#nav-checkbox(type="checkbox", name="nav-checkbox")
+    .page-container
+      block page-header
+        include ../partials/site-header.pug
+      .content-container
+        block sidebar-left
+        block content
+        block sidebar-right
+      include ../partials/footer.pug
+
+    include ../partials/scripts.pug
+
+    block scripts
+

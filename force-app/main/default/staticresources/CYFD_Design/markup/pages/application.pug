@@ -1,0 +1,44 @@
+extends ../layouts/default.pug
+
+block variables
+  - var pageName = 'Enrollment Application';
+  - var pageDescription = 'Sample page description';
+  - var currentPage = 'application';
+
+block stylesheets
+
+block content
+  .step-header
+    .container-lg
+      .page-header
+        h1.page-title Enrollment Application
+        .controls
+          a.btn-a.btn-md.btn-outline(href="index.html") Cancel
+  .container-lg.p-t.p-b-md
+    .sidebar-layout
+      .sidebar
+        nav.step-nav(id="app-progress")
+          +step-nav-item("active","Getting Started","application.html",false)
+          +step-nav-item("","Personal Information","#",true)
+          +step-nav-item("","Plan Selection","#",true)
+          +step-nav-item("","Enrollment Questions","#",true)
+          +step-nav-item("","Documents","#",true)
+          +step-nav-item("","Review and Submit","#",true)
+      main.content
+        .card
+          .card-header.p-x-md.p-t-md
+            h2.app-title Getting Started
+
+          .card-content.p-x-md.p-b
+            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus exercitationem recusandae placeat omnis neque sint officiis perspiciatis cum, aperiam similique, deleniti sit veritatis.
+            p Ratione commodi veritatis minima, aspernatur libero porro asperiores vitae voluptatibus est enim dicta perferendis animi fuga delectus eius ipsum facere corporis placeat. Perferendis?
+            p Voluptatem quaerat eum in voluptatum quas, reprehenderit architecto incidunt officiis quo libero recusandae dolore unde ab doloribus eligendi, consequuntur, beatae illum nam commodi.
+            p Repellat, reiciendis aut, quis illum sed nesciunt porro quidem doloribus quibusdam iusto, voluptate saepe soluta temporibus nemo tempora ad ex modi reprehenderit aliquid?
+            p Eius, magnam fugit? Id, earum? Quia, quibusdam animi saepe quo, fuga ut, inventore ipsum alias autem maxime totam earum molestiae velit! Sequi, distinctio?
+        .card-footer.p-y
+          .controls
+            a.btn-a.btn-md.btn-outline(href="index.html") Cancel
+            a.btn-a.btn-md.btn-primary(href="application_personal-info.html") Next
+
+
+block scripts

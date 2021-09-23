@@ -1,0 +1,36 @@
+<aura:component controller="NM_CYFD_RefreshInvoiceCtrl" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <!-- <aura:html tag="style">
+        .slds-modal__container{
+        display:none !important;
+        }
+    </aura:html>-->
+    
+    
+    <!--<aura:handler name="init" value="{!this}" action="{!c.initHandler}" />-->
+    <aura:attribute name="showSpinner" type="Boolean" default="false"></aura:attribute>
+    
+    <lightning:card>
+        <aura:if isTrue="{!v.showSpinner}">
+            <div class="custom_spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+            <div class="slds-backdrop slds-backdrop_open" style="height:50%;margin-top:28%;"></div>
+        </aura:if>
+       
+        <div class="slds-p-around_medium">
+            <p  class="slds-text-align_center slds-text-heading_medium slds-p-horizontal_small slds-p-top_small">Do you want to Delete this item?</p>
+        </div>
+        
+        <p slot="footer" class="slds-p-around_medium">
+            <div style="text-align:center">
+                <lightning:button class="slds-p-right_medium"  name='No' label='No' onclick='{!c.handleConfirmDialogNo}'/>
+            <lightning:button  variant="brand" name='Yes' label='Yes' onclick='{!c.handleConfirmDialogYes}'/>
+            
+                </div>
+            
+        </p>
+    </lightning:card>
+    
+</aura:component>

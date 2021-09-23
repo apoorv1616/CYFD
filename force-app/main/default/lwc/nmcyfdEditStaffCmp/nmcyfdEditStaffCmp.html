@@ -1,0 +1,68 @@
+<template>
+    
+    <div>
+
+        <div class="slds-modal__content modal__content-height slds-p-around_large" id="modal-content-id-2">
+            <!-- <p style="color : red;">{errorMsg}</p> -->
+            <!-- Contract Role Form-->
+            <div class="slds-grid slds-wrap">
+                
+                <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-input type="text" value={staff.firstName} label="First Name"
+                        autocomplete="none" required class="firstName" name="firstName" style="width:100%" onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-input type="text" value={staff.lastName} label="Last Name"
+                        autocomplete="none" required class="lastName" name="lastName" style="width:100%" onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-input type="date" value={staff.dob} label="Date Of Birth" autocomplete="none"
+                        name="dob" required style="width:100%" class="dob" onchange={handleInputChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-combobox name="gender" label="Gender" placeholder="Select one"
+                        value={staff.gender} options={genderValues} onchange={handleInputChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-input type="text" value={staff.jobTitle} label="Job Title"
+                        autocomplete="none" required class="jobTitle" name="jobTitle" style="width:100%" onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-input type="text" value={staff.workExp} label="Work Experience"
+                        autocomplete="none" name="workExp" style="width:100%" onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-combobox name="education" label="Education" placeholder="Select one"
+                        value={staff.education} options={educationValues} onchange={handleInputChange}>
+                    </lightning-combobox>
+                </div>
+
+
+                <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-combobox name="backgroundCheck" label="Background Check" placeholder="Select one"
+                        value={staff.backgroundCheck} class="backgroundCheck" required options={backgroundValues}
+                        onchange={handleInputChange}></lightning-combobox>
+                </div>
+                <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-input variant="label-stacked" type="checkbox" label="Active Status" name="status" checked={staff.status}
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+            </div>
+
+        </div>
+        <div class="slds-m-left_small slds-m-right_small slds-m-bottom_medium">
+            <button class="slds-button  slds-button_neutral"
+                onclick={saveRole}>Save</button>
+            
+            <button class="slds-button  slds-button_brand"
+                    onclick={handleClose}>Close</button>
+        </div>
+
+    </div>
+</template>

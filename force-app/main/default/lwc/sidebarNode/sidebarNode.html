@@ -1,0 +1,22 @@
+<template>
+
+    <div>
+        <lightning-layout horizontal-align="spread" >
+            <lightning-layout-item size="1" class="slds-p-top_small slds-p-bottom_small slds-p-right_small">
+                <template if:true={showOrderNumber}>
+                    <div class={orderClass}>{node.order}</div>
+                </template>
+                <template if:true={showAsCompleted}>
+                    <div class={orderClass}>
+                        <lightning-icon icon-name="utility:check" variant="inverse" size="xx-small"></lightning-icon>
+                    </div>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item size="11" class="slds-p-top_small slds-p-bottom_small slds-p-right_small">
+                <div class="slds-p-left_small">
+                    <span class={itemClass} onclick={handleSidebarClick}></span>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

@@ -1,0 +1,330 @@
+<template>
+    <template if:true={showSpinner}>
+        <div class="slds-m-left_large">
+            <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+        </div>
+    </template>
+
+    <div class="container">
+        <div class="slds-clearfix">
+
+            <div class="slds-float_right">
+
+                <lightning-button variant="brand" label="Refresh" icon-name="utility:refresh"
+                onclick={handleRefresh} class="slds-m-left_x-small"></lightning-button>
+
+            </div>
+        </div>
+
+        <template if:true={showHandlePreview}>
+            <c-nmcyfd-expenditure-amount-modal grant={grant} contract-activity-id={activityId} tab-name={tabName}
+            contract-id={contractId} label={label} oncancel={closeModal}
+            ></c-nmcyfd-expenditure-amount-modal>
+        </template>
+
+        <div class="ny_container">
+            <div class="ny_card ">
+                <lightning-tabset>
+                    <lightning-tab label="Activity Expenditure" title="Activity Expenditure" if:true={showActivityExpenditure}>
+                        <!-- <h3> Activity Expenditure </h3> -->
+                        <div if:true={showProgramSupportFee}>
+                            <h6 style="color:blue;"> Total Program Support Fee : $<lightning-formatted-number minimum-fraction-digits="2" value={programSupportFee} ></lightning-formatted-number></h6>
+
+                        </div>
+                        <table class="slds-table slds-table--bordered  slds-no-row-hover slds-m-top_small">
+                            <thead>
+                                <tr class="slds-text-heading--label">
+                                    <template for:each={activityColumn} for:item="item">
+                                        <template if:true={hasLineItem}>
+                                            <th key={item.fieldname} width={item.width} class="slds-cell-wrap" style="padding:2%" > {item.label} </th>
+
+                                        </template>
+                                        <template if:false={hasLineItem}>
+                                            <th key={item.fieldname} class="slds-cell-wrap" style="padding:2%" > {item.label} </th>
+                                            
+                                        </template>
+                                    </template>
+                                </tr>
+                            </thead>
+        
+                            <tbody>
+                                <template for:each={result} for:item="item" if:true={hasActivityLabel}>
+                                    <tr class="slds-hint-parent" key={item.Id} if:true={item.hasActivityLabel}  >
+
+                                        <td>
+                                            <div class=" slds-cell-wrap" >
+
+                                                <lightning-button variant="base" icon-name="utility:preview" onclick={handlePreview} 
+                                                data-grant="Activity Expenditure" data-activityid={item.Id} data-contractid={item.Contract}
+                                                data-label={item.Activity_Label}
+                                                ></lightning-button>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class=" slds-cell-wrap" >
+            
+                                                {item.Activity_Label} 
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class=" slds-cell-wrap" >
+            
+                                                <!-- ${item.Activity_Expenditure_Amount}  -->
+                                                $<lightning-formatted-number minimum-fraction-digits="2" value={item.Activity_Expenditure_Amount} ></lightning-formatted-number>
+                                            </div>
+                                        </td>
+                                        <td if:true={item.showActivityAllocatedAmount}> 
+                                            <div class=" slds-cell-wrap" if:true={item.hasActivityAllocatedAmount}>
+            
+                                                <!-- ${item.Activity_Allocated_Amount}  -->
+                                                $<lightning-formatted-number minimum-fraction-digits="2" value={item.Activity_Allocated_Amount} ></lightning-formatted-number>
+
+                                            </div>
+                                        </td>
+
+                                        <td if:true={grantNotMentoring}> 
+                                            <div class=" slds-cell-wrap" if:true={item.hasProgram_Support_Fee}>
+            
+                                                <!-- ${item.Program_Support_Fee}  -->
+                                                $<lightning-formatted-number minimum-fraction-digits="2" value={item.Program_Support_Fee} ></lightning-formatted-number>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                
+                                </template>
+        
+                                 <template if:false={hasActivityLabel}>
+                                    <td colspan="4">
+                                        <div class="slds-align_absolute-center">No Data Found...</div>
+                                    </td>
+                                </template> 
+                            </tbody>
+        
+                        </table>
+
+                    </lightning-tab>
+
+                    <lightning-tab label="Program Expenditure" title="Program Expenditure" if:true={showProgramExpenditure}>
+                        
+                        <table class="slds-table slds-table--bordered  slds-no-row-hover slds-m-top_small">
+                            <thead>
+                                <tr class="slds-text-heading--label">
+                                    <template for:each={programColumn} for:item="item">
+                                        <template if:true={hasLineItem}>
+                                            <th key={item.fieldname} width={item.width} class="slds-cell-wrap" style="padding:2%" > {item.label} </th>
+
+                                        </template>
+                                        <template if:false={hasLineItem}>
+                                            <th key={item.fieldname} class="slds-cell-wrap" style="padding:2%" > {item.label} </th>
+                                            
+                                        </template>
+                                    </template>
+                                </tr>
+                            </thead>
+        
+                            <tbody>
+                                <template for:each={result} for:item="item" if:true={hasProgram}>
+                                    <tr class="slds-hint-parent" key={item.Id}  if:true={item.hasProgram}>
+
+                                        <td>
+                                            <div class=" slds-cell-wrap" >
+
+                                                <lightning-button variant="base" icon-name="utility:preview" onclick={handlePreview} 
+                                                data-grant="Program Expenditure" data-activityid={item.Id} data-contractid={item.Contract}
+                                                data-label={item.Program}
+                                                ></lightning-button>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class=" slds-cell-wrap" >
+            
+                                                {item.Program} 
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class=" slds-cell-wrap" >
+            
+                                                <!-- ${item.Program_Expenditure_Amount} -->
+                                                $<lightning-formatted-number minimum-fraction-digits="2" value={item.Program_Expenditure_Amount} ></lightning-formatted-number>
+
+                                            </div>
+                                        </td>
+                                        <td > 
+                                            <div class=" slds-cell-wrap" if:true={item.hasProgramAllocatedAmount}>
+            
+                                                <!-- ${item.Program_Allocated_Amount}  -->
+                                                $<lightning-formatted-number minimum-fraction-digits="2" value={item.Program_Allocated_Amount} ></lightning-formatted-number>
+
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                
+                                </template>
+        
+                                <template if:false={hasProgram}>
+                                    <td colspan="4">
+                                        <div class="slds-align_absolute-center">No Data Found...</div>
+                                    </td>
+                                </template> 
+                            </tbody>
+        
+                        </table>
+                    </lightning-tab>
+
+                    <lightning-tab label="Sub-Contractor Expenditure" if:true={showSubContratorExpenditure}>
+                        <!-- <h3> Sub-Contractor Expenditure</h3> -->
+
+                        <table class="slds-table slds-table--bordered  slds-no-row-hover slds-m-top_small">
+                            <thead>
+                                <tr class="slds-text-heading--label">
+                                    <template for:each={subcontractorColumn} for:item="item">
+                                        <template if:true={hasLineItem}>
+                                            <th key={item.fieldname} width={item.width} class="slds-cell-wrap" style="padding:2%" > {item.label} </th>
+
+                                        </template>
+                                        <template if:false={hasLineItem}>
+                                            <th key={item.fieldname} class="slds-cell-wrap" style="padding:2%" > {item.label} </th>
+                                            
+                                        </template>
+                                    </template>
+                                </tr>
+                            </thead>
+        
+                            <tbody>
+                                <template for:each={result} for:item="item" if:true={hasSubcontractor}>   
+                                    <tr class="slds-hint-parent" key={item.Id} if:true={item.hasSubcontractor}>
+
+                                        <td>
+                                            <div class=" slds-cell-wrap" >
+
+                                                <lightning-button variant="base" icon-name="utility:preview" onclick={handlePreview} 
+                                                data-grant="Sub-Contractor Expenditure" data-activityid={item.Id} data-contractid={item.Contract}
+                                                data-label={item.Sub_Contractor}
+                                                ></lightning-button>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class=" slds-cell-wrap" >
+            
+                                                {item.Sub_Contractor} 
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class=" slds-cell-wrap" >
+            
+                                                <!-- ${item.Sub_Contract_Expenditure_Amount}  -->
+                                                $<lightning-formatted-number minimum-fraction-digits="2" value={item.Sub_Contract_Expenditure_Amount} ></lightning-formatted-number>
+
+                                            </div>
+                                        </td>
+                                        <td > 
+                                            <div class=" slds-cell-wrap" if:true={item.hasSubContractAllocatedAmount}>
+            
+                                                <!-- ${item.Sub_Contract_Allocated_Amount}  -->
+                                                $<lightning-formatted-number minimum-fraction-digits="2" value={item.Sub_Contract_Allocated_Amount} ></lightning-formatted-number>
+
+                                            </div>
+                                        </td>
+    
+                                    </tr>
+                                
+                                </template>
+        
+                                 <template if:false={hasSubcontractor}>
+                                    <td colspan="4">
+                                        <div class="slds-align_absolute-center">No Data Found...</div>
+                                    </td>
+                                </template> 
+                            </tbody>
+        
+                        </table>
+                    </lightning-tab>
+
+                    <!--Match Expenditure-->
+
+                    <lightning-tab label="Match Expenditure" if:true={showMatchExpenditure}>
+
+                        <c-nmcyfd-match-exp-on-contract record-id={recordId}></c-nmcyfd-match-exp-on-contract>
+                        <!-- <h3> Match Expenditure </h3> -->
+                        <!-- <div class="slds-scrollable_y" style="height:70vh;">
+                            <table class="slds-table slds-table--bordered  slds-no-row-hover slds-m-top_small">
+                                <thead>
+                                    <tr class="slds-text-heading--label">
+                                        <template for:each={matchColumn} for:item="item">
+                                            <th key={item.fieldname} class="slds-cell-wrap" style="padding:2%" > {item.label} </th>
+                                        </template>
+                                    </tr>
+                                </thead>
+            
+                                <tbody>
+                                    <template for:each={result} for:item="item" if:true={hasMatchAmount}>   
+                                        <tr class="slds-hint-parent" key={item.Id} if:true={item.hasMatchAmount} >
+
+                                            <td>
+                                                <div class=" slds-cell-wrap" >
+
+                                                    <lightning-button variant="base" label={item.contractActivityName} name={item.contractActivityId}
+                                                    onclick={navigateToCA} class="slds-m-left_x-small">
+                                                    </lightning-button>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class=" slds-cell-wrap" >
+                
+                                                    {item.Activity_Label} 
+                                                    
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class=" slds-cell-wrap" >
+                
+                                                    
+                                                    $<lightning-formatted-number minimum-fraction-digits="2" value={item.Match_Amount} ></lightning-formatted-number>
+
+                                                </div>
+                                            </td>
+        
+                                        </tr>
+                                    
+                                    </template>
+            
+                                    <template if:false={hasMatchAmount}>
+                                        <td colspan="4">
+                                            <div class="slds-align_absolute-center">No Data Found...</div>
+                                        </td>
+                                    </template> 
+                                </tbody>
+            
+                            </table>
+                        </div>  
+                        <div class="slds-m-around_small slds-m-bottom_medium">
+                            <c-nmcyfd-paginator class="slds-m-bottom_medium" items-per-page={pageSize} current-page={page}
+                                total-items={recordCount} onprevious={previousHandler} onnext={nextHandler}>
+                            </c-nmcyfd-paginator>
+                        </div> -->
+
+                    </lightning-tab>
+                </lightning-tabset>
+
+                <div class="noRecordFound" if:true={showNoData}>
+                    <!-- No Records Found! -->
+
+                    <!-- <lightning-card icon-name="custom:custom9" > -->
+
+
+                        <img src={NM_CYFD_NoDataFound} alt="No Data Found!" />
+   
+   
+                   <!-- </lightning-card> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>

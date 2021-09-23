@@ -1,0 +1,69 @@
+extends ../layouts/default.pug
+
+block variables
+  - var pageName = 'Personal Information';
+  - var pageDescription = 'Sample page description';
+  - var currentPage = 'application';
+
+block stylesheets
+
+block content
+  .step-header
+    .container-lg
+      .page-header
+        h1.page-title Enrollment Application
+        .controls
+          a.btn-a.btn-md.btn-outline(href="index.html") Save &amp; Exit
+  .container-lg.p-t.p-b-md
+    .sidebar-layout
+      .sidebar
+        nav.step-nav(id="app-progress")
+          +step-nav-item("complete","Getting Started","application.html",false)
+          +step-nav-item("active","Personal Information","#",true)
+          +step-nav-item("","Plan Selection","#",true)
+          +step-nav-item("","Enrollment Questions","#",true)
+          +step-nav-item("","Documents","#",true)
+          +step-nav-item("","Review and Submit","#",true)
+      main.content
+        .card
+          .card-header.p-x-md.p-t-md
+            div
+              h2.app-title Personal Information
+              .description.banded 2.1 - Enrollee Details
+
+          .card-content.p-x-md.p-b-md
+
+            h3.section-title.m-b Please review and update the following information.
+            .row
+              .col-sm-4
+                +inputText("","firstName","First name", false)(class="input-text")
+              .col-sm-4
+                +inputText("","middleName","Middle name", false)(class="input-text")
+              .col-sm-4
+                +inputText("","lastName","Last name", false)(class="input-text")
+
+              .col-sm-4
+                +inputText("","dateOfBirth","Date of birth", false)(class="input-text")
+              .col-sm-4
+                +inputText("","socialSecurity","Social Security Number", false)(class="input-text")
+
+            h3.section-title.m-b Address Information
+            .row
+              .col-sm-8
+                +inputText("","streetAddress","Street Address", false)(class="input-text")
+              .col-sm-4
+                +inputText("","suite","Apt/Suite", false)(class="input-text")
+              .col-sm-4
+                +inputText("","city","City", false)(class="input-text")
+              .col-sm-4
+                +inputText("","state","State", false)(class="input-text")
+              .col-sm-4
+                +inputText("","zip","ZIP Code", false)(class="input-text")
+
+        .card-footer.p-y
+          .controls
+            a.btn-a.btn-md.btn-outline(href="application.html") Previous
+            a.btn-a.btn-md.btn-primary(href="application_plan-selection.html") Next
+
+
+block scripts

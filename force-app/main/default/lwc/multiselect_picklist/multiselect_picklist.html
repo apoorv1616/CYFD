@@ -1,0 +1,47 @@
+<template>
+    <div onclick={handleCloseDropdownAfterEventVerification}>
+        <lightning-pill-container class={additionalClass} 
+            items={selectedOptions} 
+            onitemremove={handleItemRemove}
+            onclick={toggelOption} 
+            style="cursor: pointer;">
+        </lightning-pill-container>
+
+        <template if:true={showSearch}>
+            <lightning-input name="multi_select_cmp" 
+                variant="label-hidden" 
+                value={filterValue} 
+                type="search"
+                onchange={filterOptions} 
+                placeholder="Search">
+            </lightning-input>
+        </template>
+        <template if:true={renderErrorMessage}>
+            <div class="slds-form-element__help slds-text-color_destructive">{requiredFieldErrorMessage}</div>
+        </template>
+
+        <div class={showList} data-select="single">
+            <div class="slds-lookup__menu slds-combobox-picklist" onmouseleave={showList}>
+                <ul class="slds-lookup__list" role="listbox">
+                    <template for:each={availableOptions} for:item="item">
+                        <li role="presentation" key={item.value}>
+                            <span class="slds-lookup__item-action slds-media" role="option">
+                                <div class="slds-media__body" onclick={select} data-id={item.value}>
+                                    <div class="slds-lookup__result-text" data-id={item.value}>
+                                        {item.label}
+                                    </div>
+                                </div>
+                            </span>
+                        </li>
+                    </template>
+                    <div class={noOptionsAvaialble}>
+                        <span style="padding: 1rem;">No option available !</span>
+                    </div>
+                    <div if:true={noMatchingOptionFound}>
+                        <span style="padding: 1rem;">No matching option available !</span>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>

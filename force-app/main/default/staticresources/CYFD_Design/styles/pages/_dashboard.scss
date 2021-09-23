@@ -1,0 +1,51 @@
+.notification-list {
+  .item {
+    &:hover,&:focus {
+      .title {
+        text-decoration: underline;
+        color: $brand-primary;
+      }
+    }
+  }
+  .status-circle {
+    width: $gap-xs;
+    height: $gap-xs;
+    min-width: $gap-xs;
+    min-height: $gap-xs;
+    border-radius: 50%;
+    margin-right: $gap-sm;
+    position: relative;
+    top: 6px;
+  }
+  .content {
+    flex: 1;
+    padding-right: $gap-sm;
+  }
+  .title {
+    line-height: 1.3;
+    color: $text-color;
+    padding-bottom: $gap-xs / 2;
+    font-size: $font-size-base;
+    @include font-semibold;
+  }
+  .date {
+    font-size: 12px;
+    color: $gray-md;
+    @include font-semibold;
+  }
+  .level1 {
+    .status-circle {
+      background: $brand-primary;
+    }
+  }
+  .level2 {
+    .status-circle {
+      background: $warning;
+    }
+  }
+  .level3 {
+    .status-circle {
+      background: $danger;
+    }
+  }
+}

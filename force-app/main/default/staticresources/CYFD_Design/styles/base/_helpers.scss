@@ -1,0 +1,77 @@
+.icon-stroke {
+  stroke: currentColor;
+}
+
+.icon-fill {
+  fill: currentColor;
+}
+
+.icon-size-sm {
+  height: $gap-sm;
+  width: $gap-sm;
+}
+
+.icon-size-default {
+  height: $gap;
+  width: $gap;
+}
+
+.icon-size-md {
+  height: $gap-md;
+  width: $gap-md;
+}
+
+.icon-size-lg {
+  height: $gap-lg;
+  width: $gap-lg;
+}
+
+.txt-underline {
+  text-decoration: underline;
+}
+
+.txt-ucase,.txt-uppercase {
+  text-transform: uppercase;
+}
+
+.txt-read {
+  max-width: 60rem;
+}
+
+.txt-weight-semibold {
+  @include font-semibold;
+}
+
+.txt-weight-bold {
+  @include font-bold;
+}
+
+.sr-only {
+  @include sr-only;
+}
+
+.fancy-link {
+  @include fancy-link($text-color);
+}
+
+.fancy-link-brand {
+  @include fancy-link($brand-primary);
+}
+
+.fancy-link-light {
+  @include fancy-link(white);
+}
+
+.p-relative {
+  position: relative;
+}
+
+.mobile-gap {
+  @media (max-width: $screen-sm-min) {
+    [class^="col-"] {
+      +[class^="col-"] {
+        margin-top: $gap-sm;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+table{
+   box-shadow: #dec78bb0 1px 1px 0px 1px;
+}
+
+td, th {
+    text-align: center;
+    padding:2%;
+  }
+
+
+tr:hover {
+   background-color: #f3f3f7;
+}
+
+.noRecordFound {
+   /* text-align: center;
+    padding: 8%;
+    border: 1px solid #d2c8c8;
+    border-radius: 5px 5px 5px 5px;
+    background-color: #ccc1c1;
+    font-size: larger;
+    color: #b12525; */
+
+
+    border: 1px solid #dac138;
+    box-shadow: 2px -4px 4px 1px #c6cbd2;
+}

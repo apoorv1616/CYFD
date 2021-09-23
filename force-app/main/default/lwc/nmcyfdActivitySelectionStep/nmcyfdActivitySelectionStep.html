@@ -1,0 +1,97 @@
+<template>
+    <template if:false={isAmountValid}>
+        <div class="slds-p-around_small" style="background-color:#C74742;"><p style="color: white;">{validationError}</p> </div>
+    </template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+             <p class="slds-form-element__label slds-no-flex"><b>Activity</b></p>
+          <!--  <c-nm-custom-lookup-cmp iconname="standard:account" object-name="Activity__c"
+            searchfield="Name" contract-config-id={contract.Contract_Configuration__c} contract-id={contractId} 
+            onselect={handleActivitySelection} onremoveactivity ={handleActivityRemoval} class="activityId"></c-nm-custom-lookup-cmp> -->
+            
+            <!-- new code for lookup-->
+                          
+            <c-look-up contract-config-id={contract.Contract_Configuration__c} contract-id={contractId}  icon-name="custom:custom85" 
+                label-name="Activity" is-sub-contractor-user={subContractorUser}  record-name={selectedRecord} onselect={handleActivitySelection} onremoveactivity ={handleActivityRemoval} create-record=false> </c-look-up> 
+            <p class="slds-form-element__label slds-no-flex" style="color : red">{error}</p>      
+        
+        </div>
+        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+            <lightning-input type="number" value={dataObj.activityRate} label="Activity Rate"
+                    autocomplete="none" read-only name="activityRate" step="0.01" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+        </div>
+        <template if:true={mentoring}>
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                <lightning-combobox name="activityDetail" label="Activity Detail" placeholder="Select one"
+                    value={dataObj.activityDetail} class="activityDetail" required options={activityDetailValues} onchange={handleInputChange}>
+                </lightning-combobox>
+            </div>
+        </template>
+        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+             <lightning-input type="number" class="units" value={dataObj.units} label="Units"
+                     autocomplete="none" name="units" step="1"  style="width:100%" required onchange={handleInputChange} ></lightning-input>
+         </div>
+         <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+            <lightning-input type="text" value={dataObj.unitType} label="Unit Type" read-only
+                    autocomplete="none" name="unitType" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+         </div> 
+         <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+            <lightning-input type="number" value={dataObj.numberOfYouth} label="Number of Youth"
+                    autocomplete="none" required={youthRequired} name="numberOfYouth" class="numberOfYouth" step="1" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+        </div>    
+         <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+            <lightning-input type="number" value={dataObj.amount} label="Amount" 
+                    autocomplete="none" read-only class="amount" name="amount" formatter="currency" step="0.01" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+        </div>
+       
+        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+            <lightning-input type="number" value={dataObj.activityExpenditure} label="Activity Expenditure Amount"
+                    autocomplete="none" class="readonly" read-only name="activityExpenditure" formatter="currency" step="0.01" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+        </div>
+
+        <template if:false={mentoring}>
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+                <lightning-input type="text" value={dataObj.program} label="Program"
+                        autocomplete="none"  read-only name="program" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+             </div>  
+             <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+                <lightning-input type="number" value={dataObj.programExpenditure} label="Program Expenditure Amount"
+                        autocomplete="none" class="readonly" read-only name="programExpenditure" formatter="currency" step="0.01" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+            </div>
+        </template>
+        <template if:true={subContractorUser}>
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+                <lightning-input type="text" value={dataObj.subContractor} label="Sub Contractor"
+                        autocomplete="none" read-only  name="subContractor" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+            </div> 
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+                <lightning-input type="number" value={dataObj.subContractExpenditure} label="Sub-Contractor Expenditure Amount"
+                        autocomplete="none" class="readonly"  read-only name="subContractExpenditure" formatter="currency" step="0.01" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+            </div>
+        </template>
+         
+        <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+            <lightning-input type="date" class="activityDate" value={dataObj.activityDate} label="Activity Date"
+                    autocomplete="none" name="activityDate" required formatter="currency" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+        </div>
+        <template if:true={jjac}>
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                <lightning-input variant="label-stacked"  type="checkbox" label="Match" name="matchEnabled" checked={dataObj.matchEnabled}
+                    onchange={handleInputChange} disabled={matchReadOnly}>
+
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+                <lightning-input type="number" value={dataObj.matchAmount} label="Match Amount"
+                        autocomplete="none" read-only class="readonly" name="matchAmount" formatter="currency" step="0.01" style="width:100%"  onchange={handleInputChange} ></lightning-input>
+            </div>
+        </template>
+       
+         <!-- <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_12-of-12"> 
+            <lightning-textarea name="notes" label="Notes" value={dataObj.notes} onchange={handleInputChange} ></lightning-textarea>
+           <lightning-input type="text" value={dataObj.notes} label="Notes"
+                    autocomplete="none" name="notes" style="width:100%"  onchange={handleInputChange} ></lightning-input> 
+        </div> -->
+        
+     </div>
+</template>

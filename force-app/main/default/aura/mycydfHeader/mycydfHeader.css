@@ -1,0 +1,9 @@
+.THIS .user-image{
+    margin-right: .5rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.THIS .spacer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}

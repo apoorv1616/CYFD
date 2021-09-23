@@ -1,0 +1,185 @@
+<template>
+    <template if:true={showSpinner}>
+        <div class="slds-m-left_large">
+            <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+        </div>
+    </template>
+
+    <lightning-tabset class="slds-p-around_small">
+        <lightning-tab label="Contract Activities" title="Contract Activities">
+            <div class="container">
+                <div class="slds-clearfix">
+
+                    <!--Contract Activities starts-->
+                    <div class="slds-float_left slds-p-top_medium slds-m-left_small" style="display: inline-flex;">
+
+                        <lightning-combobox name="progress" label="Select Type" value={type} placeholder="Select Type"
+                            options={options} onchange={handleTypeName}>
+                        </lightning-combobox>
+
+                        <div onkeyup={handleKeyUp} class="slds-m-left_medium">
+                            <lightning-input value={searchKey} name="enter-search" label="Please hit enter to search"
+                                type="search" autocomplete="off" onchange={handleKeyUp} placeholder="Search"
+                                field-level-help="Search functionality is not enabled for Amount, Activity Date and Files.">
+                            </lightning-input>
+                        </div>
+
+                        <div class="slds-m-left_medium slds-m-bottom_medium">
+                            <lightning-input value={page} name="enter-search" label="Page Number" type="number"
+                                autocomplete="off" onchange={handlePageChange} placeholder="Search" min="1"
+                                max={recordCount} message-when-range-overflow="Enter a valid page number."
+                                message-when-range-underflow="Enter a valid page number." style="width:55%;">
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-float_right slds-p-around_medium slds-m-top_large">
+
+                        <lightning-button variant="brand" label="Refresh" icon-name="utility:refresh"
+                            onclick={handleRefresh} class="slds-m-left_x-small"></lightning-button>
+
+                    </div>
+                    <!--Ends-->
+                </div>
+            </div>
+
+            <div class="ny_container slds-p-around_medium">
+                <h3>Record Count : {recordCount}</h3>
+                <!-- <h3>Sum of Invoice Amount : {invoiceAmountSum}</h3> -->
+                <div class="ny_card ">
+                    <table class="slds-table slds-table--bordered  slds-no-row-hover">
+                        <thead>
+                            <tr class="slds-text-heading--label">
+
+                                <template for:each={column} for:item="item">
+
+                                    <th key={item.label} data-fieldname={item.fieldname}
+                                        class="slds-truncate slds-cell-wrap" style="padding: 2%;" width={item.width}
+                                        title={item.label}>{item.label}
+                                        <!-- if field is sortable then only show sorting icons -->
+                                        <template if:true={item.sortable}>
+                                            <a class="slds-th__action slds-text-link_reset" role="button" tabindex="-1">
+                                                <!-- if field is not sorted -->
+                                                <template if:false={item.sorted}>
+                                                    <lightning-icon class="sort_up" icon-name="utility:sort"
+                                                        size="xx-small" onclick={handleSort}
+                                                        data-fieldname={item.fieldname}></lightning-icon>
+                                                </template>
+
+                                                <template if:true={item.sorted}>
+                                                    <!-- descending sorting -->
+                                                    <template if:false={item.asc}>
+                                                        <lightning-icon class="sort_down" icon-name="utility:arrowdown"
+                                                            data-fieldname={item.fieldname} onclick={handleSort}
+                                                            size="xx-small"></lightning-icon>
+                                                    </template>
+                                                    <!-- ascending sorting -->
+                                                    <template if:true={item.asc}>
+                                                        <lightning-icon class="sort_down" icon-name="utility:arrowup"
+                                                            data-fieldname={item.fieldname} onclick={handleSort}
+                                                            size="xx-small"></lightning-icon>
+                                                    </template>
+                                                </template>
+
+                                            </a>
+                                        </template>
+
+                                    </th>
+
+                                </template>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <template for:each={data} for:item="item" if:true={showData}>
+                                <tr class="slds-hint-parent" key={item.Id}>
+                                    <td>
+                                        <div class="slds-truncate slds-cell-wrap" style="padding: 2%;"
+                                            title={item.Name}>
+
+                                            <!-- {item.Name}  -->
+                                            <lightning-button variant="base" label={item.Name} name={item.Id}
+                                                onclick={navigateToCA} class="slds-m-left_x-small">
+                                            </lightning-button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate slds-cell-wrap" style="padding: 2%;"
+                                            title={item.Activity_Label__c}>
+
+                                            {item.Activity_Label__c}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate slds-cell-wrap" style="padding: 2%;"
+                                            title={item.Amount__c}>
+
+                                            <!-- {item.Amount__c} -->
+                                            $<lightning-formatted-number minimum-fraction-digits="2" value={item.Amount__c} ></lightning-formatted-number>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate slds-cell-wrap" style="padding: 2%;"
+                                            title={item.Date__c}>
+
+                                            {item.Date__c}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate slds-cell-wrap" style="padding: 2%;"
+                                            title={item.CreatedBy.Name}>
+
+                                            {item.CreatedBy.Name}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate slds-cell-wrap" style="padding: 2%;"
+                                            title={item.Program__c}>
+
+                                            {item.Program__c}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate slds-cell-wrap" style="padding: 2%;"
+                                            title={item.Sub_Contractor__c}>
+
+                                            {item.Sub_Contractor__c}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate slds-cell-wrap" style="padding: 2%;"
+                                            title={item.checkFilesAndCount}>
+
+                                            {item.checkFilesAndCount}
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template if:false={showData}>
+                                <tr>
+                                    <td colspan="8" class="slds-text-align_center slds-p-around_small" style="padding:2%;">
+                                        No data found!
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+
+                    <div class="slds-m-around_small slds-m-bottom_medium">
+                        <c-nmcyfd-paginator class="slds-m-bottom_medium" items-per-page={pageSize} current-page={page}
+                            total-items={recordCount} onprevious={previousHandler} onnext={nextHandler}>
+                        </c-nmcyfd-paginator>
+                    </div>
+                </div>
+            </div>
+        </lightning-tab>
+        <lightning-tab label="Expenditure Amounts" title="Expenditure Amounts">
+            <!-- <c-nmcyfd-expenditure-on-contract record-id={recordId}></c-nmcyfd-expenditure-on-contract> -->
+            <!-- NmcyfdExprenditureAmountOnCA -->
+
+            <c-nmcyfd-exprenditure-amount-on-c-a record-id={recordId} grant={grant} contract-page={contractPage}></c-nmcyfd-exprenditure-amount-on-c-a>
+        </lightning-tab>
+    </lightning-tabset>
+</template>

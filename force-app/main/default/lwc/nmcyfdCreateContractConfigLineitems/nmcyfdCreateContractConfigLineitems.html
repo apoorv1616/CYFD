@@ -1,0 +1,84 @@
+<template>
+    <div class = "container slds-p-around_large">
+        <table class="borderclass slds-p-around_medium">
+            <tr class="mainhead" >
+                <td class="inner" colspan="4" style="color:white"><b>Billable Activities</b></td>
+            </tr>
+            <tr class="table-header">
+                <td class="inner" style="color:white"></td>
+                <td class="inner" style="color:white">Activity Label</td>
+                <td class="inner" style="color:white">Rate</td>
+                <td class="inner" style="color:white">Type</td>
+            </tr>
+            <template if:true={activitiesToDisplay}>
+                <template for:each={activitiesToDisplay} for:item="activity" for:index="index">
+                    <tr key={activity.id}>                  
+                        <td class="inner"> <lightning-input type="checkbox" label="" name={index}
+                            value={activity.selected} checked={activity.selected} onchange={handleAddActivity}></lightning-input></td>
+                        <td class="inner">{activity.activityLabel}</td>
+                        <td class="inner">${activity.rate}</td>
+                        <td class="inner">{activity.type}</td>  
+                    </tr>
+                </template> 
+            </template>
+           
+        </table>
+
+        <div class="slds-col slds-p-top_medium"><!--PAGE NAVIGATION-->
+            <div class="slds-col slds-p-bottom_xx-small">
+                <span style={ctrlPrevActivities}>
+                    <lightning-button-icon icon-name="utility:left" variant="bare" size="medium" alternative-text="Previous Page" onclick={previousPage}></lightning-button-icon>
+                </span>
+                <label class="slds-text-color_weak slds-p-horizontal_x-small" for="pageNum">Page:</label> 
+                <span>{pageNumActivities}&nbsp;of&nbsp;<b id="totalPages">{totalPagesActivities}</b></span>
+                <span style={ctrlNextActivities}>
+                    <lightning-button-icon icon-name="utility:right" variant="bare" size="medium" alternative-text="Next Page" onclick={nextPage} class="slds-p-horizontal_x-small"></lightning-button-icon>
+                </span>
+            </div>           
+        </div>
+        <br/>
+       
+        <table class="borderclass slds-p-around_medium">
+            <tr class="mainhead" >
+                <td class="inner" colspan="4" style="color:white"><b>Deliverable Activities</b></td>
+            </tr>
+            <tr class="table-header">
+                <td class="inner" style="color:white"></td>
+                <td class="inner" style="color:white">Deliverable Name</td>
+                <td class="inner" style="color:white">Status</td>
+            </tr>
+            <template if:true={deliverablesToDisplay}>
+                <template for:each={deliverablesToDisplay} for:item="activity" for:index="index">
+                    <tr key={activity.id}>                  
+                        <td class="inner"> <lightning-input type="checkbox" label="" name={index}
+                            value={activity.selected} checked={activity.selected}  onchange={handleAddDeliverable}></lightning-input></td>
+                        <td class="inner">{activity.activityLabel}</td>
+                        <td class="inner">{activity.status}</td>  
+                    </tr>
+                </template> 
+            </template>
+            
+        </table>
+        <div class="slds-col slds-p-top_medium"><!--PAGE NAVIGATION-->
+            <div class="slds-col slds-p-bottom_xx-small">
+                <span style={ctrlPrevDeliverables}>
+                    <lightning-button-icon icon-name="utility:left" variant="bare" size="medium" alternative-text="Previous Page" onclick={previousPageDeliverables}></lightning-button-icon>
+                </span>
+                <label class="slds-text-color_weak slds-p-horizontal_x-small" for="pageNum">Page:</label> 
+                <span>{pageNumDeliverables}&nbsp;of&nbsp;<b id="totalPages2">{totalPagesDeliverables}</b></span>
+                <span style={ctrlNextDeliverables}>
+                    <lightning-button-icon icon-name="utility:right" variant="bare" size="medium" alternative-text="Next Page" onclick={nextPageDeliverables} class="slds-p-horizontal_x-small"></lightning-button-icon>
+                </span>
+            </div>           
+        </div>
+        <br/>
+
+        <div class="slds-m-left_small slds-m-right_small slds-m-bottom_medium">
+            <button class="slds-button  slds-button_neutral"
+                onclick={addActivities}>Add</button>
+           
+            <button class="slds-button  slds-button_brand"
+                    onclick={handleClose}>Close</button>
+        </div>
+    </div>
+</template>

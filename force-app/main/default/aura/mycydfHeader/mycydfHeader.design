@@ -1,0 +1,7 @@
+<design:component>
+    <design:attribute name="toggleLogin" label="Show login as active"/>
+    <design:attribute name="toggleRegistration" label="Show registration as active"/>
+    <design:attribute name="hideRegistration" label="Hide registration"/>
+    <design:attribute name="showLogin" label="ShowLogin Button"/>
+    <design:attribute name="showUserDetails" label="Show User Details"/>
+</design:component>

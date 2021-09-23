@@ -1,0 +1,77 @@
+<template>
+    <div>
+        <h3 class ="slds-p-left_medium n_head_space2 heading"><b>CASEY Life Skills - (Step 6 of 7)</b></h3>
+        <h3 class ="slds-p-left_medium n_head_space heading"><b>Career and Education Planning</b></h3>
+
+        <br/>
+
+        <div class="slds-form form-section">
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToFindWorkInternships" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to find work-related internships."
+                value={dataObj.IKnowHowToFindWorkInternships} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowWhereToFindInfoAboutTraining" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know where to find information about job training."
+                value={dataObj.IKnowWhereToFindInfoAboutTraining} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ICanExplainBenefitsOfVolunteerWork" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I can explain the benefits of doing volunteer work ."
+                value={dataObj.ICanExplainBenefitsOfVolunteerWork} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="ITalkedToAAdultWhoHasAJobIWant" class = "  slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I have recently talked to an adult who works in a job I would like to have."
+                value={dataObj.ITalkedToAAdultWhoHasAJobIWant} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowTheEducationINeedForWork" class = "slds-p-left_medium n_fix_inl "
+                options={options} onchange={changeHandler} label="I know what type (college, trade school) education I need for the work I want to do."
+                value={dataObj.IKnowTheEducationINeedForWork} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToGetIntoJobAfterSchool" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to get into the school, training, or job I want after high school."
+                value={dataObj.IKnowHowToGetIntoJobAfterSchool} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToFindAidForEduation" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know how to find financial aid to help pay for my education or training."
+                value={dataObj.IKnowHowToFindAidForEduation} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IHaveTalkedAboutMyEducationPlans" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I have talked about my education plans with an adult who cares about me."
+                value={dataObj.IHaveTalkedAboutMyEducationPlans} required
+                type="radio"></lightning-radio-group>
+            </div>
+
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowAnAdultWhoWillHelpMeApplyCE" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler} label="I know an adult who will help me apply for training or education after high school."
+                value={dataObj.IKnowAnAdultWhoWillHelpMeApplyCE} required
+                type="radio"></lightning-radio-group>
+            </div>
+            <!-- ends -->
+            <!-- <p class = "slds-p-left_medium n_fix_inl ">I know an adult who will help me apply for training or education after high school.  </p>
+            <div class="slds-form__item horizontal-radio">
+                <lightning-radio-group name="IKnowHowToFindSafeCheapHousing" class = " slds-p-left_medium n_fix_inl"
+                options={options} onchange={changeHandler}
+                value={dataObj.IKnowHowToFindSafeCheapHousing}
+                type="radio"></lightning-radio-group>
+            </div> -->
+
+        </div>
+        
+    </div>
+    
+</template>

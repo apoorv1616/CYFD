@@ -1,0 +1,380 @@
+<apex:page standardController="Survey__c" extensions="NM_CYFD_GenerateSurveyPDF" showHeader="false" sidebar="false" standardStylesheets="false" renderAs="pdf" applyHtmlTag="false" applyBodyTag="false">
+    <html>
+        <head>
+    
+            <style type="text/CSS">
+                @page {
+                size:landscape;
+                @bottom-right {
+                content: counter(page) "/" counter(pages);
+                }
+                }
+                
+   
+            </style>  
+  
+        </head>
+        <body>
+            <h1>Satisfaction Survey</h1>
+			<table style = "table-layout: fixed ; border: 1px; width : 100%">
+                <tr style= "padding:3px">
+                    <td><b>Start Date :</b> {!startDate}</td>
+                    <td><b>Completion Date :</b> {!completionDate}</td>
+                </tr>
+                <apex:variable var="v" value="" rendered="{!jjac}">
+                    <tr style= "padding:3px">
+                        <td><b>Name of the Program : </b>{!program}</td>
+                        <td><b>Contract Name :</b> {!contractName}</td>
+                    </tr>
+                </apex:variable>
+                <tr style= "padding:3px">
+                    <td><b>Youth ID :</b> {!youthId}</td>
+                </tr>
+            </table>
+
+            <h3>Client Section</h3>
+            
+            
+			<apex:variable var="v" value="" rendered="{!(jjac)}">
+                <p>The program helped me feel better about myself  </p>
+                <p>{!survey.ProgramMadeMeFeelBetterAboutMyself}</p>
+                <br/>
+                  
+                
+                 <p>My relationship with my family has improved while in the program.</p>
+                 <p>{!survey.RelationshipWithMyFamilyHasImproved}</p>
+                 <br/>
+                
+                <p>I get along better with me friends as a result of being in the program.  </p>
+                <p>{!survey.IGetAlongBetterWithMeFriends}</p>
+                <br/>
+                
+                <p>My school grades improved while participating in the program.  </p>
+                <p>{!survey.MySchoolGradesImprovedInTheProgram}</p>
+                <br/>
+                
+                <p>My school attendance improved while participating in the program.</p>
+                <p>{!survey.MySchoolAttendanceImproved}</p>
+                <br/>
+                
+                 <p>My behavior at school improved while in the program. </p>
+                 <p>{!survey.MyBehaviorAtSchoolImproved}</p>
+                <br/>
+                
+                <p>When I started the program, staff explained the details about the organization, services and how to use them. </p>
+                <p>{!survey.StaffExplainedDetailsAboutServices}</p>
+                <br/>
+                
+                <p>I received support from the program staff.    </p>
+                <p>{!survey.IReceivedSupportFromProgramStaff}</p>
+                <br/>
+                
+                <p>I learned new skills while participating in the program.   </p>
+                <p>{!survey.ILearnedNewSkillsWhileParticipating}</p>
+                <br/>
+                
+                <p>I was treated with respect by program staff.   </p>
+                <p>{!survey.TreatedWithRespectByProgramStaff}</p>
+                <br/>
+                
+                <p>I am satisfied with my involvement in this program.    </p>
+                <p>{!survey.IAmSatisfiedWithMyInvolvement}</p>
+                <br/>
+                
+                <p>I would recommend this program to others.   </p>
+                <p>{!survey.WouldRecommendThisProgramToOthers}</p>
+                <br/>
+                
+                <h3>Staff Section</h3>
+                
+                <p>Did the youth have an arrest or delinquent offense  while in the progam?  </p>
+                <p>{!survey.DidTheYouthHaveArrestInTheProgram}</p>
+                <br/>
+                
+                <p>Was the youth committed to a juvenile facility while participating in the program?    </p>
+                <p>{!survey.WasTheYouthCommittedToAFacility}</p>
+                <br/>
+                
+                <p>Was the youth sentenced to adult prison while participating in the program?   </p>
+                <p>{!survey.WasTheYouthSentencedToAPrison}</p>
+                <br/>
+                
+                <p>Did the youth receive another sentence while serving in the program?   </p>
+                <p>{!survey.DidTheYouthReceiveAnotherSentence}</p>
+                <br/>
+                
+                <p>As a youth who came into the program with an arrest or a delinquent offense, did they reoffend or have a delinquent offense while in the program?   </p>
+                <p>{!survey.DidTheyReoffendOrHaveAnOffense}</p>
+                <br/>
+                
+                <p>As a youth who came into the program with an arrest or a delinquent offense, was the youth committed to a juvenile facility while participating in the program?  </p>
+                <p>{!survey.CameInWithArrestSentToFacility}</p>
+                <br/>
+                
+                <p>As a youth who came into the program with an arrest or a delinquent offense, was the youth sentenced to adult prison while participating in the program?   </p>
+                <p>{!survey.WasTheYouthSentencedToAdultPrison}</p>
+                <br/>
+                
+                <p>As a youth who came into the program with an arrest or a delinquent offense, did the youth receive another sentence while serving in the program?   </p>
+                <p>{!survey.DidTheYouthReceiveANewSentence}</p>
+                <br/>
+                
+                <p>Did the youth complete the program requirements?   </p>
+                <p>{!survey.DidTheYouthCompleteTheRequirements}</p>
+                <br/>
+                
+                <p>Did the youth exit the program satisfactorily?  </p>
+                <p>{!survey.DidTheYouthExitSatisfactorily}</p>
+                <br/>
+                
+                <p>Did the youth have an arrest or delinquent offense  within 6 - 12 months of being in the progam?  </p>
+                <p>{!survey.HaveArrestOrOffenseWith6_12Months}</p>
+                <br/>
+                
+                <p>Was the youth committed to a juvenile facility within 6 - 12 months of being in the program?   </p>
+                <p>{!survey.SentToAFacilityWithin6_12Months}</p>
+                <br/>
+                
+                <p>Was the youth sentenced to adult prison within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.SentToAdultJailWithin6_12Months}</p>
+                <br/>
+                
+                <p>Did the youth receive another sentence within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.GetAnotherSentenceIn6_12Months}</p>
+                <br/>
+                
+                <p>As a youth who came into the program with an arrest or a delinquent offense, did they reoffend or have a delinquent offense within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.ReoffendOrJuvenileActIn6_12Months} </p>
+                <br/>
+                
+                <p>As a youth who came into the program with an arrest or a delinquent offense, was the youth recommitted to a juvenile facility within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.RecommittedToAFacilityIn6_12Months}</p>
+                <br/>
+                
+                <p>As a youth who came into the program with an arrest or a delinquent offense, was the youth sentenced to adult prison within 6 - 12 months of being in the program?</p>
+                <p>{!survey.SentencedToAdultJailIn6_12Months} </p>
+                <br/>
+    
+                <p>As a youth who came into the program with an arrest or a delinquent offense, did the youth receive another sentence within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.HaveAnotherSentenceWithin6_12Months}</p>
+                <br/>
+                
+                <p>Did the youth exhibit a decrease in gang activity while in the program?  </p>
+                <p>{!survey.ExhibitADecreaseInGangActivity}</p>
+                <br/>
+                
+                <p>Did the youth exhibit a decrease in gang activity within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.DecreaseInGangActivityIn6_12Months}</p>
+                <br/>
+                
+                <p>Did the youth exhibit a decrease in substance abuse  while in the program?  </p>
+                <p>{!survey.ExhibitADecreaseInSubstanceAbuse}</p>
+                <br/>
+                <p>Did the youth exhibit a decrease in substance abuse  within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.LessSubstanceAbuseIn6_12Months}</p>
+                <br/>
+                
+                <p>Did the youth exhibit an increase in self esteem while in the program?  </p>
+                <p>{!survey.ExhibitAnIncreaseInSelfEsteem}</p>
+                <br/>
+                
+                 <p>Did the youth exhibit an increase in self esteem within 6 - 12 months of being in the program?  </p>
+                 <p>{!survey.IncreaseInSelfEsteemIn6_12Months}</p>
+               
+                <br/>
+                
+                <p>Did the youth exhibit an improvement of body image    while in the progam?  </p>
+                <p>{!survey.ExhibitAnImprovementOfBodyImage}</p>
+                <br/>
+                <p>Did the youth exhibit an improvement of body image      within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.ImprovementOfBodyImageIn6_12Months}</p>
+                <br/>
+                
+                <p>Did the youth exhibit a desired change in family relationships while in the program?   </p>
+                <p>{!survey.DesiredChangeInFamilyRelationships}</p>
+                <br/>
+                
+                <p>Did the youth exhibit a desired change in family relationships within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.ChangeInFamilyTiesIn6_12Months}</p>
+                <br/>
+                
+                <p>Did the youth exhibit an improvement in the perception of social support while in the program?  </p>
+                <p>{!survey.GainInPerceptionOfSocialSupport}</p>
+                <br/>
+                
+                <p>Did the youth exhibit an improvement in the perception of social support within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.AcumenOfSocialSupport6_12Months}</p>
+                <br/>
+                
+                <p>Did the youth exhibit an improvement in school performance (grades) while in the program? </p>
+                <p>{!survey.ShowImprovementInSchoolPerformance}</p>
+                <br/>
+                
+                <p>Did the youth exhibit an improvement in school performance (grades) within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.GainInSchoolGradesWithin6_12Months}</p>
+                <br/>
+                
+                <p>Did the youth exhibit an improvement in school attendance while in the program?  </p>
+                <p>{!survey.ImprovementInSchoolAttendance}</p>
+                
+                <br/>
+                
+                <p>Did the youth exhibit an improvement in school attendance within 6 - 12 months of being in the program?  </p>
+                <p>{!survey.GainInSchoolAttendanceIn6_12Months}</p>
+                <br/>
+                
+    
+                <p>Did the youth exhibit an improvement in behavior at school while in the program?  </p>
+                <p>{!survey.ShowImprovementInBehaviorAtSchool}</p>
+                <br/>
+                
+                <p>Did the youth exhibit an improvement in behavior at school within 6 - 12 months of being in the program? </p>
+                <p>{!survey.GainInBehaviorAtSchoolIn6_12Months}</p>
+                <br/>
+                
+                <p>Parent/Family was active in the program  </p>
+                <p>{!survey.ParentFamilyWasActiveInTheProgram}</p>
+                <br/>
+    
+                <p>Parent/Family successfully completed their program requirements/expectations  </p>
+                <p>{!survey.ParentCompletedProgramDetailsSuccess}</p>
+                <br/>
+                
+                <p>Parent/Family was satisfied with their involvement in the program  </p>
+                <p>{!survey.FamilySatisfiedWithTheirInvolvement}</p>
+                <br/>
+            </apex:variable> 
+            <apex:variable var="v" value="" rendered="{!(jcc)}">
+                <p>The program helped me feel better about myself </p>
+                <p>{!survey.ProgramMadeMeFeelBetterAboutMyself}</p>
+                <br/>
+                
+                <p>When I started the program, staff explained the details about the organization, services and how to use them  </p>
+                <p>{!survey.StaffExplainedDetailsAboutServices}</p>
+                <br/>
+                
+                <p>I received support from the program staff  </p>
+                <p>{!survey.IReceivedSupportFromProgramStaff}</p>
+                <br/>
+                
+                <p>I learned new skills while participating in the program  </p>
+                <p>{!survey.ILearnedNewSkillsWhileParticipating}</p>
+                <br/>
+                
+                <p>I learned new job-related skills by participating in the program </p>
+                <p>{!survey.ILearnedNewJobRelatedSkills}</p>
+                <br/>
+                
+                <p>I was treated with respect by program staff  </p>
+                <p>{!survey.TreatedWithRespectByProgramStaff}</p>
+                <br/>
+                
+                <p>The program helped me think about long term goals  </p>
+                <p>{!survey.HelpedMeThinkAboutLongTermGoals}</p>
+                <br/>
+                
+                <p>I would recommend this program to others  </p>
+                <p>{!survey.WouldRecommendThisProgramToOthers}</p>
+                <br/>
+                
+                <h3>Staff Questions</h3>
+                
+                <p>Parent/Family was active in the program  </p>
+                <p>{!survey.ParentFamilyWasActiveInTheProgram}</p>
+                <br/>
+    
+                <p>Parent/Family successfully completed their program requirements/expectations  </p>
+                <p>{!survey.ParentCompletedProgramDetailsSuccess}</p>
+                <br/>
+                
+                <p>Parent/Family was satisfied with their involvement in the program  </p>
+                <p>{!survey.FamilySatisfiedWithTheirInvolvement}</p>
+                <br/>
+            </apex:variable> 
+            <apex:variable var="v" value="" rendered="{!(mentoring)}">
+                <p>The program helped me feel better about myself  </p>
+                <p>{!survey.ProgramMadeMeFeelBetterAboutMyself}</p>
+                <br/>
+                
+                <p>My relationship with my family has improved while in the program  </p>
+                <p>{!survey.RelationshipWithMyFamilyHasImproved}</p>
+                 <br/>
+                
+                <p>I get along better with me friends as a result of being in the program  </p>
+                <p>{!survey.IGetAlongBetterWithMeFriends}</p>
+                <br/>
+                
+                <p>My school grades improved while participating in the program   </p>
+                <p>{!survey.MySchoolGradesImprovedInTheProgram}</p>
+                <br/>
+                
+                <p>My school attendance improved while participating in the program </p>
+                <p>{!survey.MySchoolAttendanceImproved}</p>
+                <br/>
+                
+                <p>My behavior at school improved while in the program  </p>
+                <p>{!survey.MyBehaviorAtSchoolImproved} </p>
+                <br/>
+                
+                <p>When I started the program, staff explained the details about the organization, services and how to use them  </p>
+                <p>{!survey.StaffExplainedDetailsAboutServices}</p>
+                <br/>
+                
+                <p>I received support from the program staff </p>
+                <p> {!survey.IReceivedSupportFromProgramStaff}</p>
+                <br/>
+                
+                <p>I learned new skills while participating in the program </p>
+                <p>{!survey.ILearnedNewSkillsWhileParticipating}</p>
+                <br/>
+                
+                 <p>I looked forward to meeting with my mentor while participating in the program </p>
+                 <p>{!survey.LookedForwardToMeetingWithMyMentor}</p>
+                <br/>
+                
+                <p>I was treated with respect by program staff  </p>
+                <p>{!survey.TreatedWithRespectByProgramStaff}</p>
+                <br/>
+                
+                <p>I would recommend this program to others </p>
+                <p>{!survey.WouldRecommendThisProgramToOthers}</p>
+                <br/>
+                
+                <h3>Staff Questions</h3>
+                
+                <p>Did the youth exhibit an increase in self esteem while in the program?  </p>
+                <p>{!survey.ExhibitAnIncreaseInSelfEsteem}</p>
+                <br/>
+                
+                <p>Did the youth exhibit a desired change in family relationships while in the program?  </p>
+                <p>{!survey.DesiredChangeInFamilyRelationships}</p>
+                <br/>
+                
+                <p>Did the youth exhibit an improvement in the perception of social support while in the program? </p>
+                <p>{!survey.GainInPerceptionOfSocialSupport}</p>
+                <br/>
+                
+                <p>Did the youth exhibit an improvement in school performance (grades) while in the program?  </p>
+                <p>{!survey.ShowImprovementInSchoolPerformance}</p>
+                <br/>
+                
+                <p>Did the youth exhibit an improvement in school attendance while in the program?  </p>
+                <p>{!survey.ImprovementInSchoolAttendance}</p>
+                <br/>
+                
+                <p>Parent/Family was active in the program  </p>
+                <p>{!survey.ParentFamilyWasActiveInTheProgram}</p>
+                <br/>
+    
+                <p>Parent/Family successfully completed their program requirements/expectations  </p>
+                <p>{!survey.ParentCompletedProgramDetailsSuccess}</p>
+                <br/>
+                
+                <p>Parent/Family was satisfied with their involvement in the program  </p>
+                <p>{!survey.FamilySatisfiedWithTheirInvolvement}</p>
+                <br/> 
+            </apex:variable>           
+           
+        </body>
+    </html>
+</apex:page>

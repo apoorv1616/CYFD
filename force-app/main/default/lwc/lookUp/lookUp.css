@@ -1,0 +1,11 @@
+lightning-radio-group .slds-radio_faux{
+    margin-right : 10px;
+}
+
+.pillSize{
+    width : 99%;
+}
+
+.slds-modal_content{
+    overflow : initial;
+}

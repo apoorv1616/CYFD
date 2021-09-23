@@ -1,0 +1,32 @@
+.borderclass{
+    border: 1px solid black;
+
+}
+.inner{
+    padding: 5px;
+    border: 1px solid black;
+    text-align: center;
+}
+.mainhead{
+    background-color : #F16821;
+}
+.table-header{
+    background-color : #F09466;
+}
+.TopHeader{
+    border: 1px solid black;
+    background-color : #F16821;
+}
+.buttonclass{
+    background-color: mediumturquoise  ;
+}
+.button {
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color:black;
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    
+  }

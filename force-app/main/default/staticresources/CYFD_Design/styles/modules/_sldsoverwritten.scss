@@ -1,0 +1,18 @@
+.slds-form-element__control input {
+    border-color: #dbdbdb !important;
+}
+.slds-form-element__control .uiInput--select.select:not([multiple]), .uiInput--select .select:not([multiple]), .uiInput--select .uiPopupTrigger a{
+    border-color: #dbdbdb !important;
+}
+
+.slds-form-element__control .uiInput--textarea .textarea, .uiInput--textarea.textarea{
+    border-color: #dbdbdb !important;
+}
+
+.slds-form-element__control .slds-dueling-list__options, .slds-picklist__options{
+    border-color: #dbdbdb !important;
+}
+
+.slds-checkbox .slds-checkbox_faux, .slds-checkbox .slds-checkbox--faux {
+    border-color: #dbdbdb !important;
+}

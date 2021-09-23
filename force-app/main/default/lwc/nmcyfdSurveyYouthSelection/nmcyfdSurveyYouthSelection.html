@@ -1,0 +1,65 @@
+<template>
+    <div>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12"> 
+                <p>Client Name</p>
+                <lightning-input label="Client Name" type="search" id="input" value={searchTerm}
+                    variant="label-hidden" autocomplete="off" placeholder="Search..." name="clientName" onchange={onChange}>
+                </lightning-input>
+                <br>
+            </div>
+        </div>
+        <br>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked slds-p-top_large">
+            <thead>
+                <tr>
+                    <th scope="col"> Client Name</th>
+                    <th scope="col"> Birthdate </th>
+                    <th scope="col"> Program </th>
+                    <th scope="col"> Action </th>
+                </tr>
+            </thead>
+    
+            <tbody>
+                <template if:true={contractRole}>
+                    <template for:each={contractRole} for:item="item" for:index="index">
+                        <tr key={item.youthId}>
+                            <td data-label=""><a data-youth-id={item.youthId} onclick={onYouthClick}>{item.name}</a></td>
+                            <td data-label="">{item.birthDate}</td>
+                            <td>
+                                <table class="slds-table slds-table_striped slds-max-medium-table_stacked ">
+                                    <tbody>
+                                        <template for:each={item.surveys} for:item="survey" for:index="index">
+                                            <tr key={survey.surveyId}>
+                                                <td colspan="2" data-label=""></td>
+                                                <td data-label=""><a data-id={survey.surveyId}>{survey.program}</a></td>
+                                                <td data-label=""><a data-id={survey.surveyId}>{survey.status}</a></td>
+                                                <td  data-label="">
+                                                    <template if:false={survey.completed}>
+                                                        <a  onclick={onContinueSurveyClick}>
+                                                            <p data-survey-id={survey.surveyId} style = "font-size: 85%; color : #015ba7;"  class="slds-text-link--reset">
+                                                            Continue Survey  
+                                                            </p>
+                                                        </a>
+                                                    </template>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table> 
+                            </td>
+                            <td data-label="">
+                                <a  onclick={onStartSurveyClick}>
+                                    <p data-youth-id={item.youthId} style = "font-size: 85%; color : #015ba7;" class="slds-text-link--reset">
+                                        Start New Survey
+                                    </p>
+                                </a>
+                            </td>
+                        </tr>
+                       
+                    </template>
+                </template>
+            </tbody>   
+        </table> 
+    </div>
+</template>

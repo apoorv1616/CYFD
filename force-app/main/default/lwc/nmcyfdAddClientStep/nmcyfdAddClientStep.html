@@ -1,0 +1,433 @@
+<template>
+    <div>
+        <b class="slds-float_left">{month} Activities</b>
+        <div class="slds-float_right">
+            <button class="slds-button slds-float--left slds-button_neutral" onclick={addExistingMember}>Add Existing
+                Client</button>&nbsp;&nbsp;
+            <button  disabled={addNewButtonDisabled} class="slds-button slds-float--left slds-button_neutral" onclick={addNewMember}>Add Client</button>
+        </div>
+    </div>
+    <table
+        class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked slds-p-top_large">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Client Name
+                </th>
+                <th scope="col">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <template if:true={clients}>
+                <template for:each={clients} for:item="client" for:index="index">
+                    <tr key={client.roleId}>
+                        <td data-label="Client Name">
+                            {client.name}
+                        </td>
+                        <td data-label="Actions">
+                            <a onclick={handleEditRole} data-index={index} data-id={client.roleId}>Edit</a> |
+                            <a onclick={handleRemoveRole} data-index={index} data-id={client.roleId}>Delete</a>
+                        </td>
+                    </tr>
+                </template>
+            </template>
+        </tbody>
+    </table>
+
+
+    <!-- Add Existing Client -->
+    <template if:true={addExisting}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleCloseModal}>
+                        <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="Close"
+                            size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{heading}</h2>
+                </header>
+                <div class="slds-modal__content modal__content-height slds-p-around_medium modal-body"
+                    id="modal-content-id-1">
+
+                    <div class="slds-m-bottom_small">
+                        <lightning-input type="search" value={searchValue} label="Search Clients"
+                           onchange={searchKeyword}></lightning-input>
+                     </div>
+                     <template if:true={showSpinner}>
+                        <div class="slds-spinner_inline" style="">
+                            <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+                        </div>
+                    </template>
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped slds-max-medium-table_stacked slds-p-top_large">
+                        <thead>
+                            <tr>
+                                <th scope="col"> </th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Birthdate</th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            <template if:true={existingMembers}>
+                                <template for:each={existingMembers} for:item="client" for:index="index">
+                                    <tr key={client.roleId}>
+                                        <td>
+                                            <lightning-input variant="label-stacked" type="checkbox" label="" name={client.roleId} 
+                                            checked={client.selected} onchange={handleSelection}> </lightning-input>
+                                        </td>
+                                        <td data-label="client Name">{client.firstName}</td>
+                                        <td data-label="client Name">{client.lastName}</td>
+                                        <td data-label="Dob">{client.dob}</td>
+                                    </tr>
+                                </template>
+                            </template>
+                            <template if:false={existingMembers}>
+                                No existing Clients
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" title="Cancel"
+                        onclick={handleCloseModal}>Cancel</button>
+                    <button class="slds-button slds-button_brand" disabled={saveButton1} title="Save"
+                        onclick={addExistingClients}>Add</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!-- <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+        </template> -->
+    </template>
+
+    <!-- Add New Client -->
+    <template if:true={addNew}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close" onclick={handleCloseModal}>
+                        <lightning-icon icon-name="utility:close" variant="inverse" alternative-text="Close"
+                            size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">{heading}</h2>
+                </header>
+                <div class="slds-modal__content modal__content-height slds-p-around_large modal-body"
+                    id="modal-content-id-2">
+                    <!-- Contract Role Form-->
+                    <p style="color : red;">{errorMsg}</p>
+                    <div class="slds-grid slds-wrap input-client">
+                       
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-input type="text" value={newMember.firstName} label="First Name"
+                                autocomplete="none" required class="firstName" name="firstName" style="width:100%" onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-input type="text" value={newMember.lastName} label="Last Name"
+                                autocomplete="none" required class="lastName" name="lastName" style="width:100%" onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-input type="text" max-length="1" value={newMember.middleInitial}
+                                label="Middle Initial" autocomplete="none" name="middleInitial" style="width:100%"
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-combobox name="suffix" label="Suffix" placeholder="Select one"
+                                value={newMember.suffix} class="required-field" options={suffixValues} onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-input type="date" value={newMember.dob} label="Date Of Birth" autocomplete="none"
+                                name="dob" required style="width:100%" class="dob" onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-input type="date" class="initialRegistrationDate"  value={newMember.initialRegistrationDate}
+                                label="Initial Registration Date" required autocomplete="none" name="initialRegistrationDate"
+                                style="width:100%" onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <template if:false={mentoring}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="populationServed" class="populationServed" label="Population Served"
+                                    placeholder="Select one" value={newMember.populationServed} required
+                                    options={populationServedValues} onchange={handleInputChange}></lightning-combobox>
+                            </div>
+                        </template>
+                        <template if:true={mentoring}>
+                            
+                             <div class="slds-col slds-p-around_small  slds-size_1-of-1 slds-large-size_12-of-12" role="listitem">
+                                <label class="slds-form-element__label" for="combobox-id-5"><span style="color: red;">*</span>At Risk Factors</label>
+                                <c-multiselect_picklist all-options={atRiskFactorsValues}
+                                selected-options={selectedAtRiskFactors} required-error-message="Complete this field" is-invalid={isInvalidRisk} allow-search=true is-required=true
+                                onselected={handleRiskFactorsSelection} style="width: 100%;"> </c-multiselect_picklist>
+                            </div>  
+                        </template>
+                        <template if:true={jcc}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="date" class="localSelectionPanelDate" value={newMember.localSelectionPanelDate}
+                                    label="Local Selection Panel Date" autocomplete="none" required
+                                    name="localSelectionPanelDate" style="width:100%" onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="livingArrangements" class="livingArrangements" label="Living Arrangements"
+                                    placeholder="Select one" value={newMember.livingArrangements} required
+                                    options={livingArrangementsValues} onchange={handleInputChange}>
+                                </lightning-combobox>
+                            </div>
+                        </template>
+                        <template if:false={jjac}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="education" label="Education" placeholder="Select one"
+                                    value={newMember.education} options={educationValues} onchange={handleInputChange}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="school" label="School" placeholder="Select one"
+                                    value={newMember.school} options={schoolValues} onchange={handleInputChange}>
+                                </lightning-combobox>
+                            </div>
+                        </template>
+                        <template if:true={jcc}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="employmentStatus" label="Employment Status"
+                                    placeholder="Select one" value={newMember.employmentStatus}
+                                    options={employmentStatusValues} onchange={handleInputChange}></lightning-combobox>
+                            </div>
+                            <!--
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="notInLaborForce" label="Not In Labor Force"
+                                    placeholder="Select one" value={newMember.notInLaborForce}
+                                    options={notInLaborForceValues} onchange={handleInputChange}></lightning-combobox>
+                            </div> -->
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="sourceOfIncome" label="Source Of Income"
+                                    placeholder="Select one" value={newMember.sourceOfIncome}
+                                    options={sourceOfIncomeValues} onchange={handleInputChange}></lightning-combobox>
+                            </div>
+                        </template>
+                        <template if:false={jjac}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="cyfdInvolved" label="CYFD Involved" placeholder="Select one"
+                                    value={newMember.cyfdInvolved} options={cyfdInvolvedValues}
+                                    onchange={handleInputChange}></lightning-combobox>
+                            </div>
+                        
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="referralSource" label="Referral Source" placeholder="Select one"
+                                    value={newMember.referralSource} class="referralSource" required options={referralSourceValues}
+                                    onchange={handleInputChange}></lightning-combobox>
+                            </div>
+                        </template>
+                        <template if:true={jcc}>
+                        
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="arrestInPast30Days" label="Arrest In Past 30 Days"
+                                    placeholder="Select one" value={newMember.arrestInPast30Days}
+                                    options={arrestInPast30DaysValues} onchange={handleInputChange}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="healthInsurance" label="Health Insurance"
+                                    placeholder="Select one" value={newMember.healthInsurance}
+                                    options={healthInsuranceValues} onchange={handleInputChange}></lightning-combobox>
+                            </div>
+                        </template>
+                        <template if:false={jjac}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input variant="label-stacked"  type="checkbox" label="No SSN" name="noSSN" checked={newMember.noSSN}
+                                    onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="text" value={newMember.ssnNumber} label="SSN Number"
+                                    autocomplete="none" name="ssnNumber" style="width:100%" onchange={handleInputChange}
+                                    maxlength="9" pattern="^[0-9]*$" minlength="9" message-when-pattern-mismatch="Please use a valid 9 digits SSN." >
+                                </lightning-input>
+                            </div>
+                        </template>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-combobox name="gender" label="Gender" placeholder="Select one"
+                                value={newMember.gender} class="gender" required options={genderValues} onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+                        <template if:true={mentoring}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="lgbtq" label="LGBTQ" placeholder="Select one"
+                                    value={newMember.lgbtq} options={lgbtqValues} onchange={handleInputChange}>
+                                </lightning-combobox>
+                            </div>
+                        </template>
+                        <template if:true={jcc}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="text" value={newMember.driverLicenseNumber}
+                                    label="Driver License Number" autocomplete="none" name="driverLicenseNumber"
+                                    style="width:100%" onchange={handleInputChange}></lightning-input>
+                            </div>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input variant="label-stacked"  type="checkbox" label="Client has Medicaid ID" name="hasMedicalId"
+                                    checked={newMember.hasMedicalId} onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="text" value={newMember.medicalId} label="Medicaid ID"
+                                    autocomplete="none" name="medicalId" style="width:100%"
+                                    onchange={handleInputChange}></lightning-input>
+                            </div>
+                        </template>
+
+                        <!--  -->
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-combobox name="primaryLanguage" label="Primary Language" placeholder="Select one"
+                                value={newMember.primaryLanguage} options={primaryLanguageValues}
+                                onchange={handleInputChange}></lightning-combobox>
+                        </div>
+
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-combobox name="ethnicity" label="Ethnicity" placeholder="Select one" autocomplete="pass"
+                                value={newMember.ethnicity} class="ethnicity" required options={ethnicityValues} onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-combobox name="tribalAffiliation" label="Tribal Affiliation"
+                                placeholder="Select one" value={newMember.tribalAffiliation}
+                                options={tribalAffiliationValues} onchange={handleInputChange}></lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-combobox name="otherTribalAffiliation" label="Other Tribal Affiliation"
+                                placeholder="Select one" value={newMember.otherTribalAffiliation}
+                                options={otherTribalAffiliationValues} onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-combobox name="race" label="Race" placeholder="Select one" value={newMember.race}
+                                options={raceValues} class="race" required onchange={handleInputChange}></lightning-combobox>
+                        </div>
+                       
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-input variant="label-stacked"  type="checkbox" class="homeless" label="Homeless" name="homeless"
+                                checked={newMember.homeless} onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-input type="text" value={newMember.addressLine1} label="Address Line 1"
+                                autocomplete="none" class="addressLine1" required={isNotHomeless} name="addressLine1" style="width:100%" onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-input type="text" value={newMember.addressLine2} label="Address Line 2"
+                                autocomplete="none" class="addressLine2" name="addressLine2" style="width:100%" onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-input type="text" value={newMember.city} label="City" autocomplete="none"
+                                name="city"  class="city" required={isNotHomeless}  style="width:100%" onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-input type="text" value={newMember.state} label="State" autocomplete="none"
+                                name="state" class="state" required={isNotHomeless}  style="width:100%" onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-input type="text" value={newMember.zipCode} label="Zip Code"
+                            maxlength="5" pattern="^[0-9]*$" minlength="5" message-when-pattern-mismatch="Please use a valid 5 digits zip code." 
+                                 autocomplete="none" class="zipCode" required={isNotHomeless}   name="zipCode" style="width:100%" onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <template if:false={jjac}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="checkbox" label="No Phone" name="noPhone" checked={newMember.noPhone}
+                                    onchange={handleInputChange} variant="label-stacked" >
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="phone" value={newMember.primaryPhone} label="Primary Phone"
+                                    autocomplete="none" max-length="10"  name="primaryPhone" style="width:100%" onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                        
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="phone" value={newMember.otherPhone} label="Other Phone"
+                                    autocomplete="none" max-length="10"  name="otherPhone" style="width:100%" onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                        </template>
+                        <template if:true={jcc}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="text" value={newMember.sexualPreferrence}
+                                    label="Sexual Preferrence" autocomplete="none" name="sexualPreferrence"
+                                    style="width:100%" onchange={handleInputChange}></lightning-input>
+                            </div>
+                            <template if:true={isEditMode}>
+                                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                    <lightning-combobox name="dischargeReason" label="Discharge"
+                                        placeholder="Select one" value={newMember.dischargeReason}
+                                        options={dischargeReasonOptions} onchange={handleDischargeReasonChange}>
+                                    </lightning-combobox>
+                                </div>
+                                <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                    <lightning-combobox name="reason" label="Reason" placeholder="Select one"
+                                        value={newMember.reason} options={reasonOptions} onchange={handleInputChange}>
+                                    </lightning-combobox>
+                                </div>
+                            </template>
+                          
+                        </template>
+
+                        <template if:true={jjac}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox class="geographicLocation" required  name="geographicLocation" label="Geographic Location" placeholder="Select one"
+                                    value={newMember.geographicLocation} options={geographicLocationValues} onchange={handleInputChange}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox name="otherPopulation" label="Other Population" placeholder="Select one"
+                                    value={newMember.otherPopulation} options={otherPopulationValues} onchange={handleInputChange}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox class="gangActivity" required name="gangActivity" label="Gang Activity" placeholder="Select one"
+                                    value={newMember.gangActivity} options={gangActivityValues} onchange={handleInputChange}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-combobox class="currentlyInDetention" required  name="currentlyInDetention" label="Currently In Detention?" placeholder="Select one"
+                                    value={newMember.currentlyInDetention} options={currentlyInDetentionValues} onchange={handleInputChange}>
+                                </lightning-combobox>
+                            </div>
+                        </template>
+
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-input variant="label-stacked" type="checkbox" label="Active Status" name="status" checked={newMember.status}
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                    </div>
+
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" title="Cancel"
+                        onclick={handleCloseModal}>Cancel</button>
+                    <button class="slds-button slds-button_brand" title="Save" onclick={handleNewRoleSave}>Save</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+        </template>
+    </template>
+</template>

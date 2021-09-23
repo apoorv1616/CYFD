@@ -1,0 +1,99 @@
+<template>
+       
+    <div class="slds-grid slds-wrap slds-p-vertical_medium">
+        <div class="slds-col slds-size_6-of-12 slds-large-size_6-of-12">
+            <template if:true={isSelectYouthStep}> 
+            <h1 class="page--heading">  Satisfaction Survey</h1>
+            </template>
+            <template if:true={isFederalYouthStep}> 
+                <h1 class="page--heading">  Satisfaction Survey -  Youth</h1>
+            </template>
+            <template if:true={isFederalStaffStep}> 
+                <h1 class="page--heading">  Satisfaction Survey - Staff</h1>
+            </template>
+        </div>
+        <template if:false={isSelectYouthStep}>  
+            <div class="slds-col slds-size_6-of-12 slds-large-size_6-of-12 slds-text-align_right">
+                <div class="slds-float_right">
+                    <div class="item-node">
+                        <template if:true={navigationItems}>
+                            <template for:each={navigationItems} for:item="item">
+                                <c-sidebar-node class="item-node-i" key={item.key} node={item}>
+                                </c-sidebar-node>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+            </div>          
+        </template>
+    </div>
+    <div class="instructions">
+        <p class="slds-text-align_center">{instructions}</p>
+    </div>
+    <div class="card--section"> 
+        <template if:true={showNoSurveyOptionAvailable}> 
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                <lightning-combobox auto-complete="off" name="noSurveyAvailable" label="No Survey Available" placeholder="Select one"
+                    value={noSurveyAvailable}  options={surveyOptions} onchange={handleSurveyChange}>
+                </lightning-combobox>
+
+            </div>
+
+            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12" if:true={showNo_Survey_Reason}>
+                <lightning-textarea name="No_Survey_Reason" label="Why survey is not available?" placeholder="type here..." onchange={handleChange} required></lightning-textarea>
+            </div>
+
+        </template>
+
+        <template if:false={isSelectYouthStep}>
+            <template if:true={jjac}>
+                <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
+                    <lightning-combobox auto-complete="off" name="program" label="Program" placeholder="Select one"
+                        value={program} required options={programValues} onchange={handleChange}>
+                    </lightning-combobox>
+                </div><br/>
+            </template>
+        </template>
+
+       
+        <template if:true={isSelectYouthStep}>         
+            <c-nmcyfd-survey-youth-selection contract-id={contractId} oncontinuesurvey={handleContinueSurvey} onyouthselect={handleYouthSelection} ></c-nmcyfd-survey-youth-selection>
+        </template> 
+        <template if:true={isFederalYouthStep}>  
+
+            <c-nmcyfd-federal-youth-survey contract-id={contractId} youth-id={youthId}  survey-id={surveyId} jcc={jcc} jjac={jjac} mentoring={mentoring} response={federalYouthObject}></c-nmcyfd-federal-youth-survey>    
+        </template> 
+        <template if:true={isFederalStaffStep}>
+
+            <c-nmcyfd-federal-staff-survey survey-id={surveyId}  jcc={jcc} jjac={jjac} mentoring={mentoring} response={federalStaffObject}
+            no-survey-available={noSurveyAvailable}
+            ></c-nmcyfd-federal-staff-survey> 
+        </template> 
+        <div class="card--footer">
+            <div class="slds-m-left_small slds-m-right_small slds-m-bottom_medium">
+                <button class="slds-button slds-float--left  slds-button_neutral"
+                    onclick={handleBackToContract}>Back to Contract</button>
+                <template if:true={showPrevious}>
+                    <button class="slds-button slds-float--left slds-button_neutral"
+                        onclick={handlePreviousStep}>Previous</button>
+                </template>
+                <template if:false={showSubmit}>
+                    <button class="slds-button slds-float--left slds-button_neutral"
+                        onclick={backToClientsList}>Back to Clients List</button>
+                </template>
+                <template if:false={showSubmit}>
+                    <button class="slds-button slds-float--right  slds-button_brand"
+                        onclick={handleNextStep}>Next</button>
+                </template>
+                <template if:true={showSaveAndExit}>
+                    <button class="slds-button slds-float--right  slds-button_brand"
+                        onclick={handleSaveNExit}>Save & Exit</button>
+                </template>
+                <template if:true={showSubmit}>
+                    <button class="slds-button slds-float--right  slds-button_brand"
+                        onclick={handleSubmit}>Submit</button>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

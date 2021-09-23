@@ -1,0 +1,92 @@
+button {
+  appearance: none;
+  background: transparent;
+  border: 0;
+}
+
+.btn-a {
+  align-items: center;
+  background-image: none;
+  border-radius: 0;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: $font-size-base;
+  justify-content: center;
+  margin: 0;
+  min-height: $input-height;
+  min-width: 80px;
+  padding: 0 $gap-sm;
+  text-align: center;
+  touch-action: manipulation;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  @include font-semibold;
+}
+
+.btn-lg {
+  min-height: $input-height * 1.25;
+  min-width: 8rem;
+}
+
+.btn-back {
+  align-items: center;
+  display: inline-flex;
+  font-size: 0.8rem;
+  margin-bottom: $gap;
+  text-transform: uppercase;
+  transition: all 0.15s;
+  @include font-bold;
+  svg {
+    margin-right: $gap-xs;
+    transition: all 0.15s;
+  }
+  &:hover,
+  &:focus {
+    svg {
+      animation: bounce-left 0.5s forwards;
+    }
+  }
+}
+
+.btn-forward {
+  align-items: center;
+  display: inline-flex;
+  font-size: 0.8rem;
+  padding-left: 0;
+  padding-right: 0;
+  text-transform: uppercase;
+  @include font-bold;
+  svg {
+    height: $gap-sm;
+    margin-left: $gap-xs;
+    width: $gap-sm;
+  }
+}
+
+.skip-link {
+  color: white;
+  z-index: 100;
+
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: $one;
+  width: $one;
+  margin: -$one;
+  border: 0;
+  &:focus {
+    clip: initial;
+    height: auto;
+    width: auto;
+    margin: 0;
+    color: white;
+    padding: $gap-xs $gap;
+  }
+}
+
+
+.btn-full {
+  width: 100%;
+}

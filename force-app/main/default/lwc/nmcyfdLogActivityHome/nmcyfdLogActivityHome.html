@@ -1,0 +1,79 @@
+<template>
+    <div class="container">
+       
+        <div class="slds-grid slds-wrap slds-p-vertical_medium">
+            <div class="slds-col slds-size_6-of-12 slds-large-size_6-of-12">
+                <h1 class="page--heading"> {contract.Name__c} - Activity Submission</h1>
+            </div>
+            <div class="slds-col slds-size_6-of-12 slds-large-size_6-of-12 slds-text-align_right">
+                <div class="slds-float_right">
+                    <div class="item-node">
+                        <template if:true={navigationItems}>
+                            <template for:each={navigationItems} for:item="item">
+                                <c-sidebar-node class="item-node-i" key={item.key} node={item}>
+                                </c-sidebar-node>
+                            </template>
+                        </template>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="instructions">
+            <p class="slds-text-align_center">{instructions}</p>
+        </div>
+        <div class="card--section"> 
+            
+            <template if:true={isStep1}>         
+                <h2 style = "font-size:17px; font-weight : bold;">Activity Selection (Step 1 of 4)</h2><br/>
+                <c-nmcyfd-activity-selection-step activity-detail-values={activityDetailValues} contract-id={contractId} contract={contract} 
+                activity-data={step1Data} sub-contractor-user={subContractorUser} award-amount={awardAmount} total-invoice-amount={totalInvoiceAmount}
+                jcc-user={jccUser} mentoring-user={mentoringUser} fiscal-year-start-date={fiscalYearStartDate}
+                jcc={jcc} jjac={jjac} grant={grant} mentoring={mentoring} start-date={startDate} end-date={endDate}></c-nmcyfd-activity-selection-step>
+            </template> 
+            <template if:true={isStep2}>
+                <h2 style = "font-size:17px; font-weight : bold;">Staff Members (Step 2 of 4)</h2><br/>
+                <c-nmcyfd-add-staff-members-step number-of-youth={numOfYouth} 
+                month={month} skip-staff={skipStaff} contract-id={contractId} jcc-user={jccUser} mentoring-user={mentoringUser} activity-type={activityType} 
+                unit-type={unitType}  contract={contract} activity-data={step2Data} match-enabled={matchEnabled}>
+            </c-nmcyfd-add-staff-members-step>
+            </template> 
+            <template if:true={isStep3}>
+                <h2 style = "font-size:17px; font-weight : bold;">Clients (Step 3 of 4)</h2><br/>
+                <c-nmcyfd-add-client-step number-of-youth={numOfYouth} staff-length={staffLength} 
+                activity-type={activityType} unit-type={unitType} jcc-user={jccUser} 
+                mentoring-user={mentoringUser} month={month} contract-id={contractId} 
+                contract={contract} activity-data={step3Data} activity-label={step1Data.activityLabel}
+                jcc={jcc} jjac={jjac} grant={grant} mentoring={mentoring} match-enabled={matchEnabled}>
+            </c-nmcyfd-add-client-step>
+            </template> 
+            <template if:true={isStep4}>
+                <h2 style = "font-size:17px; font-weight : bold;">Submission (Step 4 of 4)</h2><br/>
+                <c-nmcyfd-activity-submission-step activity-data={step4Data} contract-activity-id={contractActivityId} ></c-nmcyfd-activity-submission-step>
+            </template>
+            <div class="card--footer">
+                <div class="slds-m-left_small slds-m-right_small slds-m-bottom_medium">
+                    <button class="slds-button slds-float--left  slds-button_neutral"
+                        onclick={handleBackToContract}>Back to Contract</button>
+                    <template if:false={isStep1}>
+                        <button class="slds-button slds-float--left slds-button_neutral"
+                            onclick={handlePreviousStep}>Previous</button>
+                    </template>
+                    <template if:false={isStep4}>
+                        <button class="slds-button slds-float--right  slds-button_brand"
+                            onclick={handleNextStep}>Next</button>
+                    </template>
+                    <template if:true={isStep4}>
+                        <button class="slds-button slds-float--right  slds-button_brand"
+                            onclick={handleSubmit}>Submit</button>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="backdrop" if:true={showSpinner}>
+        <div class="spinner">
+            <lightning-spinner alternative-text="Loading..."></lightning-spinner>
+        </div>
+    </div>
+</template>

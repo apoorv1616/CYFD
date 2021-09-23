@@ -1,0 +1,100 @@
+<template>
+    <template if:true={showSpinner}>
+        <div class="">
+            <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+        </div>
+    </template>
+
+    <div class="container">
+        <div class="slds-clearfix">
+
+            <div class = "slds-float_left slds-p-top_medium" style="display: inline-flex;">
+
+                <div onkeyup={handleKeyUp} class="slds-m-left_medium">
+                    <lightning-input
+                        name="enter-search"
+                        label="Please hit enter to search"
+                        type="search"
+                        autocomplete="off"
+                    ></lightning-input>
+                </div>
+            </div>
+
+            <div class="slds-float_right slds-p-around_medium slds-m-top_large">
+
+                <lightning-button variant="brand" label="Refresh" icon-name="utility:refresh"
+                onclick={handleRefresh} class="slds-m-left_x-small"></lightning-button>
+
+                <lightning-button variant="brand" label="Delete Files" icon-name="utility:delete"
+                onclick={handleDelete} class="slds-m-left_x-small"></lightning-button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="ny_container slds-p-around_medium">
+        <h3>Record Count : {recordCount}</h3>
+        <div class="ny_card ">
+            <table class="slds-table slds-table--bordered slds-table_fixed-layout slds-no-row-hover">
+                <thead>
+                    <tr class="slds-text-heading--label">
+
+                    <template for:each={column} for:item="item">
+                        <th class="slds-cell-wrap" style="padding: 2%;"  width={item.width} key={item.label}>{item.label}</th>
+                    </template>
+                </tr>
+                </thead>
+
+                <tbody>
+                    <template for:each={data} for:item="item" if:true={showData}>
+                        <tr class="slds-hint-parent" key={item.Id}>
+                            <td>
+                                <lightning-input type="checkbox" name={item} data-id={item.Id}
+                                    class="slds-p-around_medium"
+                                    checked={item.isSelected}
+                                    onchange={handleInputChange}
+                                    obj-id={item.Id}
+                                ></lightning-input>
+                            </td>
+                            <td>
+                                <div class="slds-truncate slds-cell-wrap" title={item.contractActivityName}>
+
+                                    <div class="slds-truncate slds-cell-wrap" title={item.contractActivityName}>
+                                        <lightning-button variant="base" 
+                                        label={item.contractActivityName} name={item.contractActivity}
+                                        onclick={navigateToCA} class="slds-m-left_x-small">
+                                        </lightning-button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate slds-cell-wrap" title={item.title}>
+
+                                    {item.title} 
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate slds-cell-wrap slds-m-left_small" title={item.fileType}>
+
+                                    {item.fileType}
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                    <tr if:false={showData}>
+                        <td colspan="7">
+                            <div class="slds-align_absolute-center">No Files Found...</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="slds-m-around_small slds-m-bottom_medium" >
+                <c-nmcyfd-paginator class="slds-m-bottom_medium" items-per-page={pageSize}
+                            current-page={page} total-items={recordCount} onprevious={previousHandler}
+                            onnext={nextHandler}></c-nmcyfd-paginator>
+            </div>
+
+        </div>
+    </div>
+</template>

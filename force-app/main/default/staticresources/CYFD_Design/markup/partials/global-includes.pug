@@ -1,0 +1,65 @@
+include ../mixins/forms.pug
+
+mixin action-card(title,url)
+  a.card.action-card(href= url)&attributes(attributes)
+    .content
+      .title= title
+      .description
+        block
+    .controls.d-flex.align-items-center
+      svg(aria-hidden='true' xmlns:xlink='http://www.w3.org/1999/xlink')
+        use(xlink:href='/images/sprites/ui.svg#arrow')
+
+
+mixin step-nav-item(status,title,url,disable_link)
+  if status == "active"
+    if disable_link == "true"
+      div.step-item.active.disabled= title
+    else
+      a.step-item.active(href= url)= title
+  else if status == "complete"
+    if disable_link == "true"
+      div.step-item.complete.disabled= title
+    else
+      a.step-item.complete(href= url)= title
+  else
+    if disable_link == true
+      div.step-item.disabled(title="Please complete previous steps before visiting this step")= title
+    else
+      a.step-item(href= url)= title
+
+mixin step-nav-subitem(status,title,url,disable_link)
+  if status == "active"
+    if disable_link == true
+      div.step-item.active.disabled(title="This is the current step")
+        .icon
+        .title= title
+    else
+      a.step-item.active(href= url)
+        .icon
+        .title= title
+  else if status == "complete"
+    if disable_link == true
+      div.step-item.complete.disabled(title="Please complete previous steps before visiting this step")
+        img.icon(src="images/icons/x-small/check.svg", alt="")
+        .title= title
+    else
+      a.step-item.complete(href= url)
+        img.icon(src="images/icons/x-small/check.svg", alt="")
+        .title= title
+  else
+    if disable_link == true
+      div.step-item.disabled(title="Please complete previous steps before visiting this step")
+        .icon
+        .title= title
+    else
+      a.step-item(href= url)
+        .icon
+        .title= title
+
+mixin tooltip(direction)
+  .tooltip(data-direction= direction)
+    .tooltip__initiator
+      +sprite("images/icons/sprites/ui.svg#info")(class="icon-size-sm")
+    .tooltip__item()&attributes(attributes)
+      block

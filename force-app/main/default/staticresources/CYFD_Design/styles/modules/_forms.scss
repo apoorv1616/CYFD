@@ -1,0 +1,245 @@
+$touch-icon-size: 1.8rem;
+
+// Avoid iOS browsers from zooming on form element focus.
+@media screen and (-webkit-min-device-pixel-ratio:0) and (max-device-width:1024px) {
+  input,
+  select,
+  textarea {
+    font-size: $font-size-base;
+    &:focus {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+fieldset {
+  display: block;
+  border: 0;
+  padding: 0;
+  > legend {
+    margin: 0;
+    padding: 0;
+    display: block;
+    padding: $gap-xs $gap-sm;
+
+    width: 100%;
+    @include font-bold;
+    font-size: 1.1rem;
+  }
+  .form-container {
+    padding: $gap-sm ($gap-sm + $gap-xs);
+  }
+}
+
+.input-group {
+  margin-bottom: $gap-sm;
+  > label {
+    margin-bottom: $gap-xs / 2;
+    display: block;
+    font-size: $font-size-base;
+  }
+}
+
+.input-text,.form-field {
+
+  @include input-base;
+  &.medium {
+    min-height: $input-height;
+  }
+  &.large {
+    min-height: $gap + $gap-xs;
+  }
+  &:focus {
+    @include focus-outline;
+  }
+}
+
+.radio-block {
+  display: flex;
+  padding-top: $one;
+  position: relative;
+  margin-bottom: $gap-sm - $gap-xs;
+  &:hover {
+    .radio {
+      border-color: white;
+    }
+  }
+  input[type=radio]:checked {
+    ~ .radio {
+      border: 0.2rem solid lighten($brand-primary,15%);
+      &::before {
+        background: lighten($brand-primary,15%);
+      }
+    }
+    ~ label {
+      color: lighten($brand-primary,15%);
+    }
+  }
+}
+.radio {
+  display: block;
+  border: 0.2rem solid white;
+  border-radius: 100%;
+  height: $touch-icon-size;
+  left: 0;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  transition: border .25s linear;
+  width: $touch-icon-size;
+  z-index: 5;
+  &::before {
+    border-radius: 100%;
+    content: '';
+    display: block;
+    height: $touch-icon-size * 0.5;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    transition: background 0.15s linear;
+    width: $touch-icon-size * 0.5;
+  }
+}
+.radio-label {
+  align-items: center;
+  display: flex;
+  height: $input-height;
+  margin: 0;
+  padding-left: $touch-icon-size + $gap-xs;
+  position: relative;
+  z-index: 5;
+}
+
+.input-horizontal {
+  margin-bottom: $gap-sm;
+  position: relative;
+  @media (min-width:$screen-sm) {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    > label {
+      line-height: 1.2;
+      padding-right: $gap;
+      width: 10rem;
+    }
+    input,select,textarea {
+      flex: 1;
+    }
+  }
+  label.error {
+    margin-left: 10rem;
+  }
+  .req {
+    color: $danger;
+    left: -$gap-sm;
+    position: absolute;
+  }
+}
+
+
+.nm {
+  &-breadcrumb--section {
+      background-color: #f9f9f9;
+  }
+  &-page-header {
+      .breadcrumbs {
+          ol {
+              display: inline-flex;
+              .breadcrumb {
+                  margin: 1rem 0.5rem;
+                  &::after {
+                      margin-left: 0.5rem;
+                      content: "/";
+                  }
+                  &:last-child {
+                      pointer-events: none;
+                      cursor: default;
+                      a {
+                          color: $nm_default-text;
+                          &:hover {
+                              pointer-events: none;
+                              cursor: default;
+                          }
+                      }
+                      &::after {
+                          content: "";
+                      }
+                  }
+              }
+          }
+      }
+  }
+  &-form-container {
+      padding: 2rem 0rem;
+  }
+  &-right--section,
+  &-model {
+          background: $nm_white;
+          border-radius: 6px;
+          border: 0px solid $nm_border;
+          box-shadow:$nm_default-shadow;
+      .form {
+          &--header {
+              padding: 1.5rem 3rem;
+              &_heading {
+                  // display: flex;
+                  align-items: center;
+                  h2{
+                      // font-family: $nm_font;
+                      font-size: 22px;
+                      font-weight: 600;
+                      line-height: 40px;
+                  }
+              }
+              &_heading-description{
+                  color: rgb(118, 118, 118);
+              }
+              &_sub-heading {
+                  font-size: 1.2rem;
+                  margin: 1rem 0;
+                  margin-top: 1.5rem;
+              }
+          }
+          &--body {
+              padding: 0 3rem;
+          }
+          &--footer {
+              display: flex;
+              justify-content: flex-end;
+              margin-top: 1.5rem;
+              border-top: 1px solid $nm_light_gray-2;
+              display: flex;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: flex-end;
+      padding: 1.5rem 3rem;
+          }
+      }
+      .yn_question{
+          display: grid;
+          grid-template-columns: 3fr 1fr;
+          align-items: center;
+          .question{
+              color: rgb(51, 51, 51);
+              font-family: HelveticaNeue-Medium;
+              font-size: 18px;
+              font-weight: 500;
+              line-height: 30px;
+              .sub_section{
+                  color: rgb(51, 51, 51);
+                  font-family: HelveticaNeue;
+                  font-size: 12px;
+              }
+          }
+          .anwser{
+              .nm-radio-buttons {
+                  margin-top: 0rem;
+                  .slds-radio label {
+                      padding: 1.25rem 2.25rem 1.25rem 2.25rem;
+                  }
+              }
+          }
+      }
+  }
+}

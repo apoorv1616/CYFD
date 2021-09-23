@@ -1,0 +1,15 @@
+header.site-header
+  .container-lg
+    img.logo(src="/images/logo_myGICLink.png", alt="MyGICLink Logo")
+    label.nav-toggle(for="nav-checkbox")
+      span.nav-toggle-icon
+      span.nav-toggle-label Menu
+    nav.nav-primary(aria-labelledby="primaryNavLabel")
+      #primaryNavLabel.sr-only Primary navigation
+      include ../partials/navigation-primary.pug
+      .user-nav
+        .detail
+          .msg Welcome
+          .name Emilia S.
+        .avatar
+label.nav-underlay(for="nav-checkbox", aria-hidden="true")

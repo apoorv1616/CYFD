@@ -1,0 +1,8 @@
+<aura:component implements="forceCommunity:layout" description="CYDF Layout Default" access="global">
+
+  <aura:attribute name="pageContent" type="Aura.Component[]" required="false"></aura:attribute>
+
+  <div class="content-wrapper">
+    {!v.pageContent}
+  </div>
+</aura:component>

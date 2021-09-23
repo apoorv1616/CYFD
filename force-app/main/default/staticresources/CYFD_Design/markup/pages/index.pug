@@ -1,0 +1,72 @@
+extends ../layouts/default.pug
+
+block variables
+  - var pageName = 'Home';
+  - var pageDescription = 'Sample page description';
+  - var currentPage = 'index';
+
+block stylesheets
+
+block content
+  .container-lg.p-t.p-b-md
+    .hero-block
+      .row.justify-content-between
+        .col-sm-6.user-status
+          .intro
+            .welcome Welcome to your Benefits Dashboard
+            .name Emilia S.
+          .status-block.d-sm-flex.align-items-center
+            .enrollment-status
+              .title Enrollment Status
+              .status.d-flex.align-items-center
+                svg(aria-hidden='true' xmlns:xlink='http://www.w3.org/1999/xlink')
+                  use(xlink:href='/images/sprites/ui.svg#warning')
+                .name Not enrolled
+            +action-card("Enroll Today", "application.html")
+              | View your benefit options and enroll today
+        .col-sm-5.block.p-relative
+          .notifications
+            .card.p-a-md
+              .card-header.p-b-md
+                h2.card-title.txt-uppercase My Notifications
+                a.fancy-link-brand(href="#") View all
+              .card-content
+                ul.list-separated.notification-list
+                  li.level2
+                    a(href="#").item.d-flex.align-items-start
+                      span.status-circle
+                      .content
+                        .title New employment enrollment must be completed within 14 days of hire date.
+                        .date Mon, October 14 2020
+                  li.level1
+                    a(href="#").item.d-flex.align-items-start
+                      span.status-circle
+                      .content
+                        .title Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                        .date Mon, October 14 2020
+  .bg-alt.p-t-md.p-b-lg
+    .container-lg
+      .section-header
+        h2.section-title Benefits Quicklinks
+      .row.p-b-md.mobile-gap
+        .col-sm-3
+          +action-card("Plan Providers", "#")
+            | Review the full list of GIC Plan Providers, plan information and contact details.
+        .col-sm-3
+          +action-card("Resource Links", "#")
+            | External tools and resources related to your benefit options.
+        .col-sm-3
+          +action-card("Qualifying events", "#")
+            | Learn more about what would be considered a qualifying event for enrollment.
+        .col-sm-3
+          +action-card("My Profile", "#")
+            | Update your personal details, communication preferences, and address information.
+
+
+
+
+
+
+
+
+block scripts

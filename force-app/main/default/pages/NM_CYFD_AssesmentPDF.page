@@ -1,0 +1,628 @@
+<apex:page standardController="Assessment__c" extensions="NM_CYFD_GenerateAssessmentPDF" showHeader="false" sidebar="false" standardStylesheets="false" renderAs="pdf" applyHtmlTag="false" applyBodyTag="false">
+    <html>
+        <head>
+    
+            <style type="text/CSS">
+                @page {
+                size:landscape;
+                @bottom-right {
+                content: counter(page) "/" counter(pages);
+                }
+                }
+                
+                header > h3 { display: inline-block; }
+                header span { margin-left: 5px; }
+   
+            </style>  
+  
+        </head>
+        <body>
+        
+            <!-- Permanency -->
+            <h3>Casey Life Skills Assessment - {!assessmentType} {!completionDate}</h3>
+            <header>
+              <h3>Client Name : {!clientName} ({!youthId})</h3>
+              <span>JCC - Children, Youth, and Families Department</span>
+            </header>
+            <h3 style="text-align : right; background-color : #D8D8D8;min-height: 30px;"> Overall Average {!overAllAvg}</h3>
+            <!-- <table style = "table-layout: fixed ; border: 1px; width : 100%; background-color : #D8D8D8;">               
+                <tr style="min-height: 30px;">
+                    <td style="text-align : left">Permanency</td>
+                    <td style="text-align : right">Average {!permanencyAvg}</td>
+                </tr>
+              
+            </table> -->
+    
+
+            <!-- <p>I know an adult who will go with me if I need to change schools</p>
+            <p>{!assessment.IKnowAnAdultWhoWillGoWithMePERM}</p>
+            <br/>
+
+            <p>I know at least one adult, other than my worker, who would take my call in the middle of the night if I had an emergency.</p>
+            <p>{!assessment.IKnowOneAdultWhoWouldTakeMyCall}</p>
+            <br/>
+
+            <p>I have at least one trusted adult who would visit me in the hospital.</p>
+            <p>{!assessment.IHaveOneTrustedAdultWhoWillVisit}</p>
+            <br/>
+
+            <p>I have friends or family to spend time with on holidays and special occasions. </p>
+            <p>{!assessment.IHaveFamilyToSpendTimeWithOnXMas}</p>
+            <br/>
+            
+            <p>I know an adult who could be a grandparent, aunt or uncle to my children now or my future children. </p>
+            <p>{!assessment.IKnowAnAdultWhoCouldCareForKids}</p>
+            <br/>
+
+            <p>I have information about my family members. </p>
+            <p>{!assessment.IHaveInformationAboutMyFamily}</p>
+            <br/>
+
+            <p>I know an adult who I can go to for financial advice. </p>
+            <p>{!assessment.IKnowAnAdultWhoICanGoToForHelp}</p>
+            <br/>
+
+            
+            <p>There is at least one adult I trust who would be legally allowed to make medical decisions for me and advocate for me if I was unable to speak for myself. </p>
+            <p>{!assessment.ThereIsAtLeastOneAdultITrust}</p>
+            <br/>
+
+            <p>I can get in touch with at least one family member if I want to.</p>
+            <p>{!assessment.ICanGetInTouchWithAFamilyMember}</p>
+            <br/>
+
+            <p>I know at least one adult I can depend on when I exit care. </p>
+            <p>{!assessment.IKnowAtLeastOneAdultIDependOn}</p>
+            <br/>
+
+            <p>I know what my legal permanency goal is</p>
+            <p>{!assessment.IKnowWhatMyLegalPermanencyGoalIsPERM}</p>
+            <br/>
+
+            <p>I know an adult who would help me if I had a financial emergency.</p>
+            <p>{!assessment.IKnowAnAdultWhoWouldHelpMePERM}</p>
+            <br/>
+
+            <p>I know an adult I can live with for a few days or weeks if I need to. </p>
+            <p>{!assessment.IKnowAnAdultICanLiveWithForDays}</p>
+            <br/>
+
+            <p>There is at least one adult that I have regular contact with, other than my case manager or other professional, who lives in stable and safe housing. </p>
+            <p>{!assessment.ThereIsOneAdultIHaveContactWith}</p>
+            <br/>
+
+            <p>I have an adult in my life who cares about how I am doing at school or work.</p>
+            <p>{!assessment.IHaveAnAdultInMyLifeWhoCares}</p>
+            <br/>
+
+            <p>An adult I trust, other than my worker, checks in with me regularly. </p>
+            <p>{!assessment.AnAdultITrustChecksInWithMePERM}</p>
+            <br/>
+
+            <p>I am a part of a family and we care about each other. </p>
+            <p>{!assessment.IAmAPartOfAFamilyAndWeCarePERM}</p>
+            <br/>
+            
+            <p>I have recently talked to an adult who works in a job I would like to have. </p>
+            <p>{!assessment.ITalkedAnAdultWhoHasAJobILike}</p>
+            <br/>
+            
+            <p>I have talked about my education plans with an adult who cares about me. </p>
+            <p>{!assessment.ITalkedAboutMyPlansWithAnAdult}</p>
+            <br/>
+            
+            <p>I know an adult who will help me apply for training or education after high school. </p>
+            <p>{!assessment.IKnowAnAdultWhoWillHelpMeApplyPERM}</p> -->
+            <br/>
+            
+            <!-- Daily Living -->
+            <table style = "table-layout: fixed ; border: 1px; width : 100%; background-color : #D8D8D8;">               
+                <tr style="min-height: 30px;">
+                    <td style="text-align : left">Daily Living</td>
+                    <td style="text-align : right">Average {!dailyLivingAvg}</td>
+                </tr>
+              
+            </table>
+            <p>I know where to go to get on the internet. </p>
+            <p>{!assessment.IKnowWhereToGoForTheInternet}</p>
+            <br/>
+            
+            <p>I can find what I need on the internet. </p>
+            <p>{!assessment.ICanFindWhatINeedOnTheInternet}</p>
+            <br/>
+            
+            <p>I know how to use my email account.</p>
+            <p>{!assessment.IKnowHowToUseMyEmailAccount}</p>
+            <br/>
+            
+            <p>I know the products to use when cleaning the bathroom and kitchen. </p>
+            <p>{!assessment.IKnowTheProductsToUseWhenCleaning}</p>
+            <br/>
+            
+            <p>I can create, save, print and send computer documents. </p>
+            <p>{!assessment.IKnowHowToSendComputerDocuments}</p>
+            <br/>
+
+            <p>If someone sent me messages online that made me feel bad or scared, I would know what to do or who to tell.</p>
+            <p>{!assessment.IfSomeoneSendMeMessagesIWillTell}</p>
+            <br/>
+            
+            <p>I know at least one adult, other than my worker, who would take my call in the middle of the night if I had an emergency.</p>
+            <p>{!assessment.IKnowOneAdultWhoWouldTakeMyCallDL}</p>
+            <br/>
+            
+            <p>I understand how to read food product labels to see how much fat, sugar, salt, and calories the food has. </p>
+            <p>{!assessment.IUnderstandHowToReadFoodLabels}</p>
+            <br/>
+            
+            <p>I know how to do my own laundry.</p>
+            <p>{!assessment.IKnowHowToDoMyOwnLaundry}</p>
+            <br/>
+            
+            <p>I know how to use a fire extinguisher.</p>
+            <p>{!assessment.IKnowHowToUseAFireExtinguisher}</p>
+            <br/>
+            
+            <p>I know the risks of meeting someone in person that I met online. </p>
+            <p>{!assessment.IKnowTheRisksMeetingPeopleOnline}</p>
+            <br/>
+            
+            <p>I would not post pictures or messages if I thought it would hurt someone's feelings.</p>
+            <p>{!assessment.IWouldNotPostPicturesOrMessages}</p>
+            <br/>
+            
+            <p>I can make meals with or without using a recipe.</p>
+            <p>{!assessment.ICanMakeMealsWithOrWithoutRecipes}</p>
+            <br/>
+            
+            <p>I keep my living space clean.</p>
+            <p>{!assessment.IKeepMyLivingSpaceClean}</p>
+            <br/>
+            
+            <p>An adult I trust, other than my worker, checks in with me regularly. </p>
+            <p>{!assessment.AnAdultITrustChecksInWithMeDL}</p>
+            <br/>
+            
+            <p>I think about what I eat and how it impacts my health.</p>
+            <p>{!assessment.IThinkAboutWhatIEatAndItsImpact}</p>
+            <br/>
+            
+            <p>When I shop for food, I take a list and I compare prices.</p>
+            <p>{!assessment.WhenIShopForFoodITakeAList}</p>
+            <br/>
+            
+
+            <!-- Self Care -->
+
+            <table style = "table-layout: fixed ; border: 1px; width : 100%; background-color : #D8D8D8;">               
+                <tr style="min-height: 30px;">
+                    <td style="text-align : left">Self Care</td>
+                    <td style="text-align : right">Average {!selfCareAvg}</td>
+                </tr>
+              
+            </table>
+            <p>I have at least one trusted adult who would visit me if I were in the hospital.</p>
+            <p>{!assessment.IHaveOneTrustedAdultWhoWillVisitSC}</p>
+            <br/>
+            
+            <p>I know how to get myself away from harmful situations. </p>
+            <p>{!assessment.IKnowHowToGetAwayFromHarm}</p>
+            <br/>
+            
+            <p>I know ways to protect myself from sexually transmitted diseases (STDs). </p>
+            <p>{!assessment.IKnowWaysToProtectMyselfFromSTDs}</p>
+            <br/>
+            
+            <p>I know how to prevent getting pregnant or getting someone else pregnant.</p>
+            <p>{!assessment.IKnowHowToPreventGettingPregnant}</p>
+            <br/>
+            <p>I can take care of my own minor injuries and illnesses.</p>
+            <p>{!assessment.ICanTakeCareOfMyOwnMinorInjuries}</p>
+            <br/>
+            
+            <p>I know when I should go to the emergency room instead of the doctor's office. </p>
+            <p>{!assessment.IKnowWhenIShouldGoToTheER}</p>
+            <br/>
+            
+            <p>There is at least one adult I trust who would be legally allowed to make medical decisions for me and advocate for me if I was unable to speak for myself. </p>
+            <p>{!assessment.ThereIsOneAdultITrustToSpeak}</p>
+            <br/>
+            
+            <p>I bathe (wash up) daily.</p>
+            <p>{!assessment.IBatheDaily}</p>
+            <br/>
+            <p>I brush my teeth daily.</p>
+            <p>{!assessment.IBrushMyTeethDaily}</p>
+            <br/>
+            
+            <p>I have a place to go when I feel unsafe. </p>
+            <p>{!assessment.IHaveAPlaceToGoWhenIFeelUnsafe}</p>
+            <br/>
+            
+            <p>I know where to go to get information on sex or pregnancy.</p>
+            <p>{!assessment.IKnowWhereToGoGetSexInformation}</p>
+            <br/>
+            
+            <p>I can get medical and dental care when I need it.</p>
+            <p>{!assessment.ICanGetMedicalAndDentalCare}</p>
+            <br/>
+            <p>I know my family medical history.</p>
+            <p>{!assessment.IKnowMyFamilyMedicalHistory}</p>
+            <br/>
+            
+            <p>I know how to get the benefits I am eligible for, such as Social Security, Medicaid, Temporary Assistance for Needy Families (TANF), and Education and Training Vouchers (ETV).</p>
+            <p>{!assessment.IKnowHowToGetBenefitsLikeSS}</p>
+            <br/>
+            
+            <p>I can turn down a sexual advance.</p>
+            <p>{!assessment.ICanTurnDownASexualAdvance}</p>
+            <br/>
+            
+            <p>I know how to make my own medical and dental appointments.</p>
+            <p>{!assessment.IKnowHowToMakeMyOwnAppointments}</p>
+            <br/>
+            <p>I know how to get health insurance when I am older than 18. </p>
+            <p>{!assessment.IKnowHowToGetHealthInsurance}</p>
+            <br/>
+            
+            <!-- Relationships and Communications -->
+
+            <table style = "table-layout: fixed ; border: 1px; width : 100%; background-color : #D8D8D8;">               
+                <tr style="min-height: 30px;">
+                    <td style="text-align : left">Relationships and Communications</td>
+                    <td style="text-align : right">Average {!relationships_communicationsAvg}</td>
+                </tr>
+              
+            </table>		
+            <p>I know how to show respect to people with different beliefs, opinions, and cultures.</p>
+            <p>{!assessment.IKnowHowToShowRespectToPeople}</p>
+            <br/>
+            
+            <p>I think about how my choices impact others.</p>
+            <p>{!assessment.IThinkAboutTheImpactOfMyChoices}</p>
+            <br/>
+            
+            <p>I can speak up for myself.</p>
+            <p>{!assessment.ICanSpeakUpForMyself}</p>
+            <br/>
+
+            <p>I can describe my racial and ethnic identity. </p>
+            <p>{!assessment.ICanDescribeMyBiologicalIdentity}</p>
+            <br/>
+            
+            <p>I have friends I like to be with who help me feel valued and worthwhile.</p>
+            <p>{!assessment.IHaveFriendsILikeToBeWith}</p>
+            <br/>
+            
+            <p>I have friends or family to spend time with on holidays and special occasions. </p>
+            <p>{!assessment.IHaveFamilyToSpendTimeWithOnXMasRC}</p>
+            <br/>
+            
+            <p>I know an adult who could be a grandparent, aunt or uncle to my children now or my future children.</p>
+            <p>{!assessment.IKnowAnAdultWhoCouldCareForKidsRC}</p>
+            <br/>
+
+            <p>I know the signs of an abusive relationship.</p>
+            <p>{!assessment.IKnowSignsOfAnAbusiveRelationships}</p>
+            <br/>
+            
+            <p>I have information about my family members. </p>
+            <p>{!assessment.IHaveInformationAboutMyFamilyRC}</p>
+            <br/>
+            
+            <p>I can deal with anger without hurting others or damaging things.</p>
+            <p>{!assessment.IDealWithAngerAndNotHurtOthers}</p>
+            <br/>
+
+            <p>I know how to act in social or professional situations.</p>
+            <p>{!assessment.IKnowHowToActInSocialSettings}</p>
+            <br/>
+            
+            <p>I can get in touch with at least one family member when I want to</p>
+            <p>{!assessment.ICanGetInTouchWithFamily}</p>
+            <br/>
+            
+            <p>I know at least one adult I can depend on when I exit care. </p>
+            <p>{!assessment.IKnowAtLeastOneAdultWhenIExit}</p>
+            <br/>
+            
+            <p>My relationships are free from hitting, slapping, shoving, being made fun of, or name calling.</p>
+            <p>{!assessment.MyRelationshipsAreFreeFromHitting}</p>
+            <br/>
+
+            <p>I know what my legal permanency goal is</p>
+            <p>{!assessment.IKnowWhatMyLegalPermanencyGoalIsRC}</p>
+            <br/>
+            
+            <p>I show others that I care about them.</p>
+            <p>{!assessment.IShowOthersThatICareAboutThem}</p>
+            <br/>
+            
+            <p>I am a part of a family and we care about each other. </p>
+            <p>{!assessment.IAmAPartOfAFamilyAndWeCareRC}</p>
+            <br/>
+            
+            <p>I can explain the difference between sexual orientation and gender identity.</p>
+            <p>{!assessment.ICanExplainSexualOrientation}</p>
+            <br/>
+            
+            <!-- Housing and Money Management -->
+
+            <table style = "table-layout: fixed ; border: 1px; width : 100%; background-color : #D8D8D8;">               
+                <tr style="min-height: 30px;">
+                    <td style="text-align : left">Housing and Money Management</td>
+                    <td style="text-align : right">Average {!housing_moneyAvg}</td>
+                </tr>
+              
+            </table>
+            <p>I use online banking to keep track of my money.</p>
+            <p>{!assessment.IUseOnlineBankingToTrackMyMoney}</p>
+            <br/>
+            
+            <p>I know the advantages and disadvantages of using a check cashing or payday loan store.</p>
+            <p>{!assessment.IKnowTheGoodAndBadOfLoanStores}</p>
+            <br/>
+            
+            <p>I know what happens in my state if I am caught driving without car insurance or a driver's license. </p>
+            <p>{!assessment.IKnowWhatHappensIfIGetCaught}</p>
+            <br/>
+            <p>I know how to use public transportation to get where I need to go.</p>
+            <p>{!assessment.IKnowHowToUsePublicTransportation}</p>
+            <br/>
+            
+            <p>I know the importance of a good credit score.</p>
+            <p>{!assessment.IKnowTheImportanceOfGoodCredit}</p>
+            <br/>
+            
+            <p>I know how to find safe and affordable housing.</p>
+            <p>{!assessment.IKnowHowToFindSafeCheapHousing}</p>
+            <br/>
+            <!-- <p>I can figure out all the costs of car ownership, such as registration, repair, insurance, and gas.</p>
+            <p>{!assessment.IKnowWhatCanHappenWithMyLease}</p> -->
+            <br/>
+            
+            <p>I know an adult I can go to for financial assistance.</p>
+            <p>{!assessment.IKnowAnAdultICanGoToForHelp}</p>
+            <br/>
+            
+            <p>I plan for the expenses that I must pay each month.</p>
+            <p>{!assessment.IPlanForTheExpensesIPayEachMonth}</p>
+            <br/>
+            
+            <!-- <p>I can figure out all the costs of car ownership, such as registration, repairs, insurance, and gas.</p>
+            <p>{!assessment.ICanFigureOutCostsOfOwningACar}</p> -->
+            <p>I can figure out the costs to move to a new place, such as deposits, rents, utilities, and furniture.</p>
+            <p>{!assessment.ICanFigureOutTheCostsToMove}</p>
+            <br/>
+
+            <p>I understand the disadvantges of making purchases with my credit card.</p>
+            <p>{!assessment.IUnderstandMakingPurchasesWithCards}</p>
+            <br/>
+            
+            <p>I know an adult who would help me if I had a financial emergency.</p>
+            <p>{!assessment.IKnowAnAdultWhoWouldHelpMeHM}</p>
+            <br/>
+            
+            <!-- <p>I can figure out the costs to move to a new place, such as deposits, rents, utilities, and furniture.</p>
+            <p>{!assessment.ICanFigureOutTheCostsToMove}</p> -->
+            <p>I can figure out all the costs of car ownership, such as registration, repair, insurance, and gas.</p>
+            <p>{!assessment.IKnowWhatCanHappenWithMyLease}</p>
+            <br/>
+            <p>I know how to fill out an apartment rental application. </p>
+            <p>{!assessment.IKnowHowToFillOutAnAptRentalApp}</p>
+            <br/>
+            
+            <p>I can explain why people need renter's or homeowner's insurance. </p>
+            <p>{!assessment.ICanExplainTheNeedForInsurance}</p>
+            <br/>
+            
+            <p>I know an adult I could live with for a few days or weeks if I need to </p>
+            <p>{!assessment.IKnowAnAdultICanLiveWith}</p>
+            <br/>
+            
+            <p>There is at least one adult that I have regular contact with, other than my case manager or other professional, who lives in stable and safe housing. </p>
+            <p>{!assessment.ThereIsAtLeastOneAdultIContact}</p>
+            <br/>
+
+            <p>I can explain how to get and renew a driver's license or state ID card. </p>
+            <p>{!assessment.ICanExplainHowToGetALicense}</p>
+            <br/>
+            
+            <p>I understand how interest rates work on loans or credit purchases</p>
+            <p>{!assessment.IUnderstandHowInterestRatesWork}</p>
+            <br/>
+            
+            <p>I know how to get emergency help to pay for water, electricity, and gas bills.</p>
+            <p>{!assessment.IKnowHowToGetERHelpToPayBills}</p>
+            <br/>
+
+            <p>I know how to balance my bank account. </p>
+            <p>{!assessment.IKnowHowToBalanceMyBankAccount}</p>
+            <br/>
+            
+            <p>I put money in my savings account when I can.</p>
+            <p>{!assessment.IPutMoneyInMySavingsAccount}</p>
+            <br/>
+            
+            <p>I keep records of the money I am paid and the bills I pay.</p>
+            <p>{!assessment.IKeepRecordsOfMoneyIAmPaid}</p>
+            <br/>
+            
+            <!-- Work and Study Life -->
+
+            <table style = "table-layout: fixed ; border: 1px; width : 100%; background-color : #D8D8D8;">               
+                <tr style="min-height: 30px;">
+                    <td style="text-align : left">Work and Study Life</td>
+                    <td style="text-align : right">Average {!work_studyLifeAvg}</td>
+                </tr>
+              
+            </table>
+            <p>I know an adult who will go with me if I need to change schools</p>
+            <p>{!assessment.IKnowAnAdultWhoWillGoWithMeWS}</p>
+            <br/>
+
+            <p>I know how to prepare for exams and/or presentations. </p>
+            <p>{!assessment.IKnowHowToPrepareForExams}</p>
+            <br/>
+            
+            <p>I know how to get help from my school's mental health services.</p>
+            <p>{!assessment.IKnowHowToGetHelpFromSchool}</p>
+            <br/>
+            
+            <p>I can take criticism and direction at school or work without losing my temper. </p>
+            <p>{!assessment.ICanTakeCriticismWithoutLosingTemper}</p>
+            <br/>
+
+            <p>I know where I can get tutoring or other help with school work.</p>
+            <p>{!assessment.IKnowWhereICanGetTutoringForHelp}</p>
+            <br/>
+            
+            <p>I look over my work for mistakes.</p>
+            <p>{!assessment.ILookOverMyWorkForMistakes}</p>
+            <br/>
+            
+            <p>I get to school or work on time.</p>
+            <p>{!assessment.IGetToSchoolOrWorkOnTime}</p>
+            <br/>
+
+            <p>I know how to develop a resume. </p>
+            <p>{!assessment.IKnowHowToDevelopAResume}</p>
+            <br/>
+            
+            <p>I know how to fill out a job application.</p>
+            <p>{!assessment.IKnowHowToFillOutAJobApp}</p>
+            <br/>
+            
+            <p>I know how to prepare for a job interview.</p>
+            <p>{!assessment.IKnowHowToPrepareForJobInterview}</p>
+            <br/>
+            
+            <p>I know the reasons why my personal contacts are important for finding a job.</p>
+            <p>{!assessment.IKnowWhyMyContactsHelpToFindWork}</p>
+            <br/>
+
+            <p>I know how to get the documents I need for work, such as my Social Security card and birth certificate.</p>
+            <p>{!assessment.IKnowHowToGetInfoINeedForWork}</p>
+            <br/>
+            
+            <p>I know where I can get help with an income tax form.</p>
+            <p>{!assessment.IKnowWhereToGetHelpWithTaxForms}</p>
+            <br/>
+            
+            <p>I have an adult in my life who cares about how I am doing at school or work.</p>
+            <p>{!assessment.AdultInMyLifeWhoCaresAboutSchool}</p>
+            <br/>
+
+            <p>I get my work done and turned in on time.</p>
+            <p>{!assessment.IGetMyWorkDoneAndTurnedInOnTime}</p>
+            <br/>
+            
+            <p>I know what the information on a pay stub means.</p>
+            <p>{!assessment.IKnowWhatInformationOnAPayStubIs}</p>
+            <br/>
+            
+            <p>I can fill out a W-4 payroll exemption form when I get a job.</p>
+            <p>{!assessment.ICanFillOutAW_4PayrollExemption}</p>
+            <br/>
+            
+            <p>I know what employee benefits are. </p>
+            <p>{!assessment.IKnowWhatEmployeeBenefitsAre}</p>
+            <br/>
+
+            <p>I know what sexual harassment and discrimination are. </p>
+            <p>{!assessment.IKnowWhatSexualDiscriminationIs}</p>
+            <br/>
+            
+            <p>I know how and when I can see my child welfare or juvenile justice records. </p>
+            <p>{!assessment.IKnowHowICanSeeMyJJSRecords}</p>
+            <br/>
+
+            <!-- Career and Education Planning -->
+
+            <table style = "table-layout: fixed ; border: 1px; width : 100%; background-color : #D8D8D8;">               
+                <tr style="min-height: 30px;">
+                    <td style="text-align : left">Career and Education Planning</td>
+                    <td style="text-align : right">Average {!career_educationPlanningAvg}</td>
+                </tr>
+              
+            </table>
+            <p>I know what type (college, trade school) education I need for the work I want to do.</p>
+            <p>{!assessment.IKnowTheEducationINeedForWork}</p>
+            <br/>
+
+            <p>I can explain the benefits of doing volunteer work </p>
+            <p>{!assessment.ICanExplainBenefitsOfVolunteerWork}</p>
+            <br/>
+            
+            <p>I have recently talked to an adult who works in a job I would like to have. </p>
+            <p>{!assessment.ITalkedToAAdultWhoHasAJobIWant}</p>
+            <br/>
+            
+            <p>I know how to get into the school, training, or job I want after high school.</p>
+            <p>{!assessment.IKnowHowToGetIntoJobAfterSchool}</p>
+            <br/>
+            
+            <p>I have talked about my education plans with an adult who cares about me. </p>
+            <p>{!assessment.IHaveTalkedAboutMyEducationPlans}</p>
+            <br/>
+
+            <p>I know an adult who will help me apply for training or education after high school. </p>
+            <p>{!assessment.IKnowAnAdultWhoWillHelpMeApplyCE}</p>
+            <br/>
+
+            <p>I know how to find work-related internships. </p>
+            <p>{!assessment.IKnowHowToFindWorkInternships}</p>
+            <br/>
+            
+            <p>I know where to find information about job training. </p>
+            <p>{!assessment.IKnowWhereToFindInfoAboutTraining}</p>
+            <br/>
+            
+            <p>I know how to find financial aid to help pay for my education or training. </p>
+            <p>{!assessment.IKnowHowToFindAidForEduation}</p>
+            <br/>
+        
+            <!-- Looking Forward -->
+            
+          <table style = "table-layout: fixed ; border: 1px; width : 100%; background-color : #D8D8D8;">               
+                <tr style="min-height: 30px;">
+                    <td style="text-align : left">Looking Forward</td>
+                    <td style="text-align : right">Average {!lookingForwardAvg}</td>
+                </tr>
+              
+            </table>
+            <p>I believe I can influence how my life will turn out.</p>
+            <p>{!assessment.IBelieveICanInfluenceLifeTurnOut}</p>
+            <br/>
+
+            <p>I believe my relationships with others will help me succeed. </p>
+            <p>{!assessment.IBelieveRelationshipsHelpMeSucceed}</p>
+            <br/>
+            
+            <p>Most days, I am proud of the way I am living my life.</p>
+            <p>{!assessment.MostDaysIAmProudOfLivingLife}</p>
+            <br/>
+            
+            <p>I have a good relationship with a trusted adult I like and respect.</p>
+            <p>{!assessment.IHaveARelationshipWithTrustedAdult}</p>
+            <br/>
+            
+            <p>I would like to use my experience to help other youth.</p>
+            <p>{!assessment.IWouldUseExperinceToHelpYouth}</p>
+            <br/>
+
+            <p>I feel I am ready for the next phase of my life.</p>
+            <p>{!assessment.IFeelIAmReadyForNextPhaseOfLife}</p>
+            <br/>
+            
+            <p>Most days, I feel I have control of how my life will turn out. </p>
+            <p>{!assessment.MostDaysIFeelIHaveControlOfLife}</p>
+            <br/>
+            
+            <p>I can describe my vision for myself as a successful adult. </p>
+            <p>{!assessment.ICanDescribeMyVisionAsAnAdult}</p>
+            <br/>
+           
+        </body>
+    </html>
+</apex:page>

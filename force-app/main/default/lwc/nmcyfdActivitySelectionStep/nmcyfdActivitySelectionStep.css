@@ -1,0 +1,11 @@
+.slds-input .readonly {
+    border-color : red;
+    padding-left:  1 rem;
+    
+}
+
+
+.slds-input[readonly] {
+
+    background-color: blue;
+}

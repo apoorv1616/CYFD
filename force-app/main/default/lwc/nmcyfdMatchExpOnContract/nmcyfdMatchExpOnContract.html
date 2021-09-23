@@ -1,0 +1,118 @@
+<template>
+    <template if:true={showSpinner}>
+        <div class="slds-m-left_large">
+            <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+        </div>
+    </template>
+
+    <div if:true={showMatchAmount}>
+        <h6 style="color:blue;"> Total Match Amount : $<lightning-formatted-number minimum-fraction-digits="2" value={totalMatchAmountValue}></lightning-formatted-number>
+            <!-- <lightning-helptext content="Total of all the match amounts from approved and paid invoices."></lightning-helptext> -->
+        </h6>
+
+    </div>
+
+    <!-- <div class="slds-scrollable_y" style="height:70vh;"> -->
+        <table class="slds-table slds-table--bordered  slds-no-row-hover slds-m-top_small">
+            <thead>
+                <tr class="slds-text-heading--label">
+                    <template for:each={matchColumn} for:item="item">
+                        <th key={item.fieldname} class="slds-cell-wrap" style="padding:2%" > {item.label}
+                        
+                             <!-- if field is sortable then only show sorting icons -->
+                             <template if:true={item.sortable}>
+                                <a class="slds-th__action slds-text-link_reset slds-align_absolute-center" role="button" tabindex="-1">
+                                    <!-- if field is not sorted -->
+                                    <template if:false={item.sorted}>
+                                        <lightning-icon class="sort_up" icon-name="utility:sort"
+                                            size="xx-small" onclick={handleSort}
+                                            data-fieldname={item.fieldname}></lightning-icon>
+                                    </template>
+
+                                    <template if:true={item.sorted}>
+                                        <!-- descending sorting -->
+                                        <template if:false={item.asc}>
+                                            <lightning-icon class="sort_down" icon-name="utility:arrowdown"
+                                                data-fieldname={item.fieldname} onclick={handleSort}
+                                                size="xx-small"></lightning-icon>
+                                        </template>
+                                        <!-- ascending sorting -->
+                                        <template if:true={item.asc}>
+                                            <lightning-icon class="sort_down" icon-name="utility:arrowup"
+                                                data-fieldname={item.fieldname} onclick={handleSort}
+                                                size="xx-small"></lightning-icon>
+                                        </template>
+                                    </template>
+
+                                </a>
+                            </template>
+                        </th>
+                    </template>
+                </tr>
+            </thead>
+
+            <tbody>
+                <template for:each={data} for:item="item" if:true={hasMatchAmount}>   
+                    <tr class="slds-hint-parent" key={item.Id}  >
+
+                        <td>
+                            <div class=" slds-cell-wrap" >
+
+                                <lightning-button variant="base" label={item.Name} name={item.Id} data-object="Contract_Activity__c"
+                                onclick={navigate} class="slds-m-left_x-small" >
+                                </lightning-button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class=" slds-cell-wrap" >
+
+                                {item.Date__c} 
+                                
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class=" slds-cell-wrap" >
+
+                                {item.Activity_Label__c} 
+                                
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class=" slds-cell-wrap" >
+
+                                <!-- ${item.Match_Amount__c}  -->
+                                $<lightning-formatted-number minimum-fraction-digits="2" value={item.Match_Amount__c} ></lightning-formatted-number>
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class=" slds-cell-wrap" if:true={item.hasInvoice}>
+
+                                <lightning-button variant="base" label={item.Invoice__r.Name} name={item.Invoice__c} data-object="Invoice__c"
+                                onclick={navigate} class="slds-m-left_x-small" >
+                                </lightning-button>
+                                
+                            </div>
+                        </td>
+
+                    </tr>
+                
+                </template>
+
+                <template if:false={hasMatchAmount}>
+                    <td colspan="4">
+                        <div class="slds-align_absolute-center">No Data Found...</div>
+                    </td>
+                </template> 
+            </tbody>
+
+        </table>
+    <!-- </div>   -->
+    <div class="slds-m-around_small slds-m-bottom_medium">
+        <c-nmcyfd-paginator class="slds-m-bottom_medium" items-per-page={pageSize} current-page={page}
+            total-items={recordCount} onprevious={previousHandler} onnext={nextHandler}>
+        </c-nmcyfd-paginator>
+    </div>
+</template>

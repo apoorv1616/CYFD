@@ -1,0 +1,14 @@
+.heading{
+    font-size: 20px;
+}
+
+
+.THIS .horizontal-radio {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.THIS .horizontal-radio .slds-radio + .slds-radio {
+    margin-left: 1rem;
+}

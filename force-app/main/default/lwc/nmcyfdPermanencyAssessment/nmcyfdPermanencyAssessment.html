@@ -1,0 +1,112 @@
+<template>
+    <div>
+        <h3 class ="slds-p-left_medium heading n_head_space2"><b>CASEY Life Skills - (Step 1 of 8)</b></h3>
+        <h3 class = "slds-p-left_medium heading n_head_space"><b>Permanency</b></h3>
+
+      <!--  <br/>-->
+
+        <div class="slds-form form-section">        
+        <lightning-radio-group name="IKnowAnAdultWhoWillGoWithMePERM" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I know an adult who will go with me if I need to change schools"
+                            value={dataObj.IKnowAnAdultWhoWillGoWithMePERM} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+        
+        
+        <lightning-radio-group name="IKnowOneAdultWhoWouldTakeMyCall" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I know at least one adult, other than my worker, who would take my call in the middle of the night if I had an emergency."
+                            value={dataObj.IKnowOneAdultWhoWouldTakeMyCall} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+
+        
+        <lightning-radio-group name="IHaveOneTrustedAdultWhoWillVisit" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label ="I have at least one trusted adult who would visit me in the hospital"
+                            value={dataObj.IHaveOneTrustedAdultWhoWillVisit} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+
+        
+        <lightning-radio-group name="IHaveFamilyToSpendTimeWithOnXMas" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I have friends or family to spend time with on holidays and special occasions"
+                            value={dataObj.IHaveFamilyToSpendTimeWithOnXMas} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+                        
+        <lightning-radio-group name="IKnowAnAdultWhoCouldCareForKids" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I know an adult who could be a grandparent, aunt or uncle to my children now or my future children"
+                            value={dataObj.IKnowAnAdultWhoCouldCareForKids} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+         
+        <lightning-radio-group name="IHaveInformationAboutMyFamily" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I have information about my family members"
+                            value={dataObj.IHaveInformationAboutMyFamily} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+                        
+        <lightning-radio-group name="IKnowAnAdultWhoICanGoToForHelp" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I know an adult who I can go to for financial advice"
+                            value={dataObj.IKnowAnAdultWhoICanGoToForHelp} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+        <lightning-radio-group name="ThereIsAtLeastOneAdultITrust" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="There is at least one adult I trust who would be legally allowed to make medical decisions for me and advocate for me if I was unable to speak for myself"
+                            value={dataObj.ThereIsAtLeastOneAdultITrust} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+
+        <lightning-radio-group name="ICanGetInTouchWithAFamilyMember" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I can get in touch with at least one family member if I want to"
+                            value={dataObj.ICanGetInTouchWithAFamilyMember} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+                       
+            <lightning-radio-group name="IKnowAtLeastOneAdultIDependOn" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I know at least one adult I can depend on when I exit care"
+                            value={dataObj.IKnowAtLeastOneAdultIDependOn} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+        
+        
+                        
+        <lightning-radio-group name="IKnowWhatMyLegalPermanencyGoalIsPERM" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I know what my legal permanency goal is"
+                            value={dataObj.IKnowWhatMyLegalPermanencyGoalIsPERM} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+                        
+        <lightning-radio-group name="IKnowAnAdultWhoWouldHelpMePERM" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I know an adult who would help me if I had a financial emergency"
+                            value={dataObj.IKnowAnAdultWhoWouldHelpMePERM} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+                        
+        <lightning-radio-group name="IKnowAnAdultICanLiveWithForDays" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I know an adult I can live with for a few days or weeks if I need to"
+                            value={dataObj.IKnowAnAdultICanLiveWithForDays} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+                        
+        <lightning-radio-group name="ThereIsOneAdultIHaveContactWith" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="There is at least one adult that I have regular contact with, other than my case manager or other professional, who lives in stable and safe housing."
+                            value={dataObj.ThereIsOneAdultIHaveContactWith} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group> 
+                                                            
+        <lightning-radio-group name="IHaveAnAdultInMyLifeWhoCares" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I have an adult in my life who cares about how I am doing at school or work"
+                            value={dataObj.IHaveAnAdultInMyLifeWhoCares} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+                        
+        <lightning-radio-group name="AnAdultITrustChecksInWithMePERM" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="An adult I trust, other than my worker, checks in with me regularly"
+                            value={dataObj.AnAdultITrustChecksInWithMePERM} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+
+        <lightning-radio-group name="IAmAPartOfAFamilyAndWeCarePERM" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I am a part of a family and we care about each other"
+                            value={dataObj.IAmAPartOfAFamilyAndWeCarePERM} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+        <lightning-radio-group name="ITalkedAnAdultWhoHasAJobILike" class = "slds-p-left_medium n_fix_inl"
+                                options={options} label="I have recently talked to an adult who works in a job I would like to have"
+                                value={dataObj.ITalkedAnAdultWhoHasAJobILike} onchange={changeHandler} required
+                                type="radio"></lightning-radio-group>
+        <lightning-radio-group name="ITalkedAboutMyPlansWithAnAdult" class = "slds-p-left_medium n_fix_inl"
+                            options={options} label="I have talked about my education plans with an adult who cares about me"
+                            value={dataObj.ITalkedAboutMyPlansWithAnAdult} onchange={changeHandler} required
+                            type="radio"></lightning-radio-group>
+        <lightning-radio-group name="IKnowAnAdultWhoWillHelpMeApplyPERM" 
+                                class = "slds-p-left_medium n_fix_inl" label="I know an adult who will help me apply for training or education after high school"
+                                options={options} onchange={changeHandler} required
+                            value={dataObj.IKnowAnAdultWhoWillHelpMeApplyPERM} style="display:inline-block !important"
+                            type="radio"></lightning-radio-group> 
+        </div>
+    </div>
+</template>

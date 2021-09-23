@@ -1,0 +1,25 @@
+<aura:component controller = "NM_CYFD_ConfigurationController" implements="force:lightningQuickActionWithoutHeader,forceCommunity:availableForAllPageTypes,force:hasRecordId" access="global" >
+<aura:attribute name = "accountId" type = "String" />
+<aura:html tag="style">
+        .cuf-content {
+          padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+          padding: 0rem !important;
+        }
+        .slds-modal__content{
+          overflow-y:hidden !important;
+          height:unset !important;
+          max-height:unset !important;
+        }
+     </aura:html>
+     <div class="slds-col modal-header slds-modal__header">
+      <h2 class="title slds-text-heading--medium">Manage Template</h2>
+  </div>
+        <c:nmcyfdCreateContractConfigLineitems recordId= "{!v.recordId}" onclose="{!c.close}"> </c:nmcyfdCreateContractConfigLineitems>
+       
+        <!-- <div class="slds-col modal-footer slds-modal__footer">        
+          <lightning:button variant="neutral" label="Cancel"  onclick="{! c.close }"/>      
+          <lightning:button variant="brand" label="Save"  onclick="{! c.saveClick }"/>
+      </div> -->
+</aura:component>

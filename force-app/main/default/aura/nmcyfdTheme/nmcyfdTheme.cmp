@@ -1,0 +1,31 @@
+<aura:component implements="forceCommunity:themeLayout" access="global" description="CYFD Default Theme">
+
+    <ltng:require styles="{!join(',',$Resource.CYFD_Design + '/styles/main.css')}" />
+
+    <aura:attribute name="search" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="profileMenu" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="newHeader" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="blueBackground" type="Boolean" default="false"/>
+    <aura:attribute name="smallLogo" type="Boolean" default="false" />
+
+    <aura:attribute name="navBar" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="themeHeader" type="Aura.Component[]" required="false"/>
+    <aura:attribute name="themeFooter" type="Aura.Component[]" />
+
+    <a class="skip-link" tabindex="1" href="#main-content">Skip to main content</a>
+
+    <input class="nav-checkbox" id="nav-checkbox" type="checkbox" name="nav-checkbox" />
+    <div class="page-container">
+        <section>
+            {!v.themeHeader}
+        </section>
+        <label class="nav-underlay" for="nav-checkbox" aria-hidden="true"></label>
+        <div class="content-container">
+            {!v.body}
+        </div>
+        <section class="site-footer">
+            {!v.themeFooter}
+        </section>
+    </div>
+
+</aura:component>
