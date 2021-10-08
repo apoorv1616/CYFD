@@ -7,6 +7,7 @@ public without sharing class NM_CYFD_GenerateInvoicePDF {
         contractDateRange = '';
         invoiceDate = '';
         contractActivityList = new List<ContractActivityWrapper>();
+        Map<String, Decimal> mapOfActivityAndRoleToSumOfUnits = new Map<String, Decimal>();
        
         if(String.isNotBlank(appId)){
             List<Invoice__c> invoices = [SELECT Id, Name, Match_Amount__c, Invoice_Date__c, Contract__c, COntract__r.Start_Date__c, COntract__r.End_Date__c, COntract__r.Grant__c, 
@@ -19,6 +20,7 @@ public without sharing class NM_CYFD_GenerateInvoicePDF {
                            
             String fiscalYearFromPeriod = String.valueOf([SELECT FiscalYearSettings.Name,FiscalYearSettings.EndDate  FROM Period WHERE Type = 'Year' AND StartDate <= TODAY AND EndDate >= TODAY].FiscalYearSettings.EndDate.year());
             if(!invoices.isEmpty()) {
+
                 /*
                  * Author : Apoorv Anand 
                  * Desc   : fiscalYear value should be contract's end data year. If null then populating from period end date.
@@ -40,6 +42,7 @@ public without sharing class NM_CYFD_GenerateInvoicePDF {
                 Date LastDayOfLastMonth = Date.newInstance(FirstOfLastMonth.year(), FirstOfLastMonth.month(), numberOfDays);
                 serviceRenderedDate = formatDate(FirstOfLastMonth) + ' - ' + formatDate(LastDayOfLastMonth); 
                 contractDateRange = formatDate(invoices[0].COntract__r.Start_Date__c) + ' - ' + formatDate(invoices[0].COntract__r.End_Date__c);
+                
                 if(!invoices[0].Contract_Activities__r.isEmpty()){
                     
                     // Changes related to Invoice Contract Activity Issue Start | Yash Agarwal
@@ -51,7 +54,7 @@ public without sharing class NM_CYFD_GenerateInvoicePDF {
                             Decimal units = ca.Unit__c !=null ? ca.Unit__c : 0;
                             
                             if(mentoring){
-                                units = ca.Mentoring_Units__c;
+                                //units = ca.Unit__c;
                             }else if(ca.Mulitplied_by_Number_of_Youth__c && ca.Number_of_Youth__c !=null && ca.Number_of_Youth__c != 0)
                                 units = units* ca.Number_of_Youth__c;
                                 
@@ -66,14 +69,21 @@ public without sharing class NM_CYFD_GenerateInvoicePDF {
                         
                             Decimal units = ca.Unit__c !=null ? ca.Unit__c : 0;
                             if(mentoring){
-                                units = ca.Mentoring_Units__c;
+                                //units = sumOfMentoringUnits;
                             }else if(ca.Mulitplied_by_Number_of_Youth__c && ca.Number_of_Youth__c !=null && ca.Number_of_Youth__c != 0)
                                 units = units* ca.Number_of_Youth__c;
                                 
                             ContractActivityWrapper wrapperRec = activityLabelToWrapperMap.get(ca.Activity_Label__c);
-                            wrapperRec.units += units;
                             wrapperRec.rate = (ca.Rate__c !=null ? ca.Rate__c : wrapperRec.rate);
                             wrapperRec.amount += (ca.Invoice_Amount__c !=null ? ca.Invoice_Amount__c : 0);
+                            
+                            if ( !mentoring )
+                            	wrapperRec.units += units;
+                            else
+                                wrapperRec.units = wrapperRec.amount / wrapperRec.rate;
+                                //sumOfMentoringUnits;
+                            
+                            //wrapperRec.amount = wrapperRec.rate * wrapperRec.units;
                             activityLabelToWrapperMap.put(ca.Activity_Label__c,wrapperRec);
                         }
                     }
