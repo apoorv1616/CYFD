@@ -217,7 +217,7 @@
                          autocomplete="none" class="zipCode" required={isNotHomeless}   name="zipCode" style="width:100%" onchange={handleInputChange}>
                     </lightning-input>
                 </div>
-                <template if:false={jjac}>
+                <!-- <template if:false={jjac}>
                     <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
                         <lightning-input type="checkbox" label="No Phone" name="noPhone" checked={client.noPhone}
                             onchange={handleInputChange} variant="label-stacked" >
@@ -234,7 +234,7 @@
                             autocomplete="none" max-length="10"  name="otherPhone" style="width:100%" onchange={handleInputChange}>
                         </lightning-input>
                     </div>
-                </template>
+                </template> -->
                 <template if:true={jcc}>
                     <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
                         <lightning-input type="text" value={client.sexualPreferrence}
@@ -276,6 +276,25 @@
                         <lightning-combobox class="currentlyInDetention" name="currentlyInDetention" label="Currently In Detention?" placeholder="Select one"
                             value={client.currentlyInDetention} required options={currentlyInDetentionValues} onchange={handleInputChange}>
                         </lightning-combobox>
+                    </div>
+                </template>
+
+                <template if:false={jjac}>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="checkbox" label="No Phone" name="noPhone" checked={client.noPhone}
+                            onchange={handleInputChange} variant="label-stacked" >
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="phone" value={client.primaryPhone} label="Primary Phone"
+                            autocomplete="none" max-length="10"  name="primaryPhone" style="width:100%" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                
+                    <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                        <lightning-input type="phone" value={client.otherPhone} label="Other Phone"
+                            autocomplete="none" max-length="10"  name="otherPhone" style="width:100%" onchange={handleInputChange}>
+                        </lightning-input>
                     </div>
                 </template>
 
