@@ -347,7 +347,7 @@
                                  autocomplete="none" class="zipCode" required={isNotHomeless}   name="zipCode" style="width:100%" onchange={handleInputChange}>
                             </lightning-input>
                         </div>
-                        <template if:false={jjac}>
+                        <!-- <template if:false={jjac}>
                             <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
                                 <lightning-input type="checkbox" label="No Phone" name="noPhone" checked={newMember.noPhone}
                                     onchange={handleInputChange} variant="label-stacked" >
@@ -364,7 +364,7 @@
                                     autocomplete="none" max-length="10"  name="otherPhone" style="width:100%" onchange={handleInputChange}>
                                 </lightning-input>
                             </div>
-                        </template>
+                        </template> -->
                         <template if:true={jcc}>
                             <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
                                 <lightning-input type="text" value={newMember.sexualPreferrence}
@@ -403,18 +403,37 @@
                                     value={newMember.gangActivity} options={gangActivityValues} onchange={handleInputChange}>
                                 </lightning-combobox>
                             </div>
-                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_6-of-12">
                                 <lightning-combobox class="currentlyInDetention" required  name="currentlyInDetention" label="Currently In Detention?" placeholder="Select one"
                                     value={newMember.currentlyInDetention} options={currentlyInDetentionValues} onchange={handleInputChange}>
                                 </lightning-combobox>
                             </div>
                         </template>
 
-                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_6-of-12">
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
                             <lightning-input variant="label-stacked" type="checkbox" label="Active Status" name="status" checked={newMember.status}
                                 onchange={handleInputChange}>
                             </lightning-input>
                         </div>
+
+                        <template if:false={jjac}>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="checkbox" label="No Phone" name="noPhone" checked={newMember.noPhone}
+                                    onchange={handleInputChange} variant="label-stacked" >
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="phone" value={newMember.primaryPhone} label="Primary Phone"
+                                    autocomplete="none" max-length="10"  name="primaryPhone" style="width:100%" onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                        
+                            <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                                <lightning-input type="phone" value={newMember.otherPhone} label="Other Phone"
+                                    autocomplete="none" max-length="10"  name="otherPhone" style="width:100%" onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                        </template>
                     </div>
 
                 </div>
