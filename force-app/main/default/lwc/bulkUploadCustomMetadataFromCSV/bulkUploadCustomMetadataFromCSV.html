@@ -1,0 +1,103 @@
+<!--
+  @description       : 
+  @author            : Apoorv Anand
+  @group             : 
+  @last modified on  : 01-20-2021
+  @last modified by  : Apoorv Anand
+  Modifications Log 
+  Ver   Date         Author         Modification
+  1.0   01-18-2021   Apoorv Anand   Initial Version
+-->
+<template>
+    <div class="container">
+        <lightning-card icon-name="custom:custom19" title='Bulk Upload Custom Metadata Records'>
+            <div style="margin-left: 3%">
+
+                <template if:true={showSpinner}>
+                    <div class="">
+                        <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+                    </div>
+                </template>
+                
+                <lightning-layout>
+                    <lightning-layout-item padding="around-small" size="6">
+                        <lightning-combobox
+                        class = "slds-m-left_x-small "
+                        name="progress"
+                        value={value}
+                        placeholder="--Select--"
+                        options={optionsArr}
+                        onchange={handleSelectedMetadataChange} ></lightning-combobox>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item padding="around-small" class="slds-m-top_medium " size="6">
+
+                        <lightning-button variant="brand" label="Search"  icon-name="utility:search" style="width:30%;"
+                        onclick={handleSearch} class="slds-m-left_x-small">
+                        </lightning-button>
+
+                        <lightning-button variant="brand" label="Delete"  icon-name="utility:deleete" style="width:30%;"
+                        onclick={handleDelete} class="slds-m-left_x-small">
+                        </lightning-button>
+                    
+                    </lightning-layout-item>
+                </lightning-layout>
+
+                <lightning-layout>
+
+                    <lightning-layout-item padding="around-small" size="3" class="slds-m-top_large">
+                        <lightning-button variant="brand" label="Download Template"  icon-name="utility:download"
+                        onclick={handleDownload} class="slds-m-left_x-small slds-m-top_x-small"></lightning-button>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item padding="around-small" size="4">
+                        <lightning-file-upload accept={acceptedFormats}  
+                                    multiple="multiple" 
+                                    onuploadfinished={handleUploadFinished} 
+                                    record-id={recordId}></lightning-file-upload>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item padding="around-small" class="slds-m-top_x-large" size="4">
+                        <template if:true={now} >
+                            <span style="padding-right:5px; color:gray;">
+                                Last Refreshed : {now}
+                            </span>
+                        </template>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item padding="around-small" size="4" class="slds-m-top_large">
+                        <lightning-button variant="base" label=""  icon-name="utility:refresh"
+                        onclick={handleRefresh} class="slds-m-left_x-small slds-m-top_x-small">
+                        </lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+     
+            </div>
+
+            <div if:true={showFields}>
+                <lightning-datatable columns={metadataFields} 
+                                    class="myTable"
+                                    data={recordsToDisplay}
+                                    key-field="id"></lightning-datatable>
+
+                <template if:false={showData} >
+                    <div style="font-size: 18px; color : #6f82a5; text-align:center;">
+                        No Records to Display
+                    </div>
+                </template>
+            </div>
+
+
+            <template if:true={showData} >
+                <c-paginator-for-datatable records={data} 
+                            
+                            total-records={lengthOfData} 
+                            show-search-box="true" 
+                            onpaginatorchange={handlePaginatorChange}>
+                </c-paginator-for-datatable>
+            </template>
+
+        </lightning-card>
+        
+    </div>
+</template>

@@ -60,7 +60,7 @@ public with sharing class NM_CYFD_DeleteFilesOnCAController {
         }
 
         if(!contentDocumentLinkList.isEmpty()) {
-            delete contentDocumentLinkList;
+            NM_CYFD_WithoutSharingCtrl.deleteObjectList( contentDocumentLinkList );
         }
 
     }

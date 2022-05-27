@@ -1,0 +1,30 @@
+.slds-spinner_container {  
+    z-index: 10000 !important;
+    position: fixed !important;   
+  }
+  .container {
+    background-color : white;
+    font-size: 14px !important;
+}
+
+.slds-theme_backgroundColor-lightblue {
+    background-color: lightblue;
+}
+
+.nomatching_message {
+    position: relative;
+    font-size: large;
+    text-align: center;
+}
+.action-col{
+    width: 14% !important;
+}
+.stat-col{
+    width: 8% !important;
+}
+.th_font{
+    font-size: 14px;
+}
+.slds-th__action {
+  color:red;
+}

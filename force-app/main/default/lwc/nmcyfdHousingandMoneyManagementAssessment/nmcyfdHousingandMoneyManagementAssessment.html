@@ -1,12 +1,24 @@
 <template>
     <div>
-        <h3 class ="slds-p-left_medium n_head_space2 heading"><b>CASEY Life Skills - (Step 4 of 7)</b></h3>
-        <h3 class ="slds-p-left_medium n_head_space heading"><b>Housing and Money Management</b></h3>
+        <h3 class ="slds-p-left_medium n_head_space2 heading"><b>CASEY Life Skills - (Step {currentStep} of {totalStepsCount})</b></h3>
+        <h3 class ="slds-p-left_medium n_head_space heading"><b>{questionLabel}</b></h3>
 
         <br/>
 
-        <div class="slds-form form-section">
-            <div class="slds-form__item horizontal-radio">
+        <div class="slds-form form-section slds-var-m-left_medium" if:true={assessmentQuestions}>
+            <template for:each={assessmentQuestions} for:item="item">
+                <div class="slds-form__item horizontal-radio" key={item.Id}>
+                    <span class="slds-var-m-top_x-small" style="font-size: small;"> {item.Question_Sequence__c}. </span>
+                    
+                    <lightning-radio-group name={item.Assement_API__c} class = "slds-p-left_medium n_fix_inl "
+                        options={options} onchange={changeHandler} label={item.Questions_Label__c}
+                        value={item.value} required
+                        type="radio">
+                    </lightning-radio-group>
+                </div>
+            </template>
+
+            <!-- <div class="slds-form__item horizontal-radio">
                 <lightning-radio-group name="IUnderstandHowInterestRatesWork" class = " slds-p-left_medium n_fix_inl"
                                 options={options} onchange={changeHandler} label="I understand how interest rates work on loans or credit purchases."
                                 value={dataObj.IUnderstandHowInterestRatesWork} required
@@ -61,10 +73,7 @@
                 type="radio"></lightning-radio-group>
             </div>
             <div class="slds-form__item horizontal-radio">
-                <!-- <lightning-radio-group name="ICanFigureOutCostsOfOwningACar" class = " slds-p-left_medium n_fix_inl"
-                options={options} onchange={changeHandler} label="I can figure out all the costs of car ownership, such as registration, repair, insurance, and gas."
-                value={dataObj.ICanFigureOutCostsOfOwningACar} required
-                type="radio"></lightning-radio-group> -->
+
                 <lightning-radio-group name="ICanFigureOutTheCostsToMove" class = " slds-p-left_medium n_fix_inl"
                 options={options} onchange={changeHandler} label="I can figure out the costs to move to a new place, such as deposits, rents, utilities, and furniture."
                 value={dataObj.ICanFigureOutTheCostsToMove} required
@@ -140,10 +149,7 @@
                                 type="radio"></lightning-radio-group>
             </div>
             <div class="slds-form__item horizontal-radio">
-                <!-- <lightning-radio-group name="ICanFigureOutTheCostsToMove" class = " slds-p-left_medium n_fix_inl"
-                options={options} onchange={changeHandler} label="I can figure out the costs to move to a new place, such as deposits, rents, utilities, and furniture."
-                value={dataObj.ICanFigureOutTheCostsToMove} required
-                type="radio"></lightning-radio-group>  -->
+
                 <lightning-radio-group name="ICanFigureOutCostsOfOwningACar" class = " slds-p-left_medium n_fix_inl"
                 options={options} onchange={changeHandler} label="I can figure out all the costs of car ownership, such as registration, repair, insurance, and gas."
                 value={dataObj.ICanFigureOutCostsOfOwningACar} required
@@ -154,7 +160,7 @@
                 options={options} onchange={changeHandler} label="I know how to use public transportation to get where I need to go."
                 value={dataObj.IKnowHowToUsePublicTransportation} required 
                 type="radio"></lightning-radio-group>
-            </div>
+            </div> -->
 
             <!-- ends -->
             

@@ -8,25 +8,48 @@ export default class NmcyfdDailyLivingAssessment extends LightningElement {
 
     @track dataObj = {};
     @api assessmentId;
-    get options() {
-        return [
-            { label: 'No', value: '1' },
-            { label: 'Mostly No', value: '2' },
-            { label: 'Somewhat', value: '3' },
-            { label: 'Mostly Yes', value: '4'},
-            { label: 'Yes', value: '5' },
-        ];
-    }
+    @api options;
+    // get options() {
+    //     return [
+    //         { label: 'No', value: '1' },
+    //         { label: 'Mostly No', value: '2' },
+    //         { label: 'Somewhat', value: '3' },
+    //         { label: 'Mostly Yes', value: '4'},
+    //         { label: 'Yes', value: '5' },
+    //     ];
+    // }
+    @api assessmentQuestions;
+    @api currentStep;
+    @api questionsLabel;
+    @api totalStepsCount;
 
+    
     connectedCallback(){
 
-        getAssessments({stepNumber : '2',assessmentId:this.assessmentId}).then(data=>{
-            console.log('data '+JSON.stringify(data));
-            this.dataObj = data;
-            //this.dataObj = data;
+        getAssessments({stepNumber : this.currentStep,assessmentId:this.assessmentId})
+        .then(data=>{
+            this.dataObj = JSON.parse(JSON.stringify(data));
 
-        }).catch(error=>{
-            console.log('error '+JSON.stringify(error));
+            let assessmentQuestions = JSON.parse(JSON.stringify(  this.assessmentQuestions ));
+            assessmentQuestions.map( item =>  {
+                if ( this.dataObj.hasOwnProperty(item.Assement_API__c)) {
+                    item['value'] = this.dataObj[item.Assement_API__c]
+
+                }
+            } );
+            this.assessmentQuestions = JSON.parse(JSON.stringify(  assessmentQuestions ));
+
+            
+        })
+        .catch(error=>{
+            this.showData = false;
+            let msg = error.message || error.body.message;
+            const event = new ShowToastEvent({
+                title: 'Error',
+                message: msg,
+                variant :'error'
+            });
+            this.dispatchEvent(event);
         });
 
     }
@@ -41,6 +64,9 @@ export default class NmcyfdDailyLivingAssessment extends LightningElement {
         this.template.querySelectorAll('lightning-radio-group').forEach(element => {
             if(!element.value){
                 temp=true;
+                if ( !element.checkValidity() ) {
+                    element.reportValidity();
+                }
             }
             
         });
@@ -56,6 +82,7 @@ export default class NmcyfdDailyLivingAssessment extends LightningElement {
                 variant :'error'
             });
             this.dispatchEvent(event);
+            return this.dataObj;
         }
     }
     @api 

@@ -32,17 +32,21 @@
     </div>
     <div class="card--section"> 
         <template if:true={showNoSurveyOptionAvailable}> 
-            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
-                <lightning-combobox auto-complete="off" name="noSurveyAvailable" label="No Survey Available" placeholder="Select one"
-                    value={noSurveyAvailable}  options={surveyOptions} onchange={handleSurveyChange}>
-                </lightning-combobox>
+            
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_2-of-3">
+                    <lightning-combobox auto-complete="off" name="noSurveyAvailable" label="No Survey Available" placeholder="Select one"
+                        value={noSurveyAvailable}  options={surveyOptions} onchange={handleSurveyChange}>
+                    </lightning-combobox>
+                </div>
 
+    
+                
             </div>
-
-            <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12" if:true={showNo_Survey_Reason}>
+            
+            <div class="slds-col slds-size_1-of-1 slds-var-m-top_small" if:true={showNo_Survey_Reason}>
                 <lightning-textarea name="No_Survey_Reason" label="Why survey is not available?" placeholder="type here..." onchange={handleChange} required></lightning-textarea>
             </div>
-
         </template>
 
         <template if:false={isSelectYouthStep}>

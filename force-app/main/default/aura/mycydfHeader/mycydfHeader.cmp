@@ -79,7 +79,7 @@
                     <div class="search-input-wrapper">
                         <span onkeypress="{!c.gotoURL}" class="">
                             <lightning:input class="search-input" type="search" label="" 
-                                        value="{!v.searchString}" placeholder="Search Contract Roles" name="search"/>
+                                        value="{!v.searchString}" placeholder="Search" name="search"/>
                         </span>
                         <!-- <lightning:button aura:id="submit" name="submit" type="submit" label="Search" onclick="{! c.gotoURL }" /> -->
                     </div>

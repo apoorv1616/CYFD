@@ -82,13 +82,13 @@ export default class NmcyfdActivitySelectionStep extends LightningElement {
             }else{
                 this.dataObj['amount'] = this.dataObj['matchAmount'];
                 this.dataObj['matchAmount'] = null;
-                this.dataObj['activityExpenditure'] = this.dataObj['activityExpenditureOriginal']  + this.dataObj['amount'];
+                this.dataObj['activityExpenditure'] = parseFloat(this.dataObj['activityExpenditureOriginal'])  + parseFloat(this.dataObj['amount']);
                 
                 if(this.dataObj['program'])
-                this.dataObj['programExpenditure'] = this.dataObj['programExpenditureOriginal']  + this.dataObj['amount'];
+                this.dataObj['programExpenditure'] = parseFloat(this.dataObj['programExpenditureOriginal'])  + parseFloat(this.dataObj['amount']);
                 
                 if(this.dataObj['subContractor'])
-                this.dataObj['subContractExpenditure'] = this.dataObj['subContractExpenditureOriginal']  + this.dataObj['amount'];
+                this.dataObj['subContractExpenditure'] = parseFloat(this.dataObj['subContractExpenditureOriginal'])  + parseFloat(this.dataObj['amount']);
             }
             this.validations();
         }
@@ -134,12 +134,12 @@ export default class NmcyfdActivitySelectionStep extends LightningElement {
                     
                 }
                 
-                this.dataObj['activityExpenditure'] = this.dataObj['activityExpenditureOriginal'] + this.dataObj['amount'];
+                this.dataObj['activityExpenditure'] = parseFloat(this.dataObj['activityExpenditureOriginal']) + parseFloat(this.dataObj['amount']);
 
                 if(this.dataObj['subContractor'])
-                    this.dataObj['subContractExpenditure'] = this.dataObj['subContractExpenditureOriginal'] + this.dataObj['amount'];
+                    this.dataObj['subContractExpenditure'] = parseFloat(this.dataObj['subContractExpenditureOriginal']) + parseFloat(this.dataObj['amount']);
                 if(this.dataObj['program'])
-                    this.dataObj['programExpenditure'] = this.dataObj['programExpenditureOriginal'] + this.dataObj['amount'];
+                    this.dataObj['programExpenditure'] = parseFloat(this.dataObj['programExpenditureOriginal']) + parseFloat(this.dataObj['amount']);
                 this.validations();
             }           
         }
@@ -161,7 +161,9 @@ export default class NmcyfdActivitySelectionStep extends LightningElement {
         let numberOfYouth = this.template.querySelector(".numberOfYouth");
         var unitsClass = this.template.querySelector(".units");
         
-
+        if (!minimumYouth) {
+            minimumYouth = 0;
+        }
        
         if(this.dataObj['activityExpenditure'] > this.dataObj['activityAllocatedAmt'])
             error = 'Activity Expenditure cannot be more than Allocated Amount. ';

@@ -19,6 +19,12 @@ export default class NmcyfdFederalStaffSurvey extends LightningElement {
             { label: 'Not Applicable', value: 'Not Applicable' },
         ];
     }
+
+    get isYouthNoSurvey() {
+
+        return this.noSurveyAvailable === 'Youth';
+    }
+
     changeHandler(event){
         this.dataObj[event.target.name] = event.target.value;
     }
@@ -44,6 +50,9 @@ export default class NmcyfdFederalStaffSurvey extends LightningElement {
         this.template.querySelectorAll('lightning-radio-group').forEach(element => {
             if(!element.value){
                 isValid=false;
+                if ( !element.checkValidity() ) {
+                    element.reportValidity();
+                } 
             }
             
         });

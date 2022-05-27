@@ -16,3 +16,34 @@
 .item-node{
     display : flex;
 }
+
+
+@media only screen and (max-width: 767px) {
+    .heading_header_registration {
+        padding: 2rem 1rem;
+    }
+
+    .app-sidebar {
+        display: none;
+    }
+
+    .has-header {
+        margin: 1rem;
+    }
+}
+
+.auth-wrap {
+    padding: 3rem;
+    min-height: 100vh;
+}
+
+.auth-wrap.sidebar {
+    background-image: url("/assets/images/KCPE/sidebar.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.auth-wrap.main {
+    padding: 50px;
+    background-color: #fefbff;
+}

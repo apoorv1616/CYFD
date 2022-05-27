@@ -12,6 +12,30 @@ public class NM_CYFD_WithoutSharingCtrlTest {
     }
     
     @isTest
+    static void testInsertSObjectList() {
+        List<CYFD_Activity__c> CYFDActivityList = NM_CYFD_TestDataFactory.createDeliverableCYFDActivityRec(1,false);
+        NM_CYFD_WithoutSharingCtrl.insertSObjectList( CYFDActivityList );
+    }
+
+	@isTest
+    static void testUpsertObject() {
+        List<CYFD_Activity__c> CYFDActivityList = NM_CYFD_TestDataFactory.createDeliverableCYFDActivityRec(1,false);
+        NM_CYFD_WithoutSharingCtrl.upsertObject( CYFDActivityList[0] );
+    }
+    
+    @isTest
+    static void testUpsertSObjectList() {
+        List<CYFD_Activity__c> CYFDActivityList = NM_CYFD_TestDataFactory.createDeliverableCYFDActivityRec(1,false);
+        NM_CYFD_WithoutSharingCtrl.upsertSObjectList( CYFDActivityList );
+    }
+    
+    @isTest
+    static void testDeleteObjectList() {
+        List<CYFD_Activity__c> CYFDActivityList = NM_CYFD_TestDataFactory.createDeliverableCYFDActivityRec(1,true);
+        NM_CYFD_WithoutSharingCtrl.deleteObjectList( CYFDActivityList );
+    }
+    
+    @isTest
     static void testGetConfigurationLineItemRecords() {
         
         List<Contract_Configuration__c> configList = [SELECT Id FROM Contract_Configuration__c];

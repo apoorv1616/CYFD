@@ -1,7 +1,8 @@
 public without sharing class  NM_CYFD_SubmitSurveyController{
+
     
     @AuraEnabled
-    public static Map<String, Object> submitYouthData(String surveyJSON, String youthId, String type, String surveyId){ 
+    public static Map<String, Object> submitYouthData(String surveyJSON, String youthId, String type, String surveyId, String program){ 
         Map<String, Object> response = new Map<String, Object>();
         Survey__c survey = new Survey__c();
         String recordType = '';
@@ -9,10 +10,10 @@ public without sharing class  NM_CYFD_SubmitSurveyController{
         survey = surveyWrapper.saveYouthdata(survey);
         survey.Contract_Role__C = youthId;
         survey.Status__c = 'Pending';
-
+        survey.Program__c = program;
         if (String.isNotBlank(survey.No_Survey_Available__c) && survey.No_Survey_Available__c != 'None' ) {
 
-            survey.Status__c = 'Completed';
+            survey.Status__c = 'Completed'; 
         }
 
         if(String.isNotBlank(surveyId))

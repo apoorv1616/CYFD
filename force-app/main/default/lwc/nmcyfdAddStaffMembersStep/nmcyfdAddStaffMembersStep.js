@@ -155,7 +155,7 @@ export default class NmcyfdAddStaffMembersStep extends LightningElement {
             console.log('age');
             var age = this.calculateAge(this.newMember.dob);
             console.log('age ', age);
-            if((age <= 16)){
+            if((age < 16)){
                     dob.setCustomValidity("Minimum age for a Staff member is 16");
             }else{
                     dob.setCustomValidity("");

@@ -43,7 +43,7 @@
                         <td data-label=""><a data-youth-id={item.youthId} onclick={onYouthClick}> {item.name}</a></td>
                         <td data-label="">{item.status}</td>
                         <td data-label="">{item.assessmentType}</td>
-                        <td data-label="">{item.stepsCompleted}</td>
+                        <td data-label="">{item.stepsCompleted} {getTotalSteps}</td>
                         <td data-label="Actions">
                         <a data-youth-id={item.youthId} data-latest-assessment={item.assessmentType} data-step={item.lastCompletedStep} data-assessment-id={item.assessmentId} data-label={item.action} onclick={handleYouthSelection}>{item.action} </a>
                         <!--    <a onclick={handleEditRole} data-index={index} data-id={client.roleId}>Edit</a> |

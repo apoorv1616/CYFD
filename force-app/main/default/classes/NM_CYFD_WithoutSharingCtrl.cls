@@ -19,7 +19,11 @@ public without sharing class NM_CYFD_WithoutSharingCtrl {
                 WHERE Id = :lineItemId
                 LIMIT 1];
     }
-
+	
+    public static void updateSObjectList( List<Sobject> sobjectList ) {
+        update sobjectList;
+    }
+    
     public static void upsertSObjectList( List<Sobject> sobjectList ) {
         upsert sobjectList;
     }
@@ -31,6 +35,11 @@ public without sharing class NM_CYFD_WithoutSharingCtrl {
     public static Sobject upsertObject( Sobject obj ) {
         upsert obj;
         return obj;
+    }
+    
+    public static void deleteObjectList( List<Sobject> sobjectList ) {
+        delete sobjectList;
+        //return obj;
     }
     
 }

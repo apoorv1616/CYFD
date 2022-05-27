@@ -5,73 +5,425 @@
                 <p class="headingText">Offend - Short Term</p>
             </div>
             <div class="questionsDiv n_fix_inl">
-                <div class="question">
-                    <lightning-radio-group name="DidTheYouthHaveArrestInTheProgram" 
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                13.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="DidTheYouthHaveArrestInTheProgram" 
                         label="Did the youth have an arrest or delinquent offense  while in the progam?"
                         options={options} required 
                         value={dataObj.DidTheYouthHaveArrestInTheProgram} onchange={changeHandler}
                         type="radio"></lightning-radio-group> 
                     
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="WasTheYouthCommittedToAFacility"
+                
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                2.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                14.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+                    
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="WasTheYouthCommittedToAFacility"
                         label="Was the youth committed to a juvenile facility while participating in the program?"
                         options={options} required 
                         value={dataObj.WasTheYouthCommittedToAFacility} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                     
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="WasTheYouthSentencedToAPrison"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                3.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                15.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+                    
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="WasTheYouthSentencedToAPrison"
                         label="Was the youth sentenced to adult prison while participating in the program?"
                         options={options} required
                         value={dataObj.WasTheYouthSentencedToAPrison} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="DidTheYouthReceiveAnotherSentence"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                4.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                16.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="DidTheYouthReceiveAnotherSentence"
                     label="Did the youth receive another sentence while serving in the program?"
                         options={options} required
                         value={dataObj.DidTheYouthReceiveAnotherSentence} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="DidTheyReoffendOrHaveAnOffense"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                5.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                17.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="DidTheyReoffendOrHaveAnOffense"
                     label="As a youth who came into the program with an arrest or a delinquent offense, did they reoffend or have a delinquent offense while in the program?"
                         options={options} required
                         value={dataObj.DidTheyReoffendOrHaveAnOffense} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="CameInWithArrestSentToFacility"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                6.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                18.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="CameInWithArrestSentToFacility"
                     label="As a youth who came into the program with an arrest or a delinquent offense, was the youth committed to a juvenile facility while participating in the program? "
                         options={options} required
                         value={dataObj.CameInWithArrestSentToFacility} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="WasTheYouthSentencedToAdultPrison"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                7.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                19.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="WasTheYouthSentencedToAdultPrison"
                     label="As a youth who came into the program with an arrest or a delinquent offense, was the youth sentenced to adult prison while participating in the program?"
                         options={options} required
                         value={dataObj.WasTheYouthSentencedToAdultPrison} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="DidTheYouthReceiveANewSentence"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                20.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="DidTheYouthReceiveANewSentence"
                     label="As a youth who came into the program with an arrest or a delinquent offense, did the youth receive another sentence while serving in the program?"
                         options={options} required
                         value={dataObj.DidTheYouthReceiveANewSentence} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="DidTheYouthCompleteTheRequirements"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                9.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                21.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="DidTheYouthCompleteTheRequirements"
                     label="Did the youth complete the program requirements?"
                         options={options} required
                         value={dataObj.DidTheYouthCompleteTheRequirements} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="DidTheYouthExitSatisfactorily"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                10.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                22.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="DidTheYouthExitSatisfactorily"
                     label="Did the youth exit the program satisfactorily?"
                         options={options} required
                         value={dataObj.DidTheYouthExitSatisfactorily} onchange={changeHandler}
@@ -84,57 +436,337 @@
                 <p class="headingText">Offend - Long Term</p>
             </div>
             <div class="questionsDiv n_fix_inl">
-                <div class="question">
-                    <lightning-radio-group name="HaveArrestOrOffenseWith6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                11.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                23.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="HaveArrestOrOffenseWith6_12Months"
                     label="Did the youth have an arrest or delinquent offense  within 6 - 12 months of being in the progam?"
                         options={options} required
                         value={dataObj.HaveArrestOrOffenseWith6_12Months} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="SentToAFacilityWithin6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                24.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="SentToAFacilityWithin6_12Months"
                     label="Was the youth committed to a juvenile facility within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.SentToAFacilityWithin6_12Months} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="SentToAdultJailWithin6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                13.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                25.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="SentToAdultJailWithin6_12Months"
                     label="Was the youth sentenced to adult prison within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.SentToAdultJailWithin6_12Months} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="GetAnotherSentenceIn6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                14.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                26.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="GetAnotherSentenceIn6_12Months"
                     label="Did the youth receive another sentence within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.GetAnotherSentenceIn6_12Months} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="ReoffendOrJuvenileActIn6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                15.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                27.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="ReoffendOrJuvenileActIn6_12Months"
                     label="As a youth who came into the program with an arrest or a delinquent offense, did they reoffend or have a delinquent offense within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.ReoffendOrJuvenileActIn6_12Months} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="RecommittedToAFacilityIn6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                16.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                28.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="RecommittedToAFacilityIn6_12Months"
                     label="As a youth who came into the program with an arrest or a delinquent offense, was the youth recommitted to a juvenile facility within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.RecommittedToAFacilityIn6_12Months} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="SentencedToAdultJailIn6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                17.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                29.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="SentencedToAdultJailIn6_12Months"
                     label="As a youth who came into the program with an arrest or a delinquent offense, was the youth sentenced to adult prison within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.SentencedToAdultJailIn6_12Months} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="HaveAnotherSentenceWithin6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                18.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                30.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="HaveAnotherSentenceWithin6_12Months"
                     label="As a youth who came into the program with an arrest or a delinquent offense, did the youth receive another sentence within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.HaveAnotherSentenceWithin6_12Months} onchange={changeHandler}
@@ -148,15 +780,85 @@
                 <p class="headingText">Gang Activity</p>
             </div>
             <div class="questionsDiv n_fix_inl">
-                <div class="question">
-                    <lightning-radio-group name="ExhibitADecreaseInGangActivity"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                19.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                31.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="ExhibitADecreaseInGangActivity"
                     label="Did the youth exhibit a decrease in gang activity while in the program?"
                         options={options} required
                         value={dataObj.ExhibitADecreaseInGangActivity} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="DecreaseInGangActivityIn6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                20.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                32.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="DecreaseInGangActivityIn6_12Months"
                     label="Did the youth exhibit a decrease in gang activity within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.DecreaseInGangActivityIn6_12Months} onchange={changeHandler}
@@ -169,15 +871,85 @@
                 <p class="headingText">Substance Abuse</p>
             </div>
             <div class="questionsDiv n_fix_inl">
-                <div class="question">
-                    <lightning-radio-group name="ExhibitADecreaseInSubstanceAbuse"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                21.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                33.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="ExhibitADecreaseInSubstanceAbuse"
                     label="Did the youth exhibit a decrease in substance abuse  while in the program?"
                         options={options} required
                         value={dataObj.ExhibitADecreaseInSubstanceAbuse} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="LessSubstanceAbuseIn6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                22.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                34.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                12.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="LessSubstanceAbuseIn6_12Months"
                     label="Did the youth exhibit a decrease in substance abuse  within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.LessSubstanceAbuseIn6_12Months} onchange={changeHandler}
@@ -193,8 +965,43 @@
         
         <div class="questionsDiv n_fix_inl">
             <template if:false ={jcc}>
-                <div class="question">
-                    <lightning-radio-group name="ExhibitAnIncreaseInSelfEsteem"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                23.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                35.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                13.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="ExhibitAnIncreaseInSelfEsteem"
                     label="Did the youth exhibit an increase in self-esteem while in the program?"
                         options={options} required
                         value={dataObj.ExhibitAnIncreaseInSelfEsteem} onchange={changeHandler}
@@ -202,8 +1009,44 @@
                 </div>
             </template>
             <template if:true ={jjac}>
-                <div class="question">
-                    <lightning-radio-group name="IncreaseInSelfEsteemIn6_12Months"
+                
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                24.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                36.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                13.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="IncreaseInSelfEsteemIn6_12Months"
                     label="Did the youth exhibit an increase in self-esteem within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.IncreaseInSelfEsteemIn6_12Months} onchange={changeHandler}
@@ -216,15 +1059,85 @@
                 <p class="headingText">Body Image</p>
             </div>
             <div class="questionsDiv n_fix_inl">
-                <div class="question">
-                    <lightning-radio-group name="ExhibitAnImprovementOfBodyImage"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                25.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                37.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                13.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="ExhibitAnImprovementOfBodyImage"
                     label="Did the youth exhibit an improvement of body image while in the progam?"
                         options={options} required
                         value={dataObj.ExhibitAnImprovementOfBodyImage} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="ImprovementOfBodyImageIn6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                26.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                38.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                13.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="ImprovementOfBodyImageIn6_12Months"
                     label="Did the youth exhibit an improvement of body image within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.ImprovementOfBodyImageIn6_12Months} onchange={changeHandler}
@@ -240,8 +1153,44 @@
         
         <div class="questionsDiv n_fix_inl">
             <template if:false ={jcc}>
-                <div class="question">
-                    <lightning-radio-group name="DesiredChangeInFamilyRelationships"
+                <div class="question slds-grid slds-gutters">
+
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                27.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                2.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                39.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                14.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="DesiredChangeInFamilyRelationships"
                     label="Did the youth exhibit a desired change in family relationships while in the program?"
                         options={options} required
                         value={dataObj.DesiredChangeInFamilyRelationships} onchange={changeHandler}
@@ -249,8 +1198,43 @@
                 </div>
             </template>
             <template if:true ={jjac}>
-                <div class="question">
-                    <lightning-radio-group name="ChangeInFamilyTiesIn6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                28.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                3.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                40.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                14.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="ChangeInFamilyTiesIn6_12Months"
                     label="Did the youth exhibit a desired change in family relationships within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.ChangeInFamilyTiesIn6_12Months} onchange={changeHandler}
@@ -267,8 +1251,44 @@
         
         <div class="questionsDiv n_fix_inl">
             <template if:false ={jcc}>
-                <div class="question">
-                    <lightning-radio-group name="GainInPerceptionOfSocialSupport"
+                
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                29.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                3.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                41.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                15.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="GainInPerceptionOfSocialSupport"
                     label="Did the youth exhibit an improvement in the perception of social support while in the program?"
                         options={options} required
                         value={dataObj.GainInPerceptionOfSocialSupport} onchange={changeHandler}
@@ -276,8 +1296,43 @@
                 </div>
             </template>
             <template if:true ={jjac}>
-                <div class="question">
-                    <lightning-radio-group name="AcumenOfSocialSupport6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                30.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                4.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                42.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                15.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="AcumenOfSocialSupport6_12Months"
                     label="Did the youth exhibit an improvement in the perception of social support within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.AcumenOfSocialSupport6_12Months} onchange={changeHandler}
@@ -294,8 +1349,43 @@
         
         <div class="questionsDiv n_fix_inl">
             <template if:false ={jcc}>
-                <div class="question">
-                    <lightning-radio-group name="ShowImprovementInSchoolPerformance"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                31.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                4.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                43.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                16.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="ShowImprovementInSchoolPerformance"
                     label="Did the youth exhibit an improvement in school performance (grades) while in the program?"
                         options={options} required
                         value={dataObj.ShowImprovementInSchoolPerformance} onchange={changeHandler}
@@ -303,8 +1393,43 @@
                 </div>
             </template>
             <template if:true ={jjac}>
-                <div class="question">
-                    <lightning-radio-group name="GainInSchoolGradesWithin6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                32.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                5.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                44.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                16.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="GainInSchoolGradesWithin6_12Months"
                     label="Did the youth exhibit an improvement in school performance (grades) within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.GainInSchoolGradesWithin6_12Months} onchange={changeHandler}
@@ -321,8 +1446,43 @@
         
         <div class="questionsDiv n_fix_inl">
             <template if:false ={jcc}>
-                <div class="question">
-                    <lightning-radio-group name="ImprovementInSchoolAttendance"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                33.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                5.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                45.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                17.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="ImprovementInSchoolAttendance"
                     label="Did the youth exhibit an improvement in school attendance while in the program?"
                         options={options} required
                         value={dataObj.ImprovementInSchoolAttendance} onchange={changeHandler}
@@ -330,8 +1490,43 @@
                 </div>
             </template>
             <template if:true ={jjac}>
-                <div class="question">
-                    <lightning-radio-group name="GainInSchoolAttendanceIn6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                34.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                6.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                46.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                17.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="GainInSchoolAttendanceIn6_12Months"
                     label="Did the youth exhibit an improvement in school attendance within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.GainInSchoolAttendanceIn6_12Months} onchange={changeHandler}
@@ -346,15 +1541,85 @@
             </div>
         
             <div class="questionsDiv n_fix_inl">
-                <div class="question">
-                    <lightning-radio-group name="ShowImprovementInBehaviorAtSchool"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                35.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                6.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                47.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                17.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="ShowImprovementInBehaviorAtSchool"
                     label="Did the youth exhibit an improvement in behavior at school while in the program?"
                         options={options} required
                         value={dataObj.ShowImprovementInBehaviorAtSchool} onchange={changeHandler}
                         type="radio"></lightning-radio-group>
                 </div>
-                <div class="question">
-                    <lightning-radio-group name="GainInBehaviorAtSchoolIn6_12Months"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                36.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                6.
+                            </span>
+                        </template>
+                    </template>
+                    <template if:false={isYouthNoSurvey}>
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                48.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                8.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                17.
+                            </span>
+                        </template>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small" name="GainInBehaviorAtSchoolIn6_12Months"
                     label="Did the youth exhibit an improvement in behavior at school within 6 - 12 months of being in the program?"
                         options={options} required
                         value={dataObj.GainInBehaviorAtSchoolIn6_12Months} onchange={changeHandler}
@@ -367,23 +1632,128 @@
             <p class="headingText">Parent/Family Involvement</p>
         </div>
         <div class="questionsDiv n_fix_inl">
-            <div class="question">
-                <lightning-radio-group name="ParentFamilyWasActiveInTheProgram"
+            <div class="question slds-grid slds-gutters">
+                <template if:true={isYouthNoSurvey}>
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            37.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            1.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            6.
+                        </span>
+                    </template>
+                </template>
+                <template if:false={isYouthNoSurvey}>
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            49.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            9.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            18.
+                        </span>
+                    </template>
+                </template>
+
+                <lightning-radio-group class="slds-var-m-left_x-small" name="ParentFamilyWasActiveInTheProgram"
                 label="Parent/Family was active in the program."
                     options={options} required
                     value={dataObj.ParentFamilyWasActiveInTheProgram} onchange={changeHandler}
                     type="radio" 
                     ></lightning-radio-group>
             </div>
-            <div class="question">
-                <lightning-radio-group name="ParentCompletedProgramDetailsSuccess"
+            <div class="question slds-grid slds-gutters">
+                <template if:true={isYouthNoSurvey}>
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            38.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            2.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            7.
+                        </span>
+                    </template>
+                </template>
+                <template if:false={isYouthNoSurvey}>
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            50.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            10.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            19.
+                        </span>
+                    </template>
+                </template>
+
+                <lightning-radio-group class="slds-var-m-left_x-small" name="ParentCompletedProgramDetailsSuccess"
                 label="Parent/Family successfully completed their program requirements/expectations."
                     options={options} required
                     value={dataObj.ParentCompletedProgramDetailsSuccess} onchange={changeHandler}
                     type="radio"></lightning-radio-group>
             </div>
-            <div class="question">
-                <lightning-radio-group name="FamilySatisfiedWithTheirInvolvement"
+            <div class="question slds-grid slds-gutters">
+                <template if:true={isYouthNoSurvey}>
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            39.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            3.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            8.
+                        </span>
+                    </template>
+                </template>
+                <template if:false={isYouthNoSurvey}>
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            51.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            11.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            20.
+                        </span>
+                    </template>
+                </template>
+
+                <lightning-radio-group class="slds-var-m-left_x-small" name="FamilySatisfiedWithTheirInvolvement"
                 label="Parent/Family was satisfied with their involvement in the program."
                     options={options} required
                     value={dataObj.FamilySatisfiedWithTheirInvolvement} onchange={changeHandler}

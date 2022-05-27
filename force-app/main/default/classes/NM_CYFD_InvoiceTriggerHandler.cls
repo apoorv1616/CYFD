@@ -4,6 +4,7 @@ public without sharing class NM_CYFD_InvoiceTriggerHandler {
     
     public static void afterInsert( List<Invoice__c> newList ) {
         rollUpInvoiceAmountToInvoice(newList, null);
+        populateInvoiceTotalOnContract(newList, null);
     }
     
     public static void beforeUpdate(List<Invoice__c> newList, Map<Id,Invoice__c> oldMap){
@@ -15,9 +16,53 @@ public without sharing class NM_CYFD_InvoiceTriggerHandler {
     public static void afterUpdate(List<Invoice__c> newList, Map<Id,Invoice__c> oldMap) {
         updateInvoiceStatusOnPayment(newList, oldMap);
         rollUpInvoiceAmountToInvoice(newList, oldMap);
+        populateInvoiceTotalOnContract(newList, oldMap);
     }
 	
-
+    /*
+     * Author : Apoorv Anand
+     * Desc   : method is used to find sum of invoice amounts and store on contract - Invoice_Total__c.
+      			( after insert )
+     * Issue  : I-99096 
+    */
+    public static void populateInvoiceTotalOnContract( List<Invoice__c> newList, Map<Id,Invoice__c> oldMap ) {
+       
+        Set<Id> contractIdSet = new Set<Id>();
+        Map<Id, Contract__c> mapOfContractIdToContract = new Map<Id, Contract__c>();
+        Set<String> setOfStatus = new Set<String>{'Paid', 'Approved'};
+        
+        for ( Invoice__c invoiceRecord : newList ) {
+            if ( invoiceRecord.Invoice_Total__c != null && invoiceRecord.Contract__c != null 
+                && ((oldMap == null && setOfStatus.contains(invoiceRecord.Status__c))
+                    || (oldMap !=null && (setOfStatus.contains(oldMap.get(invoiceRecord.Id).Status__c) 
+                    	|| setOfStatus.contains(invoiceRecord.Status__c))
+                    && invoiceRecord.Status__c != oldMap.get(invoiceRecord.Id).Status__c))) {
+                
+                contractIdSet.add( invoiceRecord.Contract__c );
+            }
+        }
+        
+        if ( !contractIdSet.isEmpty() ) {
+            for ( AggregateResult aggr : 
+                 // Amount__c is replaced by Invoice_Total__c on 3rd Feb by SB
+                 [SELECT sum(Invoice_Total__c), Contract__c 
+                  FROM Invoice__c 
+                  WHERE Status__c IN :setOfStatus
+                  GROUP BY Contract__c 
+                  HAVING Contract__c IN :contractIdSet]) {
+                      
+                     Contract__c contractRecord = new Contract__c();
+                     contractRecord.Id = (Id)aggr.get('Contract__c');
+                     contractRecord.Invoice_Total__c = (Decimal)aggr.get('expr0');
+                     mapOfContractIdToContract.put( contractRecord.Id, contractRecord );
+             }
+            
+            if ( !mapOfContractIdToContract.isEmpty() ) {
+                update mapOfContractIdToContract.values();
+            }
+        }
+    }
+    
     public static void rollUpInvoiceAmountToInvoice(List<Invoice__c> newList, Map<Id,Invoice__c> oldMap) {
         Set<Id> invoiceIdSet = new Set<Id>();
         

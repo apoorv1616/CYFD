@@ -1,4 +1,4 @@
-trigger NM_CYFD_ActivityRoleTrigger on Activity_Role__c ( before insert, before update, after insert, after delete, before delete ) {
+trigger NM_CYFD_ActivityRoleTrigger on Activity_Role__c ( before insert, before update, after insert, after update, after delete, before delete ) {
 
     Triggers_Configuration__mdt triggerConfiguration = [SELECT MasterLabel, isActive__c FROM Triggers_Configuration__mdt
             WHERE MasterLabel = 'ActivityRoleTrigger' LIMIT 1 ];
@@ -16,16 +16,22 @@ trigger NM_CYFD_ActivityRoleTrigger on Activity_Role__c ( before insert, before 
             }
         }
 
+
         if(Trigger.isAfter && Trigger.isInsert) {
 
             NM_CYFD_ActivityRoleTriggerHandler.updateYouthNamesOnStaffRecords(Trigger.new,null);
             NM_CYFD_ActivityRoleTriggerHandler.updateContractActivityAmountForMentoring( Trigger.new, null );
+            NM_CYFD_ActivityRoleTriggerHandler.countNumberOfYouthsOnContract( Trigger.new, null );
         }
-        if (bulkUpdate) {
-            NM_CYFD_ActivityRoleTriggerHandler.updateContractActivityAmountForMentoring(Trigger.new, null);
+        
+        if(Trigger.isAfter && Trigger.isUpdate) {
+
+            NM_CYFD_ActivityRoleTriggerHandler.countNumberOfYouthsOnContract( Trigger.new, Trigger.oldMap );
         }
+
         if(Trigger.isAfter && Trigger.isDelete) {
             NM_CYFD_ActivityRoleTriggerHandler.updateContractActivityAmountForMentoring( Trigger.new, Trigger.oldMap );
+            NM_CYFD_ActivityRoleTriggerHandler.countNumberOfYouthsOnContract( Trigger.new, Trigger.oldMap );
         }
     }
     

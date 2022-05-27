@@ -1,0 +1,64 @@
+<apex:page standardController="Assessment_2022__c" extensions="NM_CYFD_Assessment2022PDFController" showHeader="false" sidebar="false" standardStylesheets="false" renderAs="pdf" applyHtmlTag="false" applyBodyTag="false">
+    <html>
+        <head>
+    
+            <style type="text/CSS">
+                @page {
+                size:landscape;
+                @bottom-right {
+                content: counter(page) "/" counter(pages);
+                }
+                }
+                
+                header > h3 { display: inline-block; }
+                header span { margin-left: 5px; }
+   
+            </style>  
+  
+        </head>
+        <body>
+        
+            <!-- Permanency -->
+            <h3>Casey Life Skills Assessment - {!assessment.Assessment_Type__c} {!completionDate}</h3>
+            <header>
+              <h3>Client Name : {!assessment.Contract_Role__r.Name__c} ({!assessment.Contract_Role__r.Youth_Id__c})</h3>
+              <span>JCC - Children, Youth, and Families Department</span>
+            </header>
+            <h3 style="text-align : right; background-color : #D8D8D8;min-height: 30px;"> Overall Average : {!totalAverage} </h3>
+            <br/>
+
+            <apex:repeat value="{!sectionNameList}" var="sectionName" id="theRepeat">
+                 	<table style = "table-layout: fixed ; border: 1px; width : 100%; background-color : #D8D8D8;">               
+                        <tr style="min-height: 30px;">
+                            <td style="text-align : left">{!sectionName}</td>
+                            <td style="text-align : right">Average : {!mapOfSectionToAverage[sectionName]}</td>
+                        </tr>
+                      
+                	</table> <br/>
+                
+                	<apex:repeat value="{!mapOfSectionToAssessment[sectionName]}" var="section" id="theRepeat1">
+
+                        <div class="custom-grid-2">
+                             <div style="text-align: left">
+                                 <div class="input-group">
+                                    <div class="view-only-info">
+                                        <label class="view-info-label">{!section.questionLabel}</label>
+                                    </div>
+                                </div>
+                             </div>
+                            
+                            <div style="text-align: right">
+                                 <div class="input-group">
+                                    <div class="view-only-info">
+                                        <label class="view-info-label">{!section.assessmentValueLabel}</label>
+                                    </div>
+                                </div>
+                             </div>
+                        </div> 
+                        <br/>
+                </apex:repeat><br/><br/>
+            </apex:repeat>
+
+        </body>
+    </html>
+</apex:page>

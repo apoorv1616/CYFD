@@ -256,21 +256,32 @@ export default class NmcyfdAddClientStep extends LightningElement {
     }
 
     handleInputChange(event){
-        if(event.target.name == 'noSSN'){
-            this.newMember[event.target.name] = event.target.checked;
-        }else if(event.target.name == 'hasMedicalId'){
-            this.newMember[event.target.name] = event.target.checked;
-        }else if(event.target.name == 'homeless'){
-            this.newMember[event.target.name] = event.target.checked;
-            //this.checkboxValidations();   
-            this.isNotHomeless = !event.target.checked ;              
+        // if(event.target.name == 'noSSN'){
+        //     this.newMember[event.target.name] = event.target.checked;
+        // }else if(event.target.name == 'hasMedicalId'){
+        //     this.newMember[event.target.name] = event.target.checked;
+        // }else if(event.target.name == 'homeless'){
+        //     this.newMember[event.target.name] = event.target.checked;
+        //     //this.checkboxValidations();   
+        //     this.isNotHomeless = !event.target.checked ;              
 
-        }else if(event.target.name == 'noPhone'){
+        // }else if(event.target.name == 'noPhone'){
+        //     this.newMember[event.target.name] = event.target.checked;
+        // }else if(event.target.name == 'status'){
+        //     this.newMember[event.target.name] = event.target.checked;
+        // }else{
+        //     this.newMember[event.target.name] = event.target.value;
+        // }
+
+        /*  
+            * Author : Apoorv Anand
+            * Desc   : Above hard-coded lines are commented as below code can be used to dynamically assign the values.
+        */ 
+        if ( event.target.type === 'checkbox') {
             this.newMember[event.target.name] = event.target.checked;
-        }else if(event.target.name == 'status'){
-            this.newMember[event.target.name] = event.target.checked;
-        }else{
-            this.newMember[event.target.name] = event.target.value;
+        }
+        else if ( event.target.value.trim() ) {
+            this.newMember[event.target.name] = event.target.value.trim();
         }
     }
 

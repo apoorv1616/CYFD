@@ -1,0 +1,25 @@
+<template>
+    <template if:true={showSpinner}>
+        <div class="">
+            <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+        </div>
+    </template>
+
+    <div class="has-shadow slds-p-vertical_medium slds-m-bottom_medium heading_header_registration">
+        <div class="container d-flex justify-space-between">
+            <h4 class="app-title">Casey Life Skills Assessment</h4>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="app-container">
+            <div class="app-sidebar">
+                <c-nmcyfd_assessment2022-sidebar naivgation-sidebar={naivgationSidebar}></c-nmcyfd_assessment2022-sidebar>
+            </div>
+            <div class="app-content">
+                <!-- <c-n-y-c-parks_-progress-notes-form></c-n-y-c-parks_-progress-notes-form> -->
+                TEST
+            </div>
+        </div>
+    </div>
+</template>

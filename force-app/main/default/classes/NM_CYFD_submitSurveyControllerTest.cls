@@ -39,9 +39,9 @@ public class NM_CYFD_submitSurveyControllerTest {
         wrapper.ProgramMadeMeFeelBetterAboutMyself = sv.Program_made_me_feel_better_about_myself__c;
         wrapper.StaffExplainedDetailsAboutServices = sv.Staff_explained_details_about_services__c;
         NM_CYFD_SubmitSurveyController.submitStaffData(JSON.serialize(wrapper),sv.Id,true, cnRl.Id, 'JCC');
-        NM_CYFD_SubmitSurveyController.submitYouthData(JSON.serialize(wrapper), cnRl.Id, 'JCC',sv.Id );
-        NM_CYFD_SubmitSurveyController.submitYouthData(JSON.serialize(wrapper), cnRl.Id, 'JJAC',sv.Id );
-        NM_CYFD_SubmitSurveyController.submitYouthData(JSON.serialize(wrapper), cnRl.Id, 'Mentoring',sv.Id );
+        NM_CYFD_SubmitSurveyController.submitYouthData(JSON.serialize(wrapper), cnRl.Id, 'JCC',sv.Id, '' );
+        NM_CYFD_SubmitSurveyController.submitYouthData(JSON.serialize(wrapper), cnRl.Id, 'JJAC',sv.Id, '' );
+        NM_CYFD_SubmitSurveyController.submitYouthData(JSON.serialize(wrapper), cnRl.Id, 'Mentoring',sv.Id, '' );
         Test.stopTest();
     }
     @isTest

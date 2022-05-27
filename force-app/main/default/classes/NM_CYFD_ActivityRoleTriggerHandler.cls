@@ -1,13 +1,77 @@
 public without sharing class NM_CYFD_ActivityRoleTriggerHandler {
 
     public static Boolean bulkUpdate = Label.nmcyfdBulkUpdateExpenditure == 'true';
+    
+    /*
+        @author : Apoorv Anand
+        @desc   : Create a way to count number of unique youths
+                : (after insert, after update, after delete)
+        @Issue  : I-96306
+    */
+    public static void countNumberOfYouthsOnContract( List<Activity_Role__c> newList, Map<Id, Activity_Role__c> oldMap ) {
+        
+        List<Activity_Role__c> activityRoleNewList = new List<Activity_Role__c>();
+        Set<Id> alreadyProcessedContractRole = new Set<Id>();
+        
+        if( newList != null && (oldMap == null || bulkUpdate)) 
+            activityRoleNewList = newList;
+        
+        else if(newList == null && oldMap != null ) 
+            activityRoleNewList = oldMap.values(); 
+        
+        Set<Id> contractIdSet = new Set<Id>();
+        Map<String, Integer> mapOfContractIdToCountOfYouths = new Map<String, Integer>();
+        Map<Id, Contract__c> mapOfContractIdToContract = new Map<Id, Contract__c>();
+        
+        for ( Activity_Role__c activityRoleRecord : activityRoleNewList ) {
+            if ( activityRoleRecord.Contract__c != null 
+                && activityRoleRecord.Contract_Role__c != null) {
+                	
+                  contractIdSet.add( activityRoleRecord.Contract__c );  
+             }
+        }
+        
+        if ( !contractIdSet.isEmpty() ) {
+
+            for ( Activity_Role__c activityRoleRecord : [SELECT Id, Contract_Role__c,Contract_Role__r.Name__c, Contract__c 
+                                                         FROM Activity_Role__c 
+                                                         WHERE RecordTypeId = :NM_CYFD_Constants.NM_CLIENTS_ACTIVITY_ROLE_RECORDTYPEID 
+                                                         AND Contract__c IN :contractIdSet ]) {
+                                                             
+                 if ( !alreadyProcessedContractRole.contains( activityRoleRecord.Contract_Role__c )) {                                            
+                     if ( !mapOfContractIdToCountOfYouths.containsKey(activityRoleRecord.Contract__c )) {
+                         
+                         mapOfContractIdToCountOfYouths.put( activityRoleRecord.Contract__c, 0 );
+                     }
+                     Integer count = mapOfContractIdToCountOfYouths.get( activityRoleRecord.Contract__c ) + 1;                                      
+                     mapOfContractIdToCountOfYouths.put( activityRoleRecord.Contract__c, count);
+                     
+                     alreadyProcessedContractRole.add( activityRoleRecord.Contract_Role__c );
+                 }
+            }
+            //System.assert(false, new List<String>(mapOfContractIdToCountOfYouths.keySet())[ + ' ' + mapOfContractIdToCountOfYouths.values()[0]);
+            for ( Activity_Role__c activityRoleRecord : activityRoleNewList ) {
+      
+                if ( mapOfContractIdToCountOfYouths.containsKey( activityRoleRecord.Contract__c ) ) {
+                    Contract__c contractRecord = new Contract__c();
+                    contractRecord.Id = activityRoleRecord.Contract__c;
+                    contractRecord.Number_of_Youths__c = mapOfContractIdToCountOfYouths.get( activityRoleRecord.Contract__c );
+                    mapOfContractIdToContract.put( contractRecord.Id, contractRecord );
+                }
+            }
+            
+            if ( !mapOfContractIdToContract.isEmpty() ) {
+                NM_CYFD_WithoutSharingCtrl.updateSObjectList( mapOfContractIdToContract.values() );
+            } 
+        }
+    }
+    
     /*
         @author : Apoorv Anand
         @desc   : to update invoice amount on mentoring grant and check minimum 2 units criteria.
                 : (after insert, after delete)
                 : Added as a part of architecture change
     */
-    
     public static void updateContractActivityAmountForMentoring ( List<Activity_Role__c> newList, Map<Id, Activity_Role__c> oldMap ) {
         
         List<Activity_Role__c> activityRoleNewList = new List<Activity_Role__c>();

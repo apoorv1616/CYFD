@@ -433,7 +433,7 @@ public without sharing class NM_CYFD_ActivityController {
         }
         catch(Exception e) {
             response.put('success', false);
-            response.put('msg', e.getMessage());
+            response.put('msg', e.getMessage() + ' ' + e.getStackTraceString());
             return response; 
         }
     }

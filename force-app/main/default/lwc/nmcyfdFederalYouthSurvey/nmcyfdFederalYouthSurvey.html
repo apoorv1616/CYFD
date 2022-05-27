@@ -11,8 +11,23 @@
             <p class="headingText">Self-Esteem</p>
         </div>
         <div class="questionsDiv n_fix_inl">
-            <div class="question">
-                <lightning-radio-group name="ProgramMadeMeFeelBetterAboutMyself"
+            <div class="question slds-grid slds-gutters">
+                <template if:true ={jjac}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        1.
+                    </span>
+                </template>
+                <template if:true ={jcc}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        1.
+                    </span>
+                </template>
+                <template if:true ={mentoring}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        1.
+                    </span>
+                </template>
+                <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="ProgramMadeMeFeelBetterAboutMyself"
                 label="The program helped me feel better about myself."
                 options={options} required
                 value={dataObj.ProgramMadeMeFeelBetterAboutMyself} onchange={changeHandler}
@@ -24,8 +39,23 @@
                 <p class="headingText">Family Relationships</p>
             </div>
             <div class="questionsDiv n_fix_inl">
-                <div class="question">
-                    <lightning-radio-group name="RelationshipWithMyFamilyHasImproved"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            2.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            1.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            2.
+                        </span>
+                    </template>
+                    <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="RelationshipWithMyFamilyHasImproved"
                     label="My relationship with my family has improved while in the program."
                     options={options} required
                     value={dataObj.RelationshipWithMyFamilyHasImproved} onchange={changeHandler}
@@ -38,8 +68,24 @@
                 <p class="headingText">Perception of Social Support</p>
             </div>
             <div class="questionsDiv n_fix_inl">
-                    <div class="question">
-                        <lightning-radio-group name="IGetAlongBetterWithMeFriends"
+                
+                    <div class="question slds-grid slds-gutters">
+                        <template if:true ={jjac}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                3.
+                            </span>
+                        </template>
+                        <template if:true ={jcc}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                1.
+                            </span>
+                        </template>
+                        <template if:true ={mentoring}>
+                            <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                                3.
+                            </span>
+                        </template>
+                        <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="IGetAlongBetterWithMeFriends"
                         label="I get along better with my friends as a result of being in the program."
                         options={options} required
                         value={dataObj.IGetAlongBetterWithMeFriends} onchange={changeHandler}
@@ -52,8 +98,24 @@
                 <p class="headingText">School Performance</p>
             </div>
             <div class="questionsDiv n_fix_inl">
-                <div class="question">
-                    <lightning-radio-group name="MySchoolGradesImprovedInTheProgram"
+                
+                <div class="question slds-grid slds-gutters">
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            4.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            1.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            4.
+                        </span>
+                    </template>
+                    <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="MySchoolGradesImprovedInTheProgram"
                     label="My school grades improved while participating in the program."
                     options={options3} required
                     value={dataObj.MySchoolGradesImprovedInTheProgram} onchange={changeHandler}
@@ -69,8 +131,24 @@
                 <p class="headingText">School Attendance</p>
             </div>
             <div class="questionsDiv n_fix_inl">
-                <div class="question">
-                    <lightning-radio-group name="MySchoolAttendanceImproved"
+                
+                <div class="question slds-grid slds-gutters">
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            5.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            1.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            5.
+                        </span>
+                    </template>
+                    <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="MySchoolAttendanceImproved"
                     label="My school attendance improved while participating in the program."
                     options={options3} required
                     value={dataObj.MySchoolAttendanceImproved} onchange={changeHandler}
@@ -83,8 +161,24 @@
                 <p class="headingText">School Behavior</p>
             </div>
             <div class="questionsDiv n_fix_inl">
-                <div class="question">
-                    <lightning-radio-group name="MyBehaviorAtSchoolImproved"
+                
+                <div class="question slds-grid slds-gutters">
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            6.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            1.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            6.
+                        </span>
+                    </template>
+                    <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="MyBehaviorAtSchoolImproved"
                     label="My behavior at school improved while in the program."
                     options={options3} required
                     value={dataObj.MyBehaviorAtSchoolImproved} onchange={changeHandler}
@@ -97,30 +191,91 @@
             <p class="headingText">Program Experience</p>
         </div>
         <div class="questionsDiv n_fix_inl">
-            <div class="question">
-                <lightning-radio-group name="StaffExplainedDetailsAboutServices"
+            <div class="question slds-grid slds-gutters">
+                <template if:true ={jjac}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        7.
+                    </span>
+                </template>
+                <template if:true ={jcc}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        2.
+                    </span>
+                </template>
+                <template if:true ={mentoring}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        7.
+                    </span>
+                </template>
+                <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="StaffExplainedDetailsAboutServices"
                 label="When I started the program, staff explained the details about the organization, services and how to use them."
                 options={options2} required
                 value={dataObj.StaffExplainedDetailsAboutServices} onchange={changeHandler}
                 type="radio"></lightning-radio-group> 
             </div>
-            <div class="question">
-                <lightning-radio-group name="IReceivedSupportFromProgramStaff"
+            <div class="question slds-grid slds-gutters">
+                <template if:true ={jjac}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        8.
+                    </span>
+                </template>
+                <template if:true ={jcc}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        3.
+                    </span>
+                </template>
+                <template if:true ={mentoring}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        8.
+                    </span>
+                </template>
+                <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="IReceivedSupportFromProgramStaff"
                 label="I received support from the program staff."
                 options={options2} required
                 value={dataObj.IReceivedSupportFromProgramStaff} onchange={changeHandler}
                 type="radio"></lightning-radio-group> 
             </div>
-            <div class="question">
-                <lightning-radio-group name="ILearnedNewSkillsWhileParticipating"
+            <div class="question slds-grid slds-gutters">
+                <template if:true ={jjac}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        9.
+                    </span>
+                </template>
+                <template if:true ={jcc}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        4.
+                    </span>
+                </template>
+                <template if:true ={mentoring}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        9.
+                    </span>
+                </template>
+                <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="ILearnedNewSkillsWhileParticipating"
                 label="I learned new skills while participating in the program."
                 options={options} required
                 value={dataObj.ILearnedNewSkillsWhileParticipating} onchange={changeHandler}
                 type="radio"></lightning-radio-group> 
             </div>
             <template if:true ={jcc}>
-                <div class="question">
-                    <lightning-radio-group name="ILearnedNewJobRelatedSkills"
+                <div class="question slds-grid slds-gutters">
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            9.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            5.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            9.
+                        </span>
+                    </template>
+
+                    <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="ILearnedNewJobRelatedSkills"
                     label="I learned new job-related skills by participating in the program."
                     options={options} required
                     value={dataObj.ILearnedNewJobRelatedSkills} onchange={changeHandler}
@@ -128,24 +283,71 @@
                 </div>
             </template>
             <template if:true ={mentoring}>
-                <div class="question">
-                    <lightning-radio-group name="LookedForwardToMeetingWithMyMentor"
+                
+                <div class="question slds-grid slds-gutters">
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            9.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            5.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            10.
+                        </span>
+                    </template>
+                    <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="LookedForwardToMeetingWithMyMentor"
                     label="I looked forward to meeting with my mentor while participating in the program."
                     options={options} required
                     value={dataObj.LookedForwardToMeetingWithMyMentor} onchange={changeHandler}
                     type="radio"></lightning-radio-group> 
                 </div>
             </template>
-            <div class="question">
-                <lightning-radio-group name="TreatedWithRespectByProgramStaff"
+            <div class="question slds-grid slds-gutters">
+                <template if:true ={jjac}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        10.
+                    </span>
+                </template>
+                <template if:true ={jcc}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        6.
+                    </span>
+                </template>
+                <template if:true ={mentoring}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        11.
+                    </span>
+                </template>
+                <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="TreatedWithRespectByProgramStaff"
                 label="I was treated with respect by program staff."
                 options={options2} required
                 value={dataObj.TreatedWithRespectByProgramStaff} onchange={changeHandler}
                 type="radio"></lightning-radio-group> 
             </div>
             <template if:true ={jcc}>
-                <div class="question">
-                    <lightning-radio-group name="HelpedMeThinkAboutLongTermGoals"
+                
+                <div class="question slds-grid slds-gutters">
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            10.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            7.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            11.
+                        </span>
+                    </template>
+                    <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="HelpedMeThinkAboutLongTermGoals"
                     label="The program helped me think about long term goals."
                     options={options} required
                     value={dataObj.HelpedMeThinkAboutLongTermGoals} onchange={changeHandler}
@@ -153,16 +355,47 @@
                 </div>
             </template>
             <template if:true ={jjac}>
-                <div class="question">
-                    <lightning-radio-group name="IAmSatisfiedWithMyInvolvement"
+                
+                <div class="question slds-grid slds-gutters">
+                    <template if:true ={jjac}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            11.
+                        </span>
+                    </template>
+                    <template if:true ={jcc}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            7.
+                        </span>
+                    </template>
+                    <template if:true ={mentoring}>
+                        <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                            11.
+                        </span>
+                    </template>
+                    <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="IAmSatisfiedWithMyInvolvement"
                     label="I am satisfied with my involvement in this program."
                     options={options2} required
                     value={dataObj.IAmSatisfiedWithMyInvolvement} onchange={changeHandler}
                     type="radio"></lightning-radio-group> 
                 </div>
             </template>
-            <div class="question">
-                <lightning-radio-group name="WouldRecommendThisProgramToOthers"
+            <div class="question slds-grid slds-gutters">
+                <template if:true ={jjac}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        12.
+                    </span>
+                </template>
+                <template if:true ={jcc}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        8.
+                    </span>
+                </template>
+                <template if:true ={mentoring}>
+                    <span class="slds-var-m-top_xx-small slds-var-m-left_medium" style="font-size:small">
+                        12.
+                    </span>
+                </template>
+                <lightning-radio-group class="slds-var-m-left_x-small slds-col slds-size_7-of-8" name="WouldRecommendThisProgramToOthers"
                 label="I would recommend this program to others."
                 options={options2} required
                 value={dataObj.WouldRecommendThisProgramToOthers} onchange={changeHandler}

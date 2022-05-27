@@ -7,6 +7,9 @@ import submitStaffData from '@salesforce/apex/NM_CYFD_SubmitSurveyController.sub
 import getContractDetails from '@salesforce/apex/NM_CYFD_SubmitSurveyController.getContractDetails';
 import step1Instructions from '@salesforce/label/c.Survey_Submission_Instructions';
 import getPicklistFields from '@salesforce/apex/NM_CYFD_SubmitSurveyController.getPicklistFields';
+import PROFILE_NAME_FIELD from '@salesforce/schema/User.Profile.Name';
+import strUserId from '@salesforce/user/Id';
+import {getRecord} from 'lightning/uiRecordApi';
 
 import {
 	getObjectInfo
@@ -59,10 +62,15 @@ export default class NmcyfdSubmitSurveyCmp extends NavigationMixin(LightningElem
     @track No_Survey_Reason;
     @track program;
 
+
+    @track profileNameOfUser;
+    userId = strUserId;
+
     @wire(getObjectInfo, {
         objectApiName: "Survey__c"
     })
     surveyinfo;
+
 
     @wire(getPicklistValues, {
         recordTypeId: "$surveyinfo.data.defaultRecordTypeId",
@@ -77,6 +85,29 @@ export default class NmcyfdSubmitSurveyCmp extends NavigationMixin(LightningElem
         }
         if(error) {
         }
+    }
+
+    @wire(getRecord, { recordId: '$recordId', fields: ['account.OwnerId'] })
+    mom;
+
+    @wire(getRecord, {
+        recordId: strUserId,
+        fields: [PROFILE_NAME_FIELD]
+    }) wireuser({
+        error,
+        data
+    }) {
+        if (error) {
+            this.error = error ; 
+        } else if (data) {
+            this.profileNameOfUser =data.fields.Profile.value.fields.Name.value; 
+            console.log('this.profileNameOfUser---->',this.profileNameOfUser);       
+        }
+    }
+
+    get checkprogrammanager() {
+
+        return this.profileNameOfUser === 'System Administrator' || this.profileNameOfUser === 'CYFD Program Manager';
     }
 
     handleSurveyChange(event) {
@@ -146,11 +177,13 @@ export default class NmcyfdSubmitSurveyCmp extends NavigationMixin(LightningElem
     }
 
     handleChange(event) {
-        if (event.target.name === 'No_Survey_Reason')
+        if (event.target.name === 'No_Survey_Reason') {
             this.No_Survey_Reason = event.target.value;
-        
-        if (event.target.name === 'program')
+        }
+
+        else if (event.target.name === 'program') {
             this.program = event.target.value;
+        }
 
     }
     
@@ -345,7 +378,7 @@ export default class NmcyfdSubmitSurveyCmp extends NavigationMixin(LightningElem
             return;
         }
 
-        if(!this.noSurveyAvailable || this.noSurveyAvailable == 'None') { 
+        else if(!this.noSurveyAvailable || this.noSurveyAvailable == 'None') { 
 
             this.federalStaffObject = this.template.querySelector('c-nmcyfd-federal-staff-survey').returnData();
             this.federalStaffObject.contractId = this.contractId;
@@ -380,6 +413,7 @@ export default class NmcyfdSubmitSurveyCmp extends NavigationMixin(LightningElem
         
         
     }
+
 
     submitStaffData(submit) {
         

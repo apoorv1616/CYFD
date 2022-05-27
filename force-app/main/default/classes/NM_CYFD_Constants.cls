@@ -1,6 +1,7 @@
 public with sharing class NM_CYFD_Constants {
     
     //Record Types
+    Public static ID NM_CLIENTS_ACTIVITY_ROLE_RECORDTYPEID = Schema.SObjectType.Activity_Role__c.getRecordTypeInfosByName().get('Clients').getRecordTypeId();
     Public static ID NM_CYFD_CONTRACT_ROLE_RECORDTYPEID = Schema.SObjectType.Contract_Role__c.getRecordTypeInfosByName().get('Provider').getRecordTypeId();
     Public static ID NM_CYFD_DELIVERABLE_ACTIVITY_RECORDTYPEID = Schema.SObjectType.CYFD_Activity__c.getRecordTypeInfosByName().get('Deliverable').getRecordTypeId();
     Public static ID NM_CYFD_DELIVERABLE_CONTRACTACTIVITY_RECORDTYPEID = Schema.SObjectType.Contract_Activity__c.getRecordTypeInfosByName().get('Deliverable').getRecordTypeId();

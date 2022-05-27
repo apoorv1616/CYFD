@@ -1,0 +1,12 @@
+<template>
+    <div class="timeline slds-var-m-top_small" if:true={handleStepsChange}>
+        <template for:each={handleStepsChange} for:item="item">
+            <div key={item.label} class="slds-var-m-around_medium" >
+                <lightning-icon class={item.iconcolor} icon-name={item.action} size="xx-small"></lightning-icon> &nbsp;
+                <span style={item.style}>{item.label}</span>
+            </div>
+            
+
+        </template>
+    </div>
+</template>

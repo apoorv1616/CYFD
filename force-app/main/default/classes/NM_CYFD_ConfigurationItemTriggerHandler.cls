@@ -10,7 +10,9 @@ public class NM_CYFD_ConfigurationItemTriggerHandler {
         {
             mapItemToActivity.put(item.Id,item.CYFD_Activity__c);
         }
-        for(CYFD_Activity__c activity : [SELECT Id,RecordTypeId FROM CYFD_Activity__c WHERE Id IN : mapItemToActivity.values()]){
+        for(CYFD_Activity__c activity : [SELECT Id,RecordTypeId, Active__c 
+                                         FROM CYFD_Activity__c 
+                                         WHERE Id IN : mapItemToActivity.values()]){
             mapActivityToType.put(activity.Id, activity.RecordTypeId);
         }
         for(Contract_Configuration_Line_Item__c item :newList)

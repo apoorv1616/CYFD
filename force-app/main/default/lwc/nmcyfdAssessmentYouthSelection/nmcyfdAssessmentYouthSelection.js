@@ -1,6 +1,7 @@
 import { LightningElement, track, api } from 'lwc';
 import getYouthDataForAssessment from '@salesforce/apex/NM_CYFD_SubmitAssessmentController.getYouthDataForAssessment';
 import startAssessment from '@salesforce/apex/NM_CYFD_SubmitAssessmentController.startAssessment';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { NavigationMixin } from 'lightning/navigation';
 const pageNumber = 1;
 const showIt = 'visibility:visible';
@@ -27,6 +28,11 @@ export default class NmcyfdAssessmentYouthSelection extends NavigationMixin(Ligh
     @track jcc = false;
     @track jjac = false;
     @track mentoring = false;
+    @api totalStepsCount;
+
+    get getTotalSteps() {
+        return ' of ' + this.totalStepsCount;
+    }
 
 
     get isActionNone(){
@@ -40,15 +46,6 @@ export default class NmcyfdAssessmentYouthSelection extends NavigationMixin(Ligh
         ];
     }
 
-   /*get actions() {
-        return [
-            { label: '-- None -- ', value: '' },
-            { label: 'Start Initial Assessment', value: 'Not Started-Initial Assessment' },
-            { label: 'Continue Initial Assessment', value: 'In Progress-Initial Assessment' },
-            { label: 'Start Discharge Assessment', value: 'Not Started-Discharge Assessment' },
-            { label: 'Continue Discharge Assessment', value: 'In Progress-Discharge Assessment' },
-        ];
-    }*/
     get actions() {
         return [
             { label: '-- None -- ', value: '' },
@@ -109,20 +106,16 @@ export default class NmcyfdAssessmentYouthSelection extends NavigationMixin(Ligh
         this.pageNum = this.pageNum-1 ;
         this.setRecordsToDisplay();
     }
-    nextPage(){  
-        console.log(' hfbj next ', this.pageNum)      
+    nextPage(){     
         this.pageNum = this.pageNum+1;
-        console.log(' hfbj next  &&  ', this.pageNum)  
         this.setRecordsToDisplay();
     }
     setRecordsToDisplay(){
 
         this.assessmentsToDisplay = [];
         this.totalPages = Math.ceil(this.assessments.length/this.pageSize);
-        console.log('total pages ', this.totalPages);
         this.setPaginationControls();
         for(let i=(this.pageNum-1)*this.pageSize; i < this.pageNum*this.pageSize; i++){
-            console.log('bdhbj');
             if(i === this.assessments.length) break;
             this.assessmentsToDisplay.push(this.assessments[i]);
         }
@@ -145,17 +138,14 @@ export default class NmcyfdAssessmentYouthSelection extends NavigationMixin(Ligh
             this.ctrlNext = hideIt;
         }
 
-        console.log('bdhbj8**** ', this.pageNum  + '  ' + this.ctrlNext);
     }
 
     handleYouthSelection(event){
         if(event.target.dataset.label != 'None'){
             var assessmentId = event.target.dataset.assessmentId;
             var stepNumber =  event.target.dataset.step ;
-            console.log('event stepnumvber ', stepNumber);
-            console.log('event.target.dataset.assessmentId ',event.target.dataset.assessmentId ,'stepnumber ',event.target.dataset.step);
+
             if(assessmentId){
-                console.log('assessmentId ',assessmentId);
                 
                 const selectedEvent = new CustomEvent('youthselect', {
                     detail: {
@@ -173,11 +163,16 @@ export default class NmcyfdAssessmentYouthSelection extends NavigationMixin(Ligh
                 assessmentType = latestAssessment == 'None' ? 'Initial Assessment' : 'Discharge Assessment';
 
                 startAssessment({contractId : this.contractId , youthId : youthId, assessmentType : assessmentType}).then(data =>{
-                    console.log('assessmentId ', data.assessmentId);
-                    console.log('step ', event.target.dataset.step);
+
                     this.dispatchEvent(new CustomEvent('youthselect', {detail:{recordId : data.assessmentId,steps : 0 } }));
                 }).catch(error=>{
-                    console.log('error', error);
+                    let msg = error.message || error.body.message;
+                    const event = new ShowToastEvent({
+                        title: 'Error',
+                        message: msg,
+                        variant :'error'
+                    });
+                    this.dispatchEvent(event);
                 }); 
             }    
         }

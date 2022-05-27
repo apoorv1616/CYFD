@@ -33,7 +33,8 @@
                         var dismissActionPanel = $A.get("e.force:closeQuickAction");
                         dismissActionPanel.fire();        
                     }
-                    baseURL += '/apex/NM_CYFD_AssesmentPDF?id='+component.get("v.recordId");        
+                    //baseURL += '/apex/NM_CYFD_AssesmentPDF?id='+component.get("v.recordId"); 
+                    baseURL += '/apex/NM_CYFD_Assessment2022PDF?id='+component.get("v.recordId");        
                     window.open(baseURL,'_blank');
                 }
             }

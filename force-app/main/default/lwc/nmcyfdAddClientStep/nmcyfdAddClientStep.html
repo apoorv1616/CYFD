@@ -131,12 +131,14 @@
                     <div class="slds-grid slds-wrap input-client">
                        
                         <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
-                            <lightning-input type="text" value={newMember.firstName} label="First Name"
+                            <lightning-input type="text" value={newMember.firstName} label="First Name" pattern="[a-zA-Z0-9-]+" 
+                                message-when-pattern-mismatch="Please enter a valid First Name."
                                 autocomplete="none" required class="firstName" name="firstName" style="width:100%" onchange={handleInputChange}>
                             </lightning-input>
                         </div>
                         <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
-                            <lightning-input type="text" value={newMember.lastName} label="Last Name"
+                            <lightning-input type="text" value={newMember.lastName} label="Last Name" pattern="[a-zA-Z0-9-]+"
+                                message-when-pattern-mismatch="Please enter a valid Last Name."
                                 autocomplete="none" required class="lastName" name="lastName" style="width:100%" onchange={handleInputChange}>
                             </lightning-input>
                         </div>

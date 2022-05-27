@@ -84,6 +84,9 @@ export default class NmcyfdFederalYouthSurvey extends LightningElement {
             this.template.querySelectorAll('lightning-radio-group').forEach(element => {
                 if(!element.value){
                     isValid=false;
+                    if ( !element.checkValidity() ) {
+                        element.reportValidity();
+                    } 
                 }
                 
             });
