@@ -17,6 +17,42 @@ public without sharing class NM_CYFD_InvoiceTriggerHandler {
         updateInvoiceStatusOnPayment(newList, oldMap);
         rollUpInvoiceAmountToInvoice(newList, oldMap);
         populateInvoiceTotalOnContract(newList, oldMap);
+        sendEmailWhenInvoiceSubmitted( newList, oldMap ); //added for I-97887
+    }
+
+    /*
+        * Issue  : I-97887
+        * Desc   : send notification when invoices are submitted
+        * Author : Apoorv Anand
+    */
+    public static void sendEmailWhenInvoiceSubmitted( List<Invoice__c> newList, Map<Id,Invoice__c> oldMap ) {
+
+        List < Messaging.SingleEmailMessage > mailList = new List < Messaging.SingleEmailMessage > ();
+        List<Contact> listOfContact = [SELECT Id FROM Contact WHERE Email != NULL LIMIT 1];
+        List<EmailTemplate> emailTemplateList = NM_CYFD_Constants.getEmailTemplateName('NM_CYFD_InvoiceSubmitted');
+        
+        List<String> userIdList = new  List<String>();
+         
+        for ( User userRecord : [select id, email from User where profile.name = 'CYFD Program Manager']) {
+
+            userIdList.add( userRecord.Id );
+        }
+
+
+        for ( Invoice__c invoiceRecord : newList ) {
+
+            if ( invoiceRecord.Status__c == NM_CYFD_Constants.SUBMITTED_STATUS
+                && 
+                (oldMap == null || oldMap.get(invoiceRecord.Id).Status__c != invoiceRecord.Status__c ) ) {
+                    
+                    mailList.add( NM_CYFD_Constants.createMailRecord( listOfContact[0].Id, emailTemplateList[0].Id, userIdList, invoiceRecord) );
+            }
+        }
+
+        if ( !mailList.isEmpty() ) {
+
+            Messaging.sendEmail( mailList );
+        }
     }
 	
     /*
@@ -86,19 +122,15 @@ public without sharing class NM_CYFD_InvoiceTriggerHandler {
     
     public static void throwErrorIfPaidStatusIsChanged(List<Invoice__c> newList, Map<Id,Invoice__c> oldMap) {
         String error = 'As a CYFD Program Manager you can only change the status of an invoice {0} to either Approved or Rejected.';
-        
+        List<Profile> profileList = [SELECT Id FROM PROFILE WHERE Name = 'System Administrator'];
         for(Invoice__c invoiceRecord : newList) {
             if(invoiceRecord.Status__c != oldMap.get(invoiceRecord.Id).Status__c) {
-                if(oldMap.get(invoiceRecord.Id).Status__c == 'Paid')
-                    //invoiceRecord.Status__c.addError(String.format(error, new List<String>{'from Paid'}));
+                if(oldMap.get(invoiceRecord.Id).Status__c == 'Paid')    
                 	invoiceRecord.Status__c.addError('You cannot change the status once it is paid');
-                /*if((oldMap.get(invoiceRecord.Id).Status__c != 'Approved'
-                    && invoiceRecord.Status__c == 'Paid'))
-                    invoiceRecord.Status__c.addError(String.format(error, new List<String>{''})); */
                 
                 if(invoiceRecord.Status__c != 'Approved' 
                     && invoiceRecord.Status__c != 'Rejected'
-                    //&& Userinfo.getUserType() == 'Standard'
+                    && Userinfo.getProfileId() != profileList[0].Id
                   	&& !bypassError)
                     
                     invoiceRecord.Status__c.addError(String.format(error, new List<String>{''}));

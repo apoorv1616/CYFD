@@ -1,5 +1,20 @@
 @isTest
 public class NM_CYFD_InvoiceTriggerHandlerTest { 
+
+    @isTest(SeeAllData=true)
+    public static void testSendEmailWhenInvoiceSubmitted() {
+        List<Account> accountList = NM_CYFD_TestDataFactory.createAccounts(1,true);
+        List<Contract__c> contractList = NM_CYFD_TestDataFactory.createContractRecords(1,accountList[0].Id,null,'JCC',true);
+        List<Invoice__c> invoiceList = NM_CYFD_TestDataFactory.createInvoiceRecords(5, contractList[0].Id,null, true);
+        
+		Invoice__c invoiceRecord = invoiceList[0];
+        invoiceRecord.Status__c = 'Submitted';
+        
+        Test.startTest();
+        	update invoiceRecord;
+        Test.stopTest();
+       	
+    }
     
     @isTest(SeeAllData=true)
     public static void testThrowErrorIfPaidStatusIsChanged() {
