@@ -16,6 +16,8 @@ public class ContractRoleWrapper{
         @AuraEnabled public String jobTitle;
         @AuraEnabled public String workExp;
         @AuraEnabled public String backgroundCheck;
+        @AuraEnabled public String preferredPronouns;
+        @AuraEnabled public String preferredName;
     
     //Client Variables
         @AuraEnabled public String youthId;
@@ -80,6 +82,8 @@ public class ContractRoleWrapper{
             staff.status = role.Active_Status__c;
             staff.backgroundCheck = role.CYFD_Background_Check__c;
             staff.gender = role.Gender__c;
+            staff.preferredPronouns = role.Preferred_Pronouns__c;
+            staff.preferredName = role.Preferred_Name__c;
             staff.jobTitle = role.Job_Title__c;
             staff.workExp = role.Work_Experience__c;
             staff.dob = role.Date_of_Birth__c;
@@ -104,6 +108,8 @@ public class ContractRoleWrapper{
             role.Gender__c  = roleWrapper.gender;
             role.Job_Title__c  = roleWrapper.jobTitle;
             role.Work_Experience__c  = roleWrapper.workExp;
+            role.Preferred_Pronouns__c = roleWrapper.preferredPronouns;
+            role.Preferred_Name__c = roleWrapper.preferredName;
             
            
             
@@ -170,6 +176,8 @@ public class ContractRoleWrapper{
             client.otherPopulation = role.Other_Population_Information__c;
             client.gangActivity = role.Gang_Activity__c;
             client.currentlyInDetention = role.Youth_Currently_in_Detention__c;
+            client.preferredPronouns = role.Preferred_Pronouns__c;
+            client.preferredName = role.Preferred_Name__c;
             
             return client;
         } 
@@ -231,6 +239,9 @@ public class ContractRoleWrapper{
             role.Other_Population_Information__c = roleWrapper.otherPopulation;
             role.Gang_Activity__c = roleWrapper.gangActivity;
             role.Youth_Currently_in_Detention__c = roleWrapper.currentlyInDetention; 
+            role.Preferred_Pronouns__c = roleWrapper.preferredPronouns;
+            role.Preferred_Name__c = roleWrapper.preferredName;
+            
             system.debug(' roleWrapper.gangActivity' + roleWrapper.gangActivity);
             system.debug(' roleWrapper.currentlyInDetention' + roleWrapper.currentlyInDetention);
             if(type == 'JCC')

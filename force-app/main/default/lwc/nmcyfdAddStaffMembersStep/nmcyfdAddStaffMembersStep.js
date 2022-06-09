@@ -7,6 +7,7 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 export default class NmcyfdAddStaffMembersStep extends LightningElement {
 
     @track staffMembers  = [];
+    @track preferredPronounsOptions = [];
     @track existingMembers = [];
     @track addExisting = false;
     @track addNew = false;
@@ -48,6 +49,7 @@ export default class NmcyfdAddStaffMembersStep extends LightningElement {
             this.educationValues = result.education;
             this.backgroundValues = result.backgroundCheck;
             this.genderValues = result.gender;
+            this.preferredPronounsOptions = result.preferredPronounsOptions;
         
         }).catch(error=>{
             console.log('error --> ', error);

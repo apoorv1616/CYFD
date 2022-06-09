@@ -147,6 +147,19 @@
                                 label="Middle Initial" autocomplete="none" name="middleInitial" style="width:100%"
                                 onchange={handleInputChange}></lightning-input>
                         </div>
+                        <!-- I-124067 starts-->
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-combobox name="preferredPronouns" label="Preferred Pronouns" placeholder="Select one"
+                                value={newMember.preferredPronouns} class="required-field" options={preferredPronounsOptions} onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+
+                        <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
+                            <lightning-input type="text" value={newMember.preferredName}
+                                label="Preferred Name" autocomplete="none" name="preferredName" style="width:100%"
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <!-- I-124067 ends -->
                         <div class="slds-col slds-p-around_small slds-size_1-of-1 slds-large-size_4-of-12">
                             <lightning-combobox name="suffix" label="Suffix" placeholder="Select one"
                                 value={newMember.suffix} class="required-field" options={suffixValues} onchange={handleInputChange}>

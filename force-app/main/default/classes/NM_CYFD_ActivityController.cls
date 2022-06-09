@@ -466,6 +466,7 @@ public without sharing class NM_CYFD_ActivityController {
         List<NM_CYFD_Utility.SelectOptionWrapper> genderValues = NM_CYFD_Utility.fetchPicklist('Contract_Role__c', 'Gender__c');
         //List<NM_CYFD_Utility.SelectOptionWrapper> educationValues = NM_CYFD_Utility.fetchPicklist('Contract_Role__c', 'Education__c');
         List<NM_CYFD_Utility.SelectOptionWrapper> backgroundCheckValues = NM_CYFD_Utility.fetchPicklist('Contract_Role__c', 'CYFD_Background_Check__c');
+        List<NM_CYFD_Utility.SelectOptionWrapper> preferredPronounsOptions = NM_CYFD_Utility.fetchPicklist('Contract_Role__c', 'Preferred_Pronouns__c');
         
         List<SelectOptionWrapper> educationOptions = new List<SelectOptionWrapper>();
         List<String> education = new List<String>{'High School', 'Some College', '1st Year of College/University (Freshman)', 
@@ -474,6 +475,7 @@ public without sharing class NM_CYFD_ActivityController {
         for( String s : education){
             educationOptions.add( new SelectOptionWrapper(s,s));
         }  
+        response.put('preferredPronounsOptions', preferredPronounsOptions);
         response.put('gender', genderValues);
         response.put('education', educationOptions);
         response.put('backgroundCheck', backgroundCheckValues);
@@ -484,6 +486,7 @@ public without sharing class NM_CYFD_ActivityController {
     @AuraEnabled 
     public static Map<String, Object> getClientPicklistFields(String grant){
         Map<String, Object> response = new Map<String, Object>();
+        List<NM_CYFD_Utility.SelectOptionWrapper> preferredPronounsOptions = NM_CYFD_Utility.fetchPicklist('Contract_Role__c', 'Preferred_Pronouns__c');
         List<NM_CYFD_Utility.SelectOptionWrapper> suffixValues = NM_CYFD_Utility.fetchPicklist('Contract_Role__c', 'Suffix__c');
         List<NM_CYFD_Utility.SelectOptionWrapper> livingArrangementsValues = NM_CYFD_Utility.fetchPicklist('Contract_Role__c', 'Living_Arrangements__c');
         List<NM_CYFD_Utility.SelectOptionWrapper> schoolValues = NM_CYFD_Utility.fetchPicklist('Contract_Role__c', 'School__c');
@@ -538,6 +541,7 @@ public without sharing class NM_CYFD_ActivityController {
         for( String s : referralSources){
             referralSourceValues.add( new SelectOptionWrapper(s,s));
         }  
+        response.put('preferredPronounsOptions', preferredPronounsOptions);
         response.put('suffixValues', suffixValues);
         response.put('livingArrangementsValues', livingArrangementsValues);
         response.put('schoolValues', schoolValues);
@@ -634,6 +638,9 @@ public without sharing class NM_CYFD_ActivityController {
         @AuraEnabled public Boolean matchEnabled;
         @AuraEnabled public Decimal matchAmount;
         @AuraEnabled public Boolean multipliedByYouth;
+        @AuraEnabled public String preferredPronouns;
+        @AuraEnabled public String preferredName;
+
         
         @AuraEnabled public List<ContractRoleWrapper> staffs;
         @AuraEnabled public List<ContractRoleWrapper> clients;

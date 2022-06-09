@@ -45,6 +45,7 @@ export default class NmcyfdAddClientStep extends LightningElement {
     @api grant;
     
     @track suffixValues = [];
+    @track preferredPronounsOptions = [];
     @track livingArrangementsValues = [];
     @track schoolValues = [];
     @track employmentStatusValues= [];
@@ -146,6 +147,7 @@ export default class NmcyfdAddClientStep extends LightningElement {
        
         getClientPicklistValues({grant : this.grant}).then(result =>{           
             this.suffixValues = result.suffixValues;
+            this.preferredPronounsOptions = result.preferredPronounsOptions;
             this.livingArrangementsValues = result.livingArrangementsValues;
             this.schoolValues = result.schoolValues;
             this.employmentStatusValues= result.employmentStatusValues;

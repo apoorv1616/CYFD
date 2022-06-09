@@ -140,6 +140,21 @@
                                 autocomplete="none" required class="lastName" name="lastName" style="width:100%" onchange={handleInputChange}>
                             </lightning-input>
                         </div>
+
+                         <!-- I-124067 starts-->
+                         <div class="slds-col slds-p-right_small  slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-combobox name="preferredPronouns" label="Preferred Pronouns" placeholder="Select one"
+                                value={newMember.preferredPronouns} class="required-field" options={preferredPronounsOptions} onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+
+                        <div class="slds-col slds-p-right_small  slds-size_1-of-1 slds-large-size_6-of-12">
+                            <lightning-input type="text" value={newMember.preferredName}
+                                label="Preferred Name" autocomplete="none" name="preferredName" style="width:100%"
+                                onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <!-- I-124067 ends -->
+
                         <div class="slds-col slds-p-right_small slds-size_1-of-1 slds-large-size_6-of-12">
                             <lightning-input type="date" value={newMember.dob} label="Date Of Birth" autocomplete="none"
                                 name="dob" required style="width:100%" class="dob" onchange={handleInputChange}></lightning-input>
