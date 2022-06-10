@@ -1,13 +1,17 @@
 <template>
     <div onclick={handleCloseDropdownAfterEventVerification}>
-        <lightning-pill-container class={additionalClass} 
+        <div class="" style="border: 1px solid #dadada; height:39px;">
+            <lightning-pill-container class={additionalClass} 
             items={selectedOptions} 
             onitemremove={handleItemRemove}
             onclick={toggelOption} 
             style="cursor: pointer;">
         </lightning-pill-container>
+        </div>
+        
 
         <template if:true={showSearch}>
+            
             <lightning-input name="multi_select_cmp" 
                 variant="label-hidden" 
                 value={filterValue} 
@@ -23,6 +27,7 @@
         <div class={showList} data-select="single">
             <div class="slds-lookup__menu slds-combobox-picklist" onmouseleave={showList}>
                 <ul class="slds-lookup__list" role="listbox">
+                    
                     <template for:each={availableOptions} for:item="item">
                         <li role="presentation" key={item.value}>
                             <span class="slds-lookup__item-action slds-media" role="option">
