@@ -23,6 +23,7 @@ public without sharing class NM_CYFD_InvoiceTriggerHandler {
     /*
         * Issue  : I-97887
         * Desc   : send notification when invoices are submitted
+          		   ( after update only)
         * Author : Apoorv Anand
     */
     public static void sendEmailWhenInvoiceSubmitted( List<Invoice__c> newList, Map<Id,Invoice__c> oldMap ) {
@@ -31,23 +32,33 @@ public without sharing class NM_CYFD_InvoiceTriggerHandler {
         List<Contact> listOfContact = [SELECT Id FROM Contact WHERE Email != NULL LIMIT 1];
         List<EmailTemplate> emailTemplateList = NM_CYFD_Constants.getEmailTemplateName('NM_CYFD_InvoiceSubmitted');
         
-        List<String> userIdList = new  List<String>();
-         
-        for ( User userRecord : [select id, email from User where profile.name = 'CYFD Program Manager']) {
-
-            userIdList.add( userRecord.Id );
-        }
-
+        Map<String, List<Id>> mapOfContractToListOfUsersId = new Map<String, List<Id>>();
+        Set<Id> invoiceIdList = new Set<Id>();
 
         for ( Invoice__c invoiceRecord : newList ) {
 
             if ( invoiceRecord.Status__c == NM_CYFD_Constants.SUBMITTED_STATUS
                 && 
+                invoiceRecord.Contract__c != null
+                && 
                 (oldMap == null || oldMap.get(invoiceRecord.Id).Status__c != invoiceRecord.Status__c ) ) {
                     
-                    mailList.add( NM_CYFD_Constants.createMailRecord( listOfContact[0].Id, emailTemplateList[0].Id, userIdList, invoiceRecord) );
+                    invoiceIdList.add( invoiceRecord.Id );
             }
         }
+        
+        if ( !invoiceIdList.isEmpty() ) {
+
+            for ( Invoice__c invoiceRecord : 
+                 	[SELECT Id, Contract__c, Contract__r.Grant_Manager__c
+                     FROM Invoice__c 
+                     WHERE Id IN :invoiceIdList
+                     AND Contract__c != null
+                     AND Contract__r.Grant_Manager__c  != NULL ]) {
+
+                     mailList.add( NM_CYFD_Constants.createMailRecord( listOfContact[0].Id, emailTemplateList[0].Id, new List<Id>{ invoiceRecord.Contract__r.Grant_Manager__c }, invoiceRecord.Id ) );
+            }
+         }
 
         if ( !mailList.isEmpty() ) {
 

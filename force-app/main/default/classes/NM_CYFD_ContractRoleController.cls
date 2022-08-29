@@ -1,4 +1,4 @@
-public class NM_CYFD_ContractRoleController {
+public with sharing class NM_CYFD_ContractRoleController {
 
     @AuraEnabled
     public static Map<String, Object> getRecordTypeDetails(String contractRoleId){

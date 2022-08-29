@@ -29,7 +29,7 @@ public with sharing class NM_CYFD_Constants {
 
         return [SELECT Id 
                 FROM EmailTemplate 
-                WHERE DeveloperName = 'NM_CYFD_InvoiceSubmitted'];
+                WHERE DeveloperName = :templateName ];
     }
     
     /*
@@ -37,14 +37,14 @@ public with sharing class NM_CYFD_Constants {
         * Desc   : send notification when invoices are submitted
         * Author : Apoorv Anand
     */
-    public static Messaging.SingleEmailMessage createMailRecord( String contactId, String templateId, List<String> userIdList, Invoice__c invoiceRecord ) {
+    public static Messaging.SingleEmailMessage createMailRecord( Id contactId, Id templateId, List<String> userIdList, Id whatId ) {
 
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
         // mail.setOrgWideEmailAddressId(owa.id);
         mail.setSaveAsActivity( false );
         mail.setTargetObjectId( contactId );
         mail.setTemplateID( templateId );
-        mail.setWhatId( invoiceRecord.Id );
+        mail.setWhatId( whatId );
         mail.setToAddresses( userIdList );
         mail.setTreatTargetObjectAsRecipient(false);
         mail.setSenderDisplayName('CYFD Team');

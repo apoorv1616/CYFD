@@ -145,14 +145,16 @@ public without sharing class NM_CYFD_SubmitAssessmentController{
         List<String> filters = new List<String>();
         if(String.isNotBlank(action))
             filters = action.split('-');
-         system.debug('action *** ' + action);
         
         String accountId = contracts[0].Account__c ;
-        // String query = 'SELECT Id, Name__c, (SELECT Id, Steps_Completed__c, Status__c, Assessment_Type__c FROM Assessments__r ORDER BY LastModifiedDate DESC LIMIT 1) ';
-        // query += 'FROM Contract_Role__c WHERE Account__c =: accountId AND RecordType.Name != \'Provider\'' ;
 
-        String query = 'SELECT Id, Name__c, (SELECT Id, Steps_Completed__c, Status__c, Assessment_Type__c FROM Assessments_2022__r ORDER BY LastModifiedDate DESC LIMIT 1) ';
-        query += 'FROM Contract_Role__c WHERE Account__c =: accountId AND RecordType.Name != \'Provider\'' ;
+        String query = ' SELECT Id, Name__c, '
+                     + ' (SELECT Id, Steps_Completed__c, Status__c, Assessment_Type__c FROM Assessments_2022__r ORDER BY LastModifiedDate DESC LIMIT 1), '
+                     + ' (SELECT Id, Steps_Completed__c, Status__c, Assessment_Type__c FROM Assessments__r WHERE Assessment_Type__c = \'Initial Assessment\' ORDER BY LastModifiedDate DESC LIMIT 1) '
+                     + ' FROM Contract_Role__c ' 
+                     + ' WHERE Account__c =: accountId '
+                     + ' AND RecordType.Name != \'Provider\' ';
+
         if(String.isNotBlank(searchKey)){
             String searchInput ='\'%' + searchKey  + '%\'';
             query += ' AND Name__c LIKE ' + searchInput;
@@ -160,29 +162,53 @@ public without sharing class NM_CYFD_SubmitAssessmentController{
         query += ' ORDER BY Name__c';
         
                                                 
-        List<Contract_Role__c> contractRoles = Database.query(query);                                   
+        List<Contract_Role__c> contractRoles = Database.query( query );  
+        
+        Set<Id> contractRoleWithDischargeAssessment = new Set<Id>();
+        
+        for ( Assessment__c assessmentRecord : 
+             	[SELECT Id, Contract_Role__c 
+                 FROM Assessment__c 
+                 WHERE Assessment_Type__c = 'Discharge Assessment'
+                 AND Status__c = 'Completed' ]) {
+           
+                  contractRoleWithDischargeAssessment.add( assessmentRecord.Contract_Role__c );
+        }
+
         List<YouthSelectionWrapper> youths = new List<YouthSelectionWrapper>();
         
         for(Contract_Role__c cr : contractRoles){
-           YouthSelectionWrapper youth = new YouthSelectionWrapper(); 
+            YouthSelectionWrapper youth = new YouthSelectionWrapper(); 
             youth.youthId = cr.Id;
             youth.name = cr.Name__c;
             
-            if(cr.Assessments_2022__r.isEmpty()){
-               
-                youth.status = 'Not Started';
-                youth.assessmentType = 'None';
-                youth.stepsCompleted = 0;
-                youth.lastCompletedStep = 0;
-                youth.action = 'Start Initial Assessment';
+            if( cr.Assessments_2022__r.isEmpty() ){
+               	if ( contractRoleWithDischargeAssessment.contains( cr.Id ) ) {
+                    youth.action = 'None';
+                    youth.status = 'Completed';
+                    youth.assessmentType = 'Discharge Assessment';
+                    youth.stepsCompleted = 9;
+                    youth.lastCompletedStep = 9;
+                }
+                else {
+                    youth.status = 'Not Started';
+                    youth.assessmentType = !cr.Assessments__r.isEmpty() && cr.Assessments__r[0].Status__c == 'Completed' ? 'Initial Assessment': 'None';
+                    youth.stepsCompleted = 0;
+                    youth.lastCompletedStep = 0;
+                    youth.action = !cr.Assessments__r.isEmpty() && cr.Assessments__r[0].Status__c == 'Completed' ? 'Start Discharge Assessment' : 'Start Initial Assessment';
+                }
+                
             }
-            else{
+            else {
                 String status = cr.Assessments_2022__r[0].Status__c;
+                String oldAssessmentStatus = !cr.Assessments__r.isEmpty() && cr.Assessments__r[0] != null  ? cr.Assessments__r[0].Status__c : null;
                 String type = cr.Assessments_2022__r[0].Assessment_Type__c;
+                String oldAssessmentType =  !cr.Assessments__r.isEmpty() && cr.Assessments__r[0] != null  ?  cr.Assessments__r[0].Assessment_Type__c : null;
+
                 youth.status = status;
                 youth.assessmentType = type;
-                youth.stepsCompleted = Integer.valueOf(cr.Assessments_2022__r[0].Steps_Completed__c);
-                youth.lastCompletedStep = Integer.valueOf(cr.Assessments_2022__r[0].Steps_Completed__c);
+                youth.stepsCompleted = Integer.valueOf( cr.Assessments_2022__r[0].Steps_Completed__c );
+                youth.lastCompletedStep = Integer.valueOf( cr.Assessments_2022__r[0].Steps_Completed__c );
                 youth.assessmentId = cr.Assessments_2022__r[0].Id;
                 
                 if(type == 'Initial Assessment'){
@@ -190,12 +216,12 @@ public without sharing class NM_CYFD_SubmitAssessmentController{
                         youth.assessmentId = '';
                         youth.action = 'Start Discharge Assessment';
                     }else if(status == 'Not Started'){
-                        youth.action = 'Start Initial Assessment';
+                        youth.action = oldAssessmentStatus == 'Completed' && oldAssessmentType == 'Initial Assessment' ? 'Start Discharge Assessment' : 'Start Initial Assessment';
                     }else if(status == 'In Progress'){
                         youth.action = 'Continue Initial Assessment';
                     }
                 }
-                if(type == 'Discharge Assessment'){
+                else if(type == 'Discharge Assessment'){
                     if(status == 'Completed'){
                         youth.action = 'None';
                     }else if(status == 'Not Started'){
@@ -206,15 +232,10 @@ public without sharing class NM_CYFD_SubmitAssessmentController{
                 }
             }
             
-            
-           // if(String.isNotBlank(action) && (youth.status != filters[0] || youth.assessmentType != filters[1]))
-             //       continue;
-                    
-            if(String.isNotBlank(action) && (youth.action != action))
-                    continue;
-            
-            if(String.isNotBlank(assessmentType) && youth.assessmentType != assessmentType)
+            if ( (String.isNotBlank( action ) && ( youth.action != action ))
+               	|| String.isNotBlank( assessmentType ) && youth.assessmentType != assessmentType) {
                 continue;
+            }
                 
             youths.add(youth);   
         }
